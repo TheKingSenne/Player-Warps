@@ -1,13 +1,13 @@
 package com.elixiumnetwork.playerwarp;
 
 import com.elixiumnetwork.messages.Messages;
+import io.papermc.lib.PaperLib;
 import org.bukkit.inventory.*;
 import com.elixiumnetwork.gui.*;
 import org.bukkit.configuration.file.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
 import me.ryanhamshire.GriefPrevention.*;
-import com.elixiumnetwork.messages.*;
 import org.bukkit.permissions.*;
 import java.io.*;
 import net.milkbowl.vault.economy.*;
@@ -24,12 +24,12 @@ public class Warp
     private final GUI gui;
     public static final List<String> teleportingPlayers;
     public FileConfiguration wC;
-    
+
     public Warp() {
         this.gui = new GUI();
         this.wC = (FileConfiguration)new YamlConfiguration();
     }
-    
+
     public void setWarp(String name, final Location loc, final CommandSender sender, final PWarpPlugin p) {
         Warp.p = p;
         this.wC = p.wF.getWarpFile();
@@ -240,7 +240,7 @@ public class Warp
             sender.sendMessage(ChatColor.GREEN + Messages.CREATED_FREE_WARP.getMessage());
         }
     }
-    
+
     public void removeWarp(String name, final CommandSender sender, final PWarpPlugin p) {
         Warp.p = p;
         this.wC = p.wF.getWarpFile();
@@ -275,7 +275,7 @@ public class Warp
             this.gui.delItem(name);
         }
     }
-    
+
     public void goToWarp(String name, final CommandSender sender, final PWarpPlugin pl) {
         Warp.p = pl;
         this.wC = Warp.p.wF.getWarpFile();
@@ -319,7 +319,7 @@ public class Warp
             }
             loc.setWorld(Bukkit.getServer().getWorld(this.wC.getString("warps." + name.toLowerCase() + ".location.world")));
             if (sender.hasPermission("pwarp.bypass.delay") || Warp.p.getConfig().getInt("teleportDelayInSeconds") == 0) {
-                player.teleport(loc);
+                PaperLib.teleportAsync(player, loc);
                 sender.sendMessage(ChatColor.GREEN + Messages.TELEPORTED.getMessage());
             }
             else if (Warp.p.getConfig().getInt("teleportDelayInSeconds") != 0) {
@@ -334,7 +334,7 @@ public class Warp
                             Warp.teleportingPlayers.remove(player.getUniqueId().toString());
                             return;
                         }
-                        player.teleport(loc);
+                        PaperLib.teleportAsync(player, loc);
                         sender.sendMessage(ChatColor.GREEN + Messages.TELEPORTED.getMessage());
                         Warp.teleportingPlayers.remove(player.getUniqueId().toString());
                     }
@@ -359,7 +359,7 @@ public class Warp
             this.gui.updateLore(name, pl);
         }
     }
-    
+
     public void getWarpList(final PWarpPlugin pl, final CommandSender sender, final int page) {
         Warp.p = pl;
         this.wC = Warp.p.wF.getWarpFile();
@@ -387,7 +387,7 @@ public class Warp
             }
         }
     }
-    
+
     public void setWarpPrice(final PWarpPlugin pl, final CommandSender sender, final int amount) {
         Warp.p = pl;
         final Player player = (Player)sender;
@@ -403,14 +403,14 @@ public class Warp
         Warp.p.saveConfig();
         sender.sendMessage(ChatColor.GREEN + Messages.SET_PRICE.getMessage());
     }
-    
+
     public void reloadConfig(final CommandSender sender, final PWarpPlugin pl) {
         (Warp.p = pl).reloadConfig();
         Warp.p.messageFile.reloadMessages();
         Warp.p.wF.reloadWarps();
         sender.sendMessage(ChatColor.GREEN + Messages.RELOAD_PLUGIN.getMessage());
     }
-    
+
     public void removeAllWarps(final PWarpPlugin pl, final CommandSender sender) {
         Warp.p = pl;
         this.wC = Warp.p.wF.getWarpFile();
@@ -431,7 +431,7 @@ public class Warp
         GUI.guis.clear();
         this.gui.getInventories(pl);
     }
-    
+
     public void setLimit(final PWarpPlugin pl, final CommandSender sender, final String limitString) {
         Warp.p = pl;
         int limit;
@@ -450,7 +450,7 @@ public class Warp
         sender.sendMessage(ChatColor.GREEN + Messages.LIMIT_CHANGED.getMessage());
         Warp.p.saveConfig();
     }
-    
+
     public boolean isSafe(final CommandSender sender, String name, final PWarpPlugin pl) {
         final Player player = (Player)sender;
         Warp.p = pl;
@@ -507,7 +507,7 @@ public class Warp
             return true;
         }
     }
-    
+
     private boolean isTrusted(final CommandSender sender, String warp, final PWarpPlugin pl) {
         warp = warp.toLowerCase();
         final Player player = (Player)sender;
@@ -526,7 +526,7 @@ public class Warp
         final List<String> trustedPlayers = (List<String>)this.wC.getStringList("warps." + warp + ".trusted");
         return trustedPlayers.contains(playerName);
     }
-    
+
     private boolean isPrivate(String name, final PWarpPlugin pl) {
         name = name.toLowerCase();
         Warp.p = pl;
@@ -539,7 +539,7 @@ public class Warp
         }
         return this.wC.getBoolean("warps." + name + ".isPrivate");
     }
-    
+
     public void setWarpLore(final CommandSender sender, final PWarpPlugin pl, final List<String> lore, String name, final int loreNum) {
         name = name.toLowerCase();
         (Warp.p = pl).reloadConfig();
@@ -588,7 +588,7 @@ public class Warp
             sender.sendMessage(ChatColor.GREEN + Messages.UPDATED_LORE.getMessage());
         }
     }
-    
+
     public void resetLore(String name, final CommandSender sender, final PWarpPlugin pl) {
         Warp.p = pl;
         this.wC = Warp.p.wF.getWarpFile();
@@ -612,7 +612,7 @@ public class Warp
         sender.sendMessage(ChatColor.GREEN + Messages.RESET_LORE.getMessage());
         this.gui.updateLore(name, pl);
     }
-    
+
     public void moveWarp(final CommandSender sender, final PWarpPlugin pl, String name) {
         Warp.p = pl;
         this.wC = Warp.p.wF.getWarpFile();
@@ -642,7 +642,7 @@ public class Warp
         }
         player.sendMessage(ChatColor.GREEN + Messages.MOVED_WARP.getMessage());
     }
-    
+
     public void automatedRemoval(final PWarpPlugin pl) {
         Warp.p = pl;
         this.wC = Warp.p.wF.getWarpFile();
@@ -705,7 +705,7 @@ public class Warp
             }
         }, (long)(1200 * Warp.p.getConfig().getInt("automatedInactiveRemovalInMinutes")));
     }
-    
+
     public void removeOldWarps(final PWarpPlugin pl, final CommandSender sender) {
         Warp.p = pl;
         this.wC = Warp.p.wF.getWarpFile();
@@ -757,7 +757,7 @@ public class Warp
         }
         sender.sendMessage(ChatColor.GREEN + Messages.REMOVED_INACTIVE.getMessage().replaceAll("PINACTIVEP", Warp.p.getConfig().getString("inactiveWarpDays")));
     }
-    
+
     public void setTrust(final PWarpPlugin pl, final CommandSender sender, final OfflinePlayer trustedPlayer, String name, final boolean removeOrAdd) {
         Warp.p = pl;
         this.wC = Warp.p.wF.getWarpFile();
@@ -802,7 +802,7 @@ public class Warp
             e.printStackTrace();
         }
     }
-    
+
     public void setWarpMoneyPrice(final PWarpPlugin pl, final CommandSender sender, final int amount) {
         Warp.p = pl;
         Warp.p.getConfig().set("warpMoneyPrice.price", (Object)amount);
@@ -810,7 +810,7 @@ public class Warp
         Warp.p.saveConfig();
         sender.sendMessage(ChatColor.GREEN + Messages.SET_PRICE.getMessage());
     }
-    
+
     public void setItem(final PWarpPlugin pl, final CommandSender sender, String name) {
         Warp.p = pl;
         this.wC = Warp.p.wF.getWarpFile();
@@ -841,7 +841,7 @@ public class Warp
         sender.sendMessage(ChatColor.GREEN + Messages.CHANGED_WARP_ICON.getMessage());
         this.gui.changeMaterial(name, handItem.getType());
     }
-    
+
     public void resetItem(final PWarpPlugin pl, final CommandSender sender, String name) {
         Warp.p = pl;
         this.wC = Warp.p.wF.getWarpFile();
@@ -865,7 +865,7 @@ public class Warp
         sender.sendMessage(ChatColor.GREEN + Messages.RESET_WARP_ICON.getMessage());
         this.gui.changeMaterial(name, Material.CONDUIT);
     }
-    
+
     public void renameWarp(final PWarpPlugin pl, final CommandSender sender, String name, String newName) {
         Warp.p = pl;
         this.wC = Warp.p.wF.getWarpFile();
@@ -905,7 +905,7 @@ public class Warp
         }
         sender.sendMessage(ChatColor.GREEN + Messages.RENAMED_WARP.getMessage());
     }
-    
+
     static {
         teleportingPlayers = new ArrayList<String>();
     }
