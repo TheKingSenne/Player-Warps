@@ -295,7 +295,7 @@ public class Warp
             return;
         }
         if (Warp.p.getConfig().get("teleportDelayInSeconds") == null) {
-            Warp.p.getConfig().set("teleportDelayInSeconds", (Object)0);
+            Warp.p.getConfig().set("teleportDelayInSeconds", 0);
             Warp.p.saveConfig();
         }
         if (!this.isSafe(sender, name, pl)) {
@@ -309,9 +309,9 @@ public class Warp
                 sender.sendMessage(ChatColor.RED + Messages.NOT_TRUSTED.getMessage());
                 return;
             }
-            loc.setX(this.wC.getDouble("warps." + name + ".location.x"));
-            loc.setY(this.wC.getDouble("warps." + name + ".location.y"));
-            loc.setZ(this.wC.getDouble("warps." + name + ".location.z"));
+            loc.setX(wC.getDouble("warps." + name + ".location.x"));
+            loc.setY(wC.getDouble("warps." + name + ".location.y") + 1.0);
+            loc.setZ(wC.getDouble("warps." + name + ".location.z"));
             if (this.wC.getString("warps." + name + ".location.direction") != null && this.wC.getString("warps." + name + ".location.pitch") != null && this.wC.getString("warps." + name + ".location.yaw") != null) {
                 loc.setDirection(this.wC.getVector("warps." + name + ".location.direction"));
                 loc.setPitch((float)this.wC.getLong("warps." + name + ".location.pitch"));
@@ -326,7 +326,7 @@ public class Warp
                 sender.sendMessage(ChatColor.GREEN + Messages.DONT_MOVE.getMessage().replaceAll("PSECONDSP", Warp.p.getConfig().getInt("teleportDelayInSeconds") + ""));
                 final Location playerLoc = player.getLocation();
                 Warp.teleportingPlayers.add(player.getUniqueId().toString());
-                Bukkit.getServer().getScheduler().scheduleSyncDelayedTask((Plugin)Warp.p, (Runnable)new Runnable() {
+                Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Warp.p, new Runnable() {
                     @Override
                     public void run() {
                         if (player.getLocation().getBlockX() != playerLoc.getBlockX() || player.getLocation().getBlockY() != playerLoc.getBlockY() || player.getLocation().getBlockZ() != playerLoc.getBlockZ()) {
@@ -357,34 +357,6 @@ public class Warp
                 e.printStackTrace();
             }
             this.gui.updateLore(name, pl);
-        }
-    }
-
-    public void getWarpList(final PWarpPlugin pl, final CommandSender sender, final int page) {
-        Warp.p = pl;
-        this.wC = Warp.p.wF.getWarpFile();
-        if (this.wC.getStringList("warpsList") == null) {
-            sender.sendMessage(ChatColor.RED + Messages.NO_WARPS.getMessage());
-        }
-        else {
-            Warp.warps = (List<String>)this.wC.getStringList("warpList");
-            final int listSize = Warp.warps.size();
-            if ((page - 1) * 5 >= listSize) {
-                if (page == 1) {
-                    sender.sendMessage(ChatColor.RED + Messages.NO_WARPS.getMessage());
-                }
-                else {
-                    sender.sendMessage(ChatColor.RED + Messages.PAGE_NOT_EXISTING.getMessage());
-                }
-            }
-            else {
-                sender.sendMessage(ChatColor.DARK_GRAY + "Page " + page + ":");
-                for (int i = 0; i < 5; ++i) {
-                    if (i + (page - 1) * 5 < listSize) {
-                        sender.sendMessage(ChatColor.GRAY + "" + (i + 1 + (page - 1) * 5) + ". " + Warp.warps.get(i + (page - 1) * 5).substring(0, 1).toUpperCase() + Warp.warps.get(i + (page - 1) * 5).substring(1));
-                    }
-                }
-            }
         }
     }
 
