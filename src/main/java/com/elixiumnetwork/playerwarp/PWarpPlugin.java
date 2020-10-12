@@ -20,7 +20,7 @@ public class PWarpPlugin extends JavaPlugin implements askHelp
     public final VaultPlugin v;
     private final List<String> hooks;
     public final WarpFile wF;
-    
+
     public PWarpPlugin() {
         this.warp = new Warp();
         this.gui = new GUI();
@@ -29,7 +29,7 @@ public class PWarpPlugin extends JavaPlugin implements askHelp
         this.hooks = new ArrayList<String>();
         this.wF = new WarpFile();
     }
-    
+
     public void onEnable() {
         Bukkit.getConsoleSender().sendMessage("[PWarp] PWarp has been enabled!");
         if (Bukkit.getPluginManager().getPlugin("Vault") == null) {
@@ -61,19 +61,19 @@ public class PWarpPlugin extends JavaPlugin implements askHelp
         this.wF.transferWarps(this);
         this.messageFile.createMessageFile(this);
         this.messageFile.checkConfig();
-        Bukkit.getPluginManager().registerEvents((Listener)new GUI(), (Plugin)this);
+        Bukkit.getPluginManager().registerEvents(new GUI(), (Plugin)this);
         this.warp.automatedRemoval(this);
         this.gui.setUpGui((PWarpPlugin)JavaPlugin.getPlugin((Class)PWarpPlugin.class));
         this.saveDefaultConfig();
         this.getConfig().options().copyDefaults(true);
         this.saveConfig();
     }
-    
+
     public void onDisable() {
         Bukkit.getConsoleSender().sendMessage("[PWarp] PWarp has been disabled!");
         this.saveConfig();
     }
-    
+
     public boolean onCommand(final CommandSender sender, final Command cmd, final String lbl, final String[] args) {
         if (cmd.getName().equalsIgnoreCase("pwarp")) {
             if (sender instanceof Player) {

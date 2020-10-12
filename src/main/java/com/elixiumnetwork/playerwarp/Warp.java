@@ -22,12 +22,13 @@ public class Warp
     private static ItemStack price;
     private static PWarpPlugin p;
     private final GUI gui;
+    private int taskId;
     public static final List<String> teleportingPlayers;
     public FileConfiguration wC;
 
     public Warp() {
         this.gui = new GUI();
-        this.wC = (FileConfiguration)new YamlConfiguration();
+        this.wC = new YamlConfiguration();
     }
 
     public void setWarp(String name, final Location loc, final CommandSender sender, final PWarpPlugin p) {
@@ -101,7 +102,6 @@ public class Warp
                             sender.sendMessage(ChatColor.RED + Messages.LIMIT_REACHED.getMessage().replaceAll("PLIMITP", newLimit + ""));
                             return;
                         }
-                        continue;
                     }
                 }
             }
@@ -380,6 +380,10 @@ public class Warp
         (Warp.p = pl).reloadConfig();
         Warp.p.messageFile.reloadMessages();
         Warp.p.wF.reloadWarps();
+
+        Bukkit.getScheduler().cancelTask(taskId);
+        automatedRemoval(pl);
+
         sender.sendMessage(ChatColor.GREEN + Messages.RELOAD_PLUGIN.getMessage());
     }
 
@@ -618,63 +622,65 @@ public class Warp
     public void automatedRemoval(final PWarpPlugin pl) {
         Warp.p = pl;
         this.wC = Warp.p.wF.getWarpFile();
-        if (Warp.p.getConfig().get("automatedOldWarpRemoval") == null) {
-            Warp.p.getConfig().set("automatedOldWarpRemoval", (Object)true);
+        FileConfiguration config = Warp.p.getConfig();
+        if (config.get("automatedOldWarpRemoval") == null) {
+            config.set("automatedOldWarpRemoval", true);
         }
-        if (Warp.p.getConfig().get("automatedInactiveRemovalInMinutes") == null) {
-            Warp.p.getConfig().set("automatedInactiveRemovalInMinutes", (Object)60);
+        if (config.get("automatedInactiveRemovalInMinutes") == null) {
+            config.set("automatedInactiveRemovalInMinutes", 60);
         }
-        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask((Plugin)Warp.p, (Runnable)new Runnable() {
-            @Override
-            public void run() {
-                final Calendar currentDate = Calendar.getInstance();
-                if (Warp.this.wC.getStringList("warpList").isEmpty()) {
-                    Warp.this.automatedRemoval(Warp.p);
-                    return;
-                }
-                for (final String warp : Warp.this.wC.getStringList("warpList")) {
-                    if (Warp.this.wC.getString("warps." + warp + ".date") == null) {
-                        Warp.this.wC.set("warps." + warp + ".date", (Object)((currentDate.get(2) + 1) * 30 + currentDate.get(5) + 1 + (currentDate.get(1) + 1) * 364));
-                    }
-                    final int daysBetween = (currentDate.get(2) + 1) * 30 + currentDate.get(5) + 1 + (currentDate.get(1) + 1) * 364 - Warp.this.wC.getInt("warps." + warp + ".date");
-                    if (Warp.p.getConfig().getInt("inactiveWarpDays") == 0) {
-                        Warp.p.getConfig().set("inactiveWarpDays", (Object)30);
-                    }
-                    if (daysBetween >= Warp.p.getConfig().getInt("inactiveWarpDays")) {
-                        Warp.this.wC.set("warps." + warp, (Object)null);
-                        final List<String> warps = (List<String>)Warp.this.wC.getStringList("warpList");
-                        warps.remove(warp);
-                        Warp.this.wC.set("warpList", (Object)warps);
-                        Warp.this.gui.delItem(warp);
-                    }
-                }
-                Warp.p.saveConfig();
-                try {
-                    Warp.this.wC.save(new File(Warp.p.getDataFolder(), "warps.yml"));
-                }
-                catch (IOException e) {
-                    e.printStackTrace();
-                }
-                for (final String warp : Warp.this.wC.getStringList("warpList")) {
-                    final OfflinePlayer warpOwner = Bukkit.getOfflinePlayer(UUID.fromString(Objects.requireNonNull(Warp.this.wC.getString("warps." + warp + ".owner-UUID"))));
-                    final long now = System.currentTimeMillis();
-                    final long diffInDays = (now - warpOwner.getLastPlayed()) / 86400000L;
-                    if (diffInDays > Warp.p.getConfig().getLong("inactiveWarpDays")) {
-                        Warp.this.wC.set("warps." + warp, (Object)null);
-                        final List<String> warps2 = (List<String>)Warp.this.wC.getStringList("warpList");
-                        warps2.remove(warp);
-                        Warp.this.wC.set("warpList", (Object)warps2);
-                        Warp.this.gui.delItem(warp);
-                    }
-                }
-                try {
-                    Warp.this.wC.save(new File(Warp.p.getDataFolder(), "warps.yml"));
-                }
-                catch (IOException e) {
-                    e.printStackTrace();
-                }
+        if (!config.getBoolean("automatedOldWarpRemoval")) { // false
+            return;
+        }
+        Bukkit.getLogger().info("Starting automatedRemoval task...");
+        taskId = Bukkit.getScheduler().scheduleSyncDelayedTask(Warp.p, (Runnable) () -> {
+            final Calendar currentDate = Calendar.getInstance();
+            if (Warp.this.wC.getStringList("warpList").isEmpty()) {
                 Warp.this.automatedRemoval(Warp.p);
+                return;
             }
+            for (final String warp : Warp.this.wC.getStringList("warpList")) {
+                if (Warp.this.wC.getString("warps." + warp + ".date") == null) {
+                    Warp.this.wC.set("warps." + warp + ".date", (Object)((currentDate.get(2) + 1) * 30 + currentDate.get(5) + 1 + (currentDate.get(1) + 1) * 364));
+                }
+                final int daysBetween = (currentDate.get(2) + 1) * 30 + currentDate.get(5) + 1 + (currentDate.get(1) + 1) * 364 - Warp.this.wC.getInt("warps." + warp + ".date");
+                if (Warp.p.getConfig().getInt("inactiveWarpDays") == 0) {
+                    Warp.p.getConfig().set("inactiveWarpDays", (Object)30);
+                }
+                if (daysBetween >= Warp.p.getConfig().getInt("inactiveWarpDays")) {
+                    Warp.this.wC.set("warps." + warp, null);
+                    final List<String> warps = Warp.this.wC.getStringList("warpList");
+                    warps.remove(warp);
+                    Warp.this.wC.set("warpList", (Object)warps);
+                    Warp.this.gui.delItem(warp);
+                }
+            }
+            Warp.p.saveConfig();
+            try {
+                Warp.this.wC.save(new File(Warp.p.getDataFolder(), "warps.yml"));
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+            for (final String warp : Warp.this.wC.getStringList("warpList")) {
+                final OfflinePlayer warpOwner = Bukkit.getOfflinePlayer(UUID.fromString(Objects.requireNonNull(Warp.this.wC.getString("warps." + warp + ".owner-UUID"))));
+                final long now = System.currentTimeMillis();
+                final long diffInDays = (now - warpOwner.getLastPlayed()) / 86400000L;
+                if (diffInDays > Warp.p.getConfig().getLong("inactiveWarpDays")) {
+                    Warp.this.wC.set("warps." + warp, (Object)null);
+                    final List<String> warps2 = (List<String>)Warp.this.wC.getStringList("warpList");
+                    warps2.remove(warp);
+                    Warp.this.wC.set("warpList", (Object)warps2);
+                    Warp.this.gui.delItem(warp);
+                }
+            }
+            try {
+                Warp.this.wC.save(new File(Warp.p.getDataFolder(), "warps.yml"));
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+            automatedRemoval(Warp.p);
         }, (long)(1200 * Warp.p.getConfig().getInt("automatedInactiveRemovalInMinutes")));
     }
 

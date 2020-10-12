@@ -5,6 +5,8 @@ import org.bukkit.plugin.java.*;
 import org.bukkit.*;
 import com.elixiumnetwork.messages.*;
 import java.util.*;
+import java.util.stream.Collectors;
+
 import org.bukkit.inventory.meta.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
@@ -19,24 +21,19 @@ public class GUI implements Listener
     private static ItemStack pane;
     private static final ItemStack backButton;
     private static final ItemStack nextButton;
-    public static ArrayList<Inventory> guis;
+    public static List<Inventory> guis = new ArrayList<>();
     private static List<String> warpsSorted;
     private static FileConfiguration wC;
 
     public void setUpGui(final PWarpPlugin p) {
         if (p.getConfig().get("guiRefreshRateInMinutes") == null) {
-            p.getConfig().set("guiRefreshRateInMinutes", (Object)30);
+            p.getConfig().set("guiRefreshRateInMinutes", 30);
             p.saveConfig();
         }
         GUI.wC = p.wF.getWarpFile();
         this.sortWarps();
         this.getInventories(p);
-        Bukkit.getScheduler().scheduleSyncDelayedTask((Plugin)p, (Runnable)new Runnable() {
-            @Override
-            public void run() {
-                GUI.this.setUpGui(p);
-            }
-        }, (long)(1200 * p.getConfig().getInt("guiRefreshRateInMinutes")));
+        Bukkit.getScheduler().scheduleSyncDelayedTask(p, () -> GUI.this.setUpGui(p), (1200 * p.getConfig().getInt("guiRefreshRateInMinutes")));
     }
 
     private void sortWarps() {
@@ -75,7 +72,7 @@ public class GUI implements Listener
 
     public void getInventories(final PWarpPlugin p) {
         final List<String> warps = GUI.warpsSorted;
-        final ArrayList<Inventory> inventories = new ArrayList<Inventory>();
+        final ArrayList<Inventory> inventories = new ArrayList<>();
         final int invAmount = (int)Math.ceil(GUI.wC.getStringList("warpList").size() / 36);
         final ItemStack guiPage = new ItemStack(Material.PAPER, 1);
         final ItemMeta pageMeta = Bukkit.getItemFactory().getItemMeta(Material.PAPER);
@@ -121,12 +118,21 @@ public class GUI implements Listener
             inv.setItem(49, guiPage);
             inventories.add(inv);
         }
+        closeInventoriesForViewers(guis);
         GUI.guis = inventories;
+    }
+
+    private void closeInventoriesForViewers(List<Inventory> inventories) {
+        // fixes dupe glitch
+        List<HumanEntity> viewers = new ArrayList<>();
+        inventories.forEach(i -> viewers.addAll(i.getViewers()));
+        viewers.forEach(HumanEntity::closeInventory);
+        viewers.clear();
     }
 
     public void openInv(final CommandSender sender, final int page) {
         final Player player = (Player)sender;
-        final ArrayList<Inventory> inv = GUI.guis;
+        final List<Inventory> inv = GUI.guis;
         if (GUI.guis.isEmpty() || (GUI.guis.get(0).getItem(9) == null && GUI.guis.get(0).getItem(10) == null && GUI.guis.get(0).getItem(11) == null && GUI.guis.get(0).getItem(12) == null && GUI.guis.get(0).getItem(13) == null && GUI.guis.get(0).getItem(14) == null)) {
             sender.sendMessage(ChatColor.RED + Messages.NO_WARPS.getMessage());
             return;
