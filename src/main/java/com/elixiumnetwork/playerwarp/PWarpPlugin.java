@@ -60,7 +60,7 @@ public class PWarpPlugin extends JavaPlugin implements askHelp
         this.wF.transferWarps(this);
         this.messageFile.createMessageFile(this);
         this.messageFile.checkConfig();
-        Bukkit.getPluginManager().registerEvents(new GUI(), (Plugin)this);
+        Bukkit.getPluginManager().registerEvents(new GUI(), this);
         this.warp.automatedRemoval(this);
         this.gui.setUpGui((PWarpPlugin)JavaPlugin.getPlugin((Class)PWarpPlugin.class));
         this.saveDefaultConfig();
@@ -121,7 +121,7 @@ public class PWarpPlugin extends JavaPlugin implements askHelp
                         return true;
                     }
                     if (this.getConfig().get("defaultSetWarpAccess") == null) {
-                        this.getConfig().set("defaultSetWarpAccess", (Object)true);
+                        this.getConfig().set("defaultSetWarpAccess", true);
                     }
                     if (!this.getConfig().getBoolean("defaultSetWarpAccess") && !sender.hasPermission("pwarp.setwarp")) {
                         sender.sendMessage(ChatColor.RED + Messages.NO_PERMISSION.getMessage());
@@ -280,7 +280,7 @@ public class PWarpPlugin extends JavaPlugin implements askHelp
                             sender.sendMessage(ChatColor.RED + Messages.WARP_NOT_EXISTING.getMessage());
                             return true;
                         }
-                        this.wF.getWarpFile().set("warps." + args[1].toLowerCase() + ".isPrivate", (Object)true);
+                        this.wF.getWarpFile().set("warps." + args[1].toLowerCase() + ".isPrivate", true);
                         try {
                             this.wF.getWarpFile().save(new File(this.getDataFolder(), "warps.yml"));
                         }
@@ -303,7 +303,7 @@ public class PWarpPlugin extends JavaPlugin implements askHelp
                             sender.sendMessage(ChatColor.RED + Messages.WARP_NOT_EXISTING.getMessage());
                             return true;
                         }
-                        this.wF.getWarpFile().set("warps." + args[1].toLowerCase() + ".isPrivate", (Object)false);
+                        this.wF.getWarpFile().set("warps." + args[1].toLowerCase() + ".isPrivate", false);
                         try {
                             this.wF.getWarpFile().save(new File(this.getDataFolder(), "warps.yml"));
                         }
@@ -418,14 +418,14 @@ public class PWarpPlugin extends JavaPlugin implements askHelp
                                         worlds.add(args[2].toLowerCase());
                                     }
                                     else {
-                                        worlds = (List<String>)this.getConfig().getStringList("blacklist");
+                                        worlds = this.getConfig().getStringList("blacklist");
                                         if (worlds.contains(args[2].toLowerCase())) {
                                             sender.sendMessage(ChatColor.RED + Messages.ALREADY_BLACKLISTED.getMessage());
                                             return true;
                                         }
                                         worlds.add(args[2].toLowerCase());
                                     }
-                                    this.getConfig().set("blacklist", (Object)worlds);
+                                    this.getConfig().set("blacklist", worlds);
                                     this.saveConfig();
                                     sender.sendMessage(ChatColor.GREEN + Messages.ADDED_BLACKLIST.getMessage().replaceAll("PWORLDP", args[2].toLowerCase()));
                                     return true;
@@ -444,9 +444,9 @@ public class PWarpPlugin extends JavaPlugin implements askHelp
                                         sender.sendMessage(ChatColor.RED + Messages.WORLD_NOT_BLACKLISTED.getMessage().replaceAll("PWORLDP", args[2].toLowerCase()));
                                         return true;
                                     }
-                                    worlds = (List<String>)this.getConfig().getStringList("blacklist");
+                                    worlds = this.getConfig().getStringList("blacklist");
                                     worlds.remove(args[2].toLowerCase());
-                                    this.getConfig().set("blacklist", (Object)worlds);
+                                    this.getConfig().set("blacklist", worlds);
                                     this.saveConfig();
                                     sender.sendMessage(ChatColor.GREEN + Messages.REMOVED_BLACKLIST.getMessage().replaceAll("PWORLDP", args[2].toLowerCase()));
                                     return true;
@@ -460,7 +460,7 @@ public class PWarpPlugin extends JavaPlugin implements askHelp
                                         sender.sendMessage(ChatColor.RED + Messages.NO_WORLDS_BLACKLISTED.getMessage());
                                         return true;
                                     }
-                                    final List<String> blacklist = (List<String>)this.getConfig().getStringList("blacklist");
+                                    final List<String> blacklist = this.getConfig().getStringList("blacklist");
                                     sender.sendMessage(ChatColor.GRAY + "" + ChatColor.STRIKETHROUGH + "-----" + ChatColor.RESET + ChatColor.YELLOW + "[Blacklist]" + ChatColor.GRAY + ChatColor.STRIKETHROUGH + "-----" + ChatColor.GOLD + "\n » " + ChatColor.YELLOW + String.join(ChatColor.GOLD + "\n » " + ChatColor.YELLOW, blacklist));
                                     return true;
                                 }
@@ -518,13 +518,13 @@ public class PWarpPlugin extends JavaPlugin implements askHelp
                                     return true;
                                 }
                                 if (args[1].equalsIgnoreCase("enable")) {
-                                    this.getConfig().set("worldToWorldTeleport", (Object)true);
+                                    this.getConfig().set("worldToWorldTeleport", true);
                                     this.saveConfig();
                                     sender.sendMessage(ChatColor.GREEN + Messages.ENABLED_W2W.getMessage());
                                     return true;
                                 }
                                 if (args[1].equalsIgnoreCase("disable")) {
-                                    this.getConfig().set("worldToWorldTeleport", (Object)false);
+                                    this.getConfig().set("worldToWorldTeleport", false);
                                     this.saveConfig();
                                     sender.sendMessage(ChatColor.GREEN + Messages.DISABLED_W2W.getMessage());
                                     return true;
@@ -644,7 +644,7 @@ public class PWarpPlugin extends JavaPlugin implements askHelp
                                 else {
                                     this.gui.addItem(args[1].toLowerCase(), this);
                                 }
-                                this.wF.getWarpFile().set("warps." + args[1].toLowerCase() + ".isHidden", (Object)hidden);
+                                this.wF.getWarpFile().set("warps." + args[1].toLowerCase() + ".isHidden", hidden);
                                 try {
                                     this.wF.getWarpFile().save(new File(this.getDataFolder(), "warps.yml"));
                                 }
@@ -663,7 +663,7 @@ public class PWarpPlugin extends JavaPlugin implements askHelp
                                     sender.sendMessage(ChatColor.RED + Messages.CORRECT_USAGE.getMessage().replaceAll("PUSAGEP", "/pwarp warpsafety <true/false>"));
                                     return true;
                                 }
-                                this.getConfig().set("checkWarpSafety", (Object)Boolean.parseBoolean(args[1].toLowerCase()));
+                                this.getConfig().set("checkWarpSafety", Boolean.parseBoolean(args[1].toLowerCase()));
                                 this.saveConfig();
                                 sender.sendMessage(ChatColor.GREEN + Messages.WARP_SAFETY_UPDATED.getMessage());
                                 return true;
@@ -687,7 +687,7 @@ public class PWarpPlugin extends JavaPlugin implements askHelp
                             sender.sendMessage(ChatColor.RED + Messages.PLUGIN_NEEDS_NUMBER.getMessage());
                             return true;
                         }
-                        this.getConfig().set("teleportDelayInSeconds", (Object)seconds);
+                        this.getConfig().set("teleportDelayInSeconds", seconds);
                         this.saveConfig();
                         sender.sendMessage(ChatColor.GREEN + Messages.SET_DELAY.getMessage());
                         return true;
@@ -817,13 +817,13 @@ public class PWarpPlugin extends JavaPlugin implements askHelp
                         return true;
                     }
                     if (args[1].equalsIgnoreCase("enable")) {
-                        this.getConfig().set("worldToWorldTeleport", (Object)true);
+                        this.getConfig().set("worldToWorldTeleport", true);
                         this.saveConfig();
                         sender.sendMessage(ChatColor.GREEN + Messages.ENABLED_W2W.getMessage());
                         return true;
                     }
                     if (args[1].equalsIgnoreCase("disable")) {
-                        this.getConfig().set("worldToWorldTeleport", (Object)false);
+                        this.getConfig().set("worldToWorldTeleport", false);
                         this.saveConfig();
                         sender.sendMessage(ChatColor.GREEN + Messages.DISABLED_W2W.getMessage());
                         return true;
@@ -848,7 +848,7 @@ public class PWarpPlugin extends JavaPlugin implements askHelp
                         sender.sendMessage(ChatColor.RED + Messages.PLUGIN_NEEDS_NUMBER.getMessage());
                         return true;
                     }
-                    this.getConfig().set("teleportDelayInSeconds", (Object)seconds2);
+                    this.getConfig().set("teleportDelayInSeconds", seconds2);
                     this.saveConfig();
                     sender.sendMessage(ChatColor.GREEN + Messages.SET_DELAY.getMessage());
                     return true;
@@ -868,10 +868,10 @@ public class PWarpPlugin extends JavaPlugin implements askHelp
                             worlds2.add(args[2].toLowerCase());
                         }
                         else {
-                            worlds2 = (List<String>)this.getConfig().getStringList("blacklist");
+                            worlds2 = this.getConfig().getStringList("blacklist");
                             worlds2.add(args[2].toLowerCase());
                         }
-                        this.getConfig().set("blacklist", (Object)worlds2);
+                        this.getConfig().set("blacklist", worlds2);
                         this.saveConfig();
                         sender.sendMessage(ChatColor.GREEN + Messages.ADDED_BLACKLIST.getMessage().replaceAll("PWORLDP", args[2].toLowerCase()));
                         return true;
@@ -886,9 +886,9 @@ public class PWarpPlugin extends JavaPlugin implements askHelp
                             sender.sendMessage(ChatColor.RED + Messages.WORLD_NOT_BLACKLISTED.getMessage().replaceAll("PWORLDP", args[2].toLowerCase()));
                             return true;
                         }
-                        worlds2 = (List<String>)this.getConfig().getStringList("blacklist");
+                        worlds2 = this.getConfig().getStringList("blacklist");
                         worlds2.remove(args[2].toLowerCase());
-                        this.getConfig().set("blacklist", (Object)worlds2);
+                        this.getConfig().set("blacklist", worlds2);
                         this.saveConfig();
                         sender.sendMessage(ChatColor.GREEN + Messages.REMOVED_BLACKLIST.getMessage().replaceAll("PWORLDP", args[2].toLowerCase()));
                         return true;
@@ -898,7 +898,7 @@ public class PWarpPlugin extends JavaPlugin implements askHelp
                             sender.sendMessage(ChatColor.RED + Messages.NO_WORLDS_BLACKLISTED.getMessage());
                             return true;
                         }
-                        final List<String> blacklist2 = (List<String>)this.getConfig().getStringList("blacklist");
+                        final List<String> blacklist2 = this.getConfig().getStringList("blacklist");
                         sender.sendMessage(ChatColor.GRAY + "" + ChatColor.STRIKETHROUGH + "-----" + ChatColor.RESET + ChatColor.YELLOW + "[Blacklist]" + ChatColor.GRAY + ChatColor.STRIKETHROUGH + "-----" + ChatColor.GOLD + "\n » " + ChatColor.YELLOW + String.join(ChatColor.GOLD + "\n » " + ChatColor.YELLOW, blacklist2));
                         return true;
                     }

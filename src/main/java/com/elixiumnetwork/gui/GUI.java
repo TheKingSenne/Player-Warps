@@ -40,11 +40,11 @@ public class GUI implements Listener
             return;
         }
         final HashMap<Integer, List<String>> warpsWithVisitors = new HashMap<>();
-        final List<String> warps = (List<String>)GUI.wC.getStringList("warpList");
+        final List<String> warps = GUI.wC.getStringList("warpList");
         final List<String> sortedWarps = new ArrayList<>();
         for (final String warpName : warps) {
             if (GUI.wC.getString("warps." + warpName + ".isHidden") == null) {
-                GUI.wC.set("warps." + warpName + ".isHidden", (Object)false);
+                GUI.wC.set("warps." + warpName + ".isHidden", false);
             }
             if (!GUI.wC.getBoolean("warps." + warpName + ".isHidden") && GUI.wC.getString("warps." + warpName + ".owner-UUID") != null) {
                 if (!warpsWithVisitors.containsKey(GUI.wC.getInt("warps." + warpName + ".visitorCount"))) {
@@ -96,7 +96,7 @@ public class GUI implements Listener
                     }
                     lore.add(ChatColor.GRAY + "" + ChatColor.STRIKETHROUGH + "-------------------");
                     if (!GUI.wC.getStringList("warps." + warps.get(i + a * 36) + ".lore").isEmpty()) {
-                        final List<String> customLore = (List<String>)GUI.wC.getStringList("warps." + warps.get(i + a * 36) + ".lore");
+                        final List<String> customLore = GUI.wC.getStringList("warps." + warps.get(i + a * 36) + ".lore");
                         lore.add(ChatColor.AQUA + customLore.get(0).replace('&', '§'));
                         lore.add(ChatColor.AQUA + customLore.get(1).replace('&', '§'));
                         lore.add(ChatColor.AQUA + customLore.get(2).replace('&', '§'));
@@ -105,7 +105,7 @@ public class GUI implements Listener
                     lore.add(ChatColor.AQUA + Messages.GUI_WARP_OWNER.getMessage() + " " + Bukkit.getOfflinePlayer(UUID.fromString(Objects.requireNonNull(GUI.wC.getString("warps." + warps.get(i + a * 36) + ".owner-UUID")))).getName());
                     lore.add(ChatColor.AQUA + Messages.GUI_VISITORS.getMessage() + " " + GUI.wC.getInt("warps." + warps.get(i + a * 36) + ".visitorCount"));
                     lore.add(ChatColor.GRAY + "" + ChatColor.STRIKETHROUGH + "-------------------");
-                    m.setLore((List)lore);
+                    m.setLore(lore);
                     warpIcon.setItemMeta(m);
                     inv.addItem(new ItemStack[] { warpIcon });
                 }
@@ -135,7 +135,7 @@ public class GUI implements Listener
             sender.sendMessage(ChatColor.RED + Messages.NO_WARPS.getMessage());
             return;
         }
-        player.openInventory((Inventory)inv.get(page));
+        player.openInventory(inv.get(page));
     }
 
     public void changeMaterial(String name, final Material material) {
@@ -168,7 +168,7 @@ public class GUI implements Listener
         lore.add(ChatColor.AQUA + Messages.GUI_WARP_OWNER.getMessage() + " " + Bukkit.getOfflinePlayer(UUID.fromString(Objects.requireNonNull(GUI.wC.getString("warps." + name + ".owner-UUID")))).getName());
         lore.add(ChatColor.AQUA + Messages.GUI_VISITORS.getMessage() + " " + GUI.wC.getInt("warps." + name + ".visitorCount"));
         lore.add(ChatColor.GRAY + "" + ChatColor.STRIKETHROUGH + "-------------------");
-        m.setLore((List)lore);
+        m.setLore(lore);
         warpIcon.setItemMeta(m);
         if (GUI.guis.get(GUI.guis.size() - 1).getItem(44) == null) {
             GUI.guis.get(GUI.guis.size() - 1).addItem(new ItemStack[] { warpIcon });
@@ -191,7 +191,7 @@ public class GUI implements Listener
         for (final Inventory inv : GUI.guis) {
             for (int i = 9; i <= 44; ++i) {
                 if (inv.getItem(i) != null && Objects.requireNonNull(inv.getItem(i)).hasItemMeta() && Objects.requireNonNull(Objects.requireNonNull(inv.getItem(i)).getItemMeta()).getDisplayName().equals(ChatColor.YELLOW + name.substring(0, 1).toUpperCase() + name.substring(1))) {
-                    inv.setItem(i, (ItemStack)null);
+                    inv.setItem(i, null);
                     break;
                 }
             }
@@ -210,7 +210,7 @@ public class GUI implements Listener
                     final List<String> lore = new ArrayList<>();
                     lore.add(ChatColor.GRAY + "" + ChatColor.STRIKETHROUGH + "-------------------");
                     if (!GUI.wC.getStringList("warps." + name + ".lore").isEmpty()) {
-                        final List<String> customLore = (List<String>)GUI.wC.getStringList("warps." + name + ".lore");
+                        final List<String> customLore = GUI.wC.getStringList("warps." + name + ".lore");
                         for (int a = 0; a < customLore.size(); ++a) {
                             lore.add(ChatColor.AQUA + customLore.get(a).replace('&', '§'));
                         }
@@ -220,7 +220,7 @@ public class GUI implements Listener
                     lore.add(ChatColor.AQUA + Messages.GUI_VISITORS.getMessage() + " " + GUI.wC.getInt("warps." + name + ".visitorCount"));
                     lore.add(ChatColor.GRAY + "" + ChatColor.STRIKETHROUGH + "-------------------");
                     assert m != null;
-                    m.setLore((List)lore);
+                    m.setLore(lore);
                     warpIcon.setItemMeta(m);
                     inv.setItem(i, warpIcon);
                     break;
@@ -233,15 +233,15 @@ public class GUI implements Listener
     }
 
     private Inventory basicGui() {
-        final Inventory gui = Bukkit.createInventory((InventoryHolder)null, 54, ChatColor.YELLOW + Messages.GUI_INVENTORY_NAME.getMessage());
-        if (((PWarpPlugin)JavaPlugin.getPlugin((Class)PWarpPlugin.class)).getConfig().get("paneItem") == null) {
+        final Inventory gui = Bukkit.createInventory(null, 54, ChatColor.YELLOW + Messages.GUI_INVENTORY_NAME.getMessage());
+        if (JavaPlugin.getPlugin((Class)PWarpPlugin.class).getConfig().get("paneItem") == null) {
             final ItemMeta paneMeta = Bukkit.getItemFactory().getItemMeta(Material.GRAY_STAINED_GLASS_PANE);
             assert paneMeta != null;
             paneMeta.setDisplayName(" ");
             GUI.pane.setItemMeta(paneMeta);
         }
         else {
-            GUI.pane = ((PWarpPlugin)JavaPlugin.getPlugin((Class)PWarpPlugin.class)).getConfig().getItemStack("paneItem");
+            GUI.pane = JavaPlugin.getPlugin((Class)PWarpPlugin.class).getConfig().getItemStack("paneItem");
         }
         for (int i = 0; i < 9; ++i) {
             gui.setItem(i, GUI.pane);
@@ -255,7 +255,7 @@ public class GUI implements Listener
         nbim.setDisplayName(ChatColor.GRAY + Messages.NEXT_BUTTON.getMessage());
         ItemStack guiItem = new ItemStack(Material.SUNFLOWER);
         try {
-            guiItem = ((PWarpPlugin)JavaPlugin.getPlugin((Class)PWarpPlugin.class)).getConfig().getItemStack("guiItem");
+            guiItem = JavaPlugin.getPlugin((Class)PWarpPlugin.class).getConfig().getItemStack("guiItem");
             assert guiItem != null;
             if (Objects.requireNonNull(guiItem.getItemMeta()).hasDisplayName()) {
                 final ItemMeta guiMeta = guiItem.getItemMeta();
@@ -269,7 +269,7 @@ public class GUI implements Listener
             assert guiItemMeta != null;
             guiItemMeta.setDisplayName(ChatColor.YELLOW + "Created by The_King_Senne!");
             guiItem.setItemMeta(guiItemMeta);
-            ((PWarpPlugin)JavaPlugin.getPlugin((Class)PWarpPlugin.class)).getConfig().set("guiItem", (Object)guiItem);
+            JavaPlugin.getPlugin((Class)PWarpPlugin.class).getConfig().set("guiItem", guiItem);
         }
         GUI.backButton.setItemMeta(bbim);
         GUI.nextButton.setItemMeta(nbim);
@@ -288,7 +288,7 @@ public class GUI implements Listener
         }
         player.getInventory().setItemInMainHand(guiItem);
         guiItem.setAmount(1);
-        p.getConfig().set("guiItem", (Object)guiItem);
+        p.getConfig().set("guiItem", guiItem);
         p.saveConfig();
         for (final Inventory gui : GUI.guis) {
             gui.setItem(4, guiItem);
@@ -304,7 +304,7 @@ public class GUI implements Listener
         }
         final ItemStack paneItem = player.getInventory().getItemInMainHand();
         paneItem.setAmount(1);
-        p.getConfig().set("paneItem", (Object)paneItem);
+        p.getConfig().set("paneItem", paneItem);
         p.saveConfig();
         for (final Inventory gui : GUI.guis) {
             for (int a = 0; a < 9; ++a) {
@@ -342,25 +342,25 @@ public class GUI implements Listener
             final Player player = (Player)e.getWhoClicked();
             final String pageMessage = ChatColor.stripColor(e.getInventory().getItem(49).getItemMeta().getDisplayName());
             final int page = Integer.parseInt(pageMessage.replace(ChatColor.stripColor(Messages.GUI_PAGE.getMessage()), "")) - 1;
-            if (clicked.equals((Object)((PWarpPlugin)JavaPlugin.getPlugin((Class)PWarpPlugin.class)).getConfig().getItemStack("paneItem")) || e.getSlot() == 49 || e.getSlot() == 4) {
+            if (clicked.equals(JavaPlugin.getPlugin((Class)PWarpPlugin.class).getConfig().getItemStack("paneItem")) || e.getSlot() == 49 || e.getSlot() == 4) {
                 return;
             }
-            if (clicked.equals((Object)GUI.backButton)) {
+            if (clicked.equals(GUI.backButton)) {
                 if (page == 0) {
                     return;
                 }
-                this.openInv((CommandSender)player, page - 1);
+                this.openInv(player, page - 1);
                 e.setCancelled(true);
             }
-            else if (clicked.equals((Object)GUI.nextButton)) {
+            else if (clicked.equals(GUI.nextButton)) {
                 if ((page + 1) * 36 < GUI.wC.getStringList("warpList").size()) {
-                    this.openInv((CommandSender)player, page + 1);
+                    this.openInv(player, page + 1);
                 }
                 e.setCancelled(true);
             }
             else {
                 final Warp warp = new Warp();
-                warp.goToWarp(Objects.requireNonNull(clicked.getItemMeta()).getDisplayName().toLowerCase().substring(2), (CommandSender)player, (PWarpPlugin)JavaPlugin.getPlugin((Class)PWarpPlugin.class));
+                warp.goToWarp(Objects.requireNonNull(clicked.getItemMeta()).getDisplayName().toLowerCase().substring(2), player, (PWarpPlugin)JavaPlugin.getPlugin((Class)PWarpPlugin.class));
                 e.getWhoClicked().closeInventory();
                 e.setCancelled(true);
             }
@@ -372,6 +372,6 @@ public class GUI implements Listener
         backButton = new ItemStack(Material.STONE_BUTTON, 1);
         nextButton = new ItemStack(Material.STONE_BUTTON, 1);
         GUI.warpsSorted = new ArrayList<>();
-        GUI.wC = (FileConfiguration)new YamlConfiguration();
+        GUI.wC = new YamlConfiguration();
     }
 }

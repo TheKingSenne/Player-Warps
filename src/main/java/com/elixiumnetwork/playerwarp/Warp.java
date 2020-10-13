@@ -36,13 +36,13 @@ public class Warp
         name = name.toLowerCase();
         final Player owner = (Player)sender;
         if (Bukkit.getPluginManager().getPlugin("GriefPrevention") != null) {
-            final Claim claim = GriefPrevention.instance.dataStore.getClaimAt(owner.getLocation(), true, (Claim)null);
+            final Claim claim = GriefPrevention.instance.dataStore.getClaimAt(owner.getLocation(), true, null);
             if (claim != null && claim.allowAccess(owner) != null) {
                 sender.sendMessage(ChatColor.RED + Messages.NO_ACCESS_GP.getMessage());
                 return;
             }
         }
-        Warp.warps = (List<String>)this.wC.getStringList("warpList");
+        Warp.warps = this.wC.getStringList("warpList");
         if (p.getConfig().getStringList("blacklist") != null && !sender.hasPermission("pwarp.blacklist.bypass")) {
             for (int i = 0; i < p.getConfig().getStringList("blacklist").size(); ++i) {
                 if (p.getConfig().getStringList("blacklist").get(i).equalsIgnoreCase(owner.getWorld().getName())) {
@@ -110,17 +110,17 @@ public class Warp
             return;
         }
         if (p.getConfig().get("warpPrice.enable") == null) {
-            p.getConfig().set("warpPrice.enable", (Object)false);
+            p.getConfig().set("warpPrice.enable", false);
         }
         if (p.getConfig().get("warpMoneyPrice.enable") == null) {
-            p.getConfig().set("warpMoneyPrice.enable", (Object)false);
+            p.getConfig().set("warpMoneyPrice.enable", false);
         }
         boolean canAfford = false;
         boolean useEco = false;
         boolean useItem = false;
         double moneyAmount = 0.0;
         if (p.getConfig().get("warpMoneyPrice.price") != null && p.getConfig().getBoolean("warpMoneyPrice.enable") && !sender.hasPermission("pwarp.noprice")) {
-            final OfflinePlayer offlineWarpOwner = (OfflinePlayer)owner;
+            final OfflinePlayer offlineWarpOwner = owner;
             useEco = true;
             moneyAmount = p.getConfig().getDouble("warpMoneyPrice.price");
             final Economy eco = p.v.getEconomy();
@@ -167,7 +167,7 @@ public class Warp
                 owner.sendMessage(ChatColor.RED + Messages.CANT_AFFORD_MONEY.getMessage().replaceAll("PMONEYAMOUNTP", "\\$" + moneyAmount));
                 return;
             }
-            p.v.getEconomy().withdrawPlayer((OfflinePlayer)owner, (double)p.getConfig().getInt("warpMoneyPrice.price"));
+            p.v.getEconomy().withdrawPlayer(owner, p.getConfig().getInt("warpMoneyPrice.price"));
         }
         else if (useEco && useItem) {
             if (itemStack.getAmount() < priceAmount || !canAfford) {
@@ -180,20 +180,20 @@ public class Warp
             }
             else {
                 owner.getInventory().removeItem(new ItemStack[] { p.getConfig().getItemStack("warpPrice.item") });
-                p.v.getEconomy().withdrawPlayer((OfflinePlayer)owner, (double)p.getConfig().getInt("warpMoneyPrice.price"));
+                p.v.getEconomy().withdrawPlayer(owner, p.getConfig().getInt("warpMoneyPrice.price"));
             }
         }
         Warp.warps.add(name);
-        this.wC.set("warps." + name + ".location.x", (Object)loc.getX());
-        this.wC.set("warps." + name + ".location.y", (Object)loc.getY());
-        this.wC.set("warps." + name + ".location.z", (Object)loc.getZ());
-        this.wC.set("warps." + name + ".location.world", (Object)loc.getWorld().getName());
-        this.wC.set("warps." + name + ".location.pitch", (Object)(double)loc.getPitch());
-        this.wC.set("warps." + name + ".location.yaw", (Object)(double)loc.getYaw());
-        this.wC.set("warps." + name + ".location.direction", (Object)loc.getDirection());
-        this.wC.set("warps." + name + ".owner-UUID", (Object)owner.getUniqueId().toString());
-        this.wC.set("warps." + name + ".visitorCount", (Object)0);
-        this.wC.set("warpList", (Object)Warp.warps);
+        this.wC.set("warps." + name + ".location.x", loc.getX());
+        this.wC.set("warps." + name + ".location.y", loc.getY());
+        this.wC.set("warps." + name + ".location.z", loc.getZ());
+        this.wC.set("warps." + name + ".location.world", loc.getWorld().getName());
+        this.wC.set("warps." + name + ".location.pitch", (double)loc.getPitch());
+        this.wC.set("warps." + name + ".location.yaw", (double)loc.getYaw());
+        this.wC.set("warps." + name + ".location.direction", loc.getDirection());
+        this.wC.set("warps." + name + ".owner-UUID", owner.getUniqueId().toString());
+        this.wC.set("warps." + name + ".visitorCount", 0);
+        this.wC.set("warpList", Warp.warps);
         try {
             this.wC.save(new File(p.getDataFolder(), "warps.yml"));
         }
@@ -246,8 +246,8 @@ public class Warp
         name = name.toLowerCase();
         if (!this.wC.isConfigurationSection("warps." + name)) {
             sender.sendMessage(ChatColor.RED + Messages.WARP_NOT_EXISTING.getMessage());
-            (Warp.warps = (List<String>)this.wC.getStringList("warpList")).remove(name);
-            this.wC.set("warpList", (Object)Warp.warps);
+            (Warp.warps = this.wC.getStringList("warpList")).remove(name);
+            this.wC.set("warpList", Warp.warps);
             try {
                 this.wC.save(new File(p.getDataFolder(), "warps.yml"));
             }
@@ -261,9 +261,9 @@ public class Warp
                 sender.sendMessage(ChatColor.RED + Messages.NOT_AN_OWNER.getMessage());
                 return;
             }
-            this.wC.set("warps." + name, (Object)null);
-            (Warp.warps = (List<String>)this.wC.getStringList("warpList")).remove(name);
-            this.wC.set("warpList", (Object)Warp.warps);
+            this.wC.set("warps." + name, null);
+            (Warp.warps = this.wC.getStringList("warpList")).remove(name);
+            this.wC.set("warpList", Warp.warps);
             sender.sendMessage(ChatColor.GREEN + Messages.REMOVED_WARP.getMessage());
             try {
                 this.wC.save(new File(p.getDataFolder(), "warps.yml"));
@@ -280,13 +280,13 @@ public class Warp
         this.wC = Warp.p.wF.getWarpFile();
         name = name.toLowerCase();
         final Player player = (Player)sender;
-        final Location loc = new Location((World)Bukkit.getWorlds().get(0), 0.0, 0.0, 0.0, 0.0f, 0.0f);
+        final Location loc = new Location(Bukkit.getWorlds().get(0), 0.0, 0.0, 0.0, 0.0f, 0.0f);
         if (!this.wC.isConfigurationSection("warps." + name.toLowerCase()) && !this.wC.isConfigurationSection("warps." + name.toLowerCase() + ".location")) {
             sender.sendMessage(ChatColor.RED + Messages.WARP_NOT_EXISTING.getMessage());
             return;
         }
         if (Warp.p.getConfig().get("worldToWorldTeleport") == null) {
-            Warp.p.getConfig().set("worldToWorldTeleport", (Object)true);
+            Warp.p.getConfig().set("worldToWorldTeleport", true);
             Warp.p.saveConfig();
         }
         if (!Warp.p.getConfig().getBoolean("worldToWorldTeleport") && !sender.hasPermission("pwarp.worldtoworld.bypass") && !player.getLocation().getWorld().getName().equalsIgnoreCase(this.wC.getString("warps." + name + ".location.world"))) {
@@ -337,18 +337,18 @@ public class Warp
                         sender.sendMessage(ChatColor.GREEN + Messages.TELEPORTED.getMessage());
                         Warp.teleportingPlayers.remove(player.getUniqueId().toString());
                     }
-                }, (long)(20 * Warp.p.getConfig().getInt("teleportDelayInSeconds")));
+                }, 20 * Warp.p.getConfig().getInt("teleportDelayInSeconds"));
             }
             if (this.wC.getString("warps." + name + ".visitorCount").equals(null)) {
-                this.wC.set("warps." + name + ".visitorCount", (Object)0);
+                this.wC.set("warps." + name + ".visitorCount", 0);
             }
             int visitorCounter = this.wC.getInt("warps." + name + ".visitorCount");
             if (!player.getUniqueId().toString().equals(this.wC.getString("warps." + name + ".owner-UUID"))) {
                 ++visitorCounter;
             }
-            this.wC.set("warps." + name + ".visitorCount", (Object)visitorCounter);
+            this.wC.set("warps." + name + ".visitorCount", visitorCounter);
             final Calendar currentDate = Calendar.getInstance();
-            this.wC.set("warps." + name + ".date", (Object)((currentDate.get(2) + 1) * 30 + currentDate.get(5) + 1 + (currentDate.get(1) + 1) * 364));
+            this.wC.set("warps." + name + ".date", (currentDate.get(2) + 1) * 30 + currentDate.get(5) + 1 + (currentDate.get(1) + 1) * 364);
             try {
                 this.wC.save(new File(Warp.p.getDataFolder(), "warps.yml"));
             }
@@ -364,13 +364,13 @@ public class Warp
         final Player player = (Player)sender;
         Warp.price = player.getInventory().getItemInMainHand();
         player.getInventory().setItemInMainHand(Warp.price);
-        if (Warp.price.getType().equals((Object)Material.AIR)) {
+        if (Warp.price.getType().equals(Material.AIR)) {
             sender.sendMessage(ChatColor.RED + Messages.HOLD_ITEM.getMessage());
             return;
         }
         Warp.price.setAmount(amount);
-        Warp.p.getConfig().set("warpPrice.item", (Object)Warp.price);
-        Warp.p.getConfig().set("warpPrice.enable", (Object)true);
+        Warp.p.getConfig().set("warpPrice.item", Warp.price);
+        Warp.p.getConfig().set("warpPrice.enable", true);
         Warp.p.saveConfig();
         sender.sendMessage(ChatColor.GREEN + Messages.SET_PRICE.getMessage());
     }
@@ -393,9 +393,9 @@ public class Warp
             sender.sendMessage(ChatColor.RED + Messages.NO_WARPS.getMessage());
             return;
         }
-        (Warp.warps = (List<String>)this.wC.getStringList("warpList")).clear();
-        this.wC.set("warpList", (Object)Warp.warps);
-        this.wC.set("warps", (Object)null);
+        (Warp.warps = this.wC.getStringList("warpList")).clear();
+        this.wC.set("warpList", Warp.warps);
+        this.wC.set("warps", null);
         try {
             this.wC.save(new File(Warp.p.getDataFolder(), "warps.yml"));
         }
@@ -421,7 +421,7 @@ public class Warp
             sender.sendMessage(ChatColor.RED + Messages.LIMIT_ABOVE_0.getMessage());
             return;
         }
-        Warp.p.getConfig().set("warpLimit", (Object)limit);
+        Warp.p.getConfig().set("warpLimit", limit);
         sender.sendMessage(ChatColor.GREEN + Messages.LIMIT_CHANGED.getMessage());
         Warp.p.saveConfig();
     }
@@ -433,7 +433,7 @@ public class Warp
         name = name.toLowerCase();
         Location loc = null;
         if (Warp.p.getConfig().get("checkWarpSafety") == null) {
-            Warp.p.getConfig().set("checkWarpSafety", (Object)true);
+            Warp.p.getConfig().set("checkWarpSafety", true);
         }
         if (!Warp.p.getConfig().getBoolean("checkWarpSafety")) {
             return true;
@@ -448,7 +448,7 @@ public class Warp
             return true;
         }
         else {
-            loc = new Location((World)Bukkit.getWorlds().get(0), 0.0, 0.0, 0.0, 0.0f, 0.0f);
+            loc = new Location(Bukkit.getWorlds().get(0), 0.0, 0.0, 0.0, 0.0f, 0.0f);
             if (this.wC.getString("warps." + name + ".location.x") == null || this.wC.getString("warps." + name + ".location.y") == null || this.wC.getString("warps." + name + ".location.z") == null) {
                 sender.sendMessage(ChatColor.RED + Messages.CONFIGURED_WRONG.getMessage());
                 return false;
@@ -457,7 +457,7 @@ public class Warp
             loc.setY(this.wC.getDouble("warps." + name + ".location.y") - 1.0);
             loc.setZ(this.wC.getDouble("warps." + name + ".location.z"));
             try {
-                loc.setWorld(Bukkit.getServer().getWorld((String)Objects.requireNonNull(this.wC.getString("warps." + name + ".location.world"))));
+                loc.setWorld(Bukkit.getServer().getWorld(Objects.requireNonNull(this.wC.getString("warps." + name + ".location.world"))));
             }
             catch (Exception e) {
                 sender.sendMessage(ChatColor.RED + Messages.CONFIGURED_WRONG.getMessage());
@@ -498,7 +498,7 @@ public class Warp
         if (this.wC.getStringList("warps." + warp + ".trusted") == null) {
             return false;
         }
-        final List<String> trustedPlayers = (List<String>)this.wC.getStringList("warps." + warp + ".trusted");
+        final List<String> trustedPlayers = this.wC.getStringList("warps." + warp + ".trusted");
         return trustedPlayers.contains(playerName);
     }
 
@@ -507,10 +507,10 @@ public class Warp
         Warp.p = pl;
         this.wC = Warp.p.wF.getWarpFile();
         if (this.wC.getString("warps." + name + ".isPrivate") == null) {
-            this.wC.set("warps." + name + ".isPrivate", (Object)false);
+            this.wC.set("warps." + name + ".isPrivate", false);
         }
         else if (this.wC.getString("warps." + name + ".isPrivate") != "true" && this.wC.getString("warps." + name + ".isPrivate") != "false") {
-            this.wC.set("warps." + name + ".isPrivate", (Object)false);
+            this.wC.set("warps." + name + ".isPrivate", false);
         }
         return this.wC.getBoolean("warps." + name + ".isPrivate");
     }
@@ -539,7 +539,7 @@ public class Warp
             configLore.add("&1");
             configLore.add("&1");
             configLore.set(loreNum, loreString);
-            this.wC.set("warps." + name + ".lore", (Object)configLore);
+            this.wC.set("warps." + name + ".lore", configLore);
             try {
                 this.wC.save(new File(Warp.p.getDataFolder(), "warps.yml"));
             }
@@ -550,9 +550,9 @@ public class Warp
             this.gui.updateLore(name, pl);
         }
         else {
-            configLore = (List<String>)this.wC.getStringList("warps." + name + ".lore");
+            configLore = this.wC.getStringList("warps." + name + ".lore");
             configLore.set(loreNum, loreString);
-            this.wC.set("warps." + name + ".lore", (Object)configLore);
+            this.wC.set("warps." + name + ".lore", configLore);
             try {
                 this.wC.save(new File(Warp.p.getDataFolder(), "warps.yml"));
             }
@@ -577,7 +577,7 @@ public class Warp
             sender.sendMessage(ChatColor.RED + Messages.NOT_AN_OWNER.getMessage());
             return;
         }
-        this.wC.set("warps." + name + ".lore", (Object)null);
+        this.wC.set("warps." + name + ".lore", null);
         try {
             this.wC.save(new File(Warp.p.getDataFolder(), "warps.yml"));
         }
@@ -602,13 +602,13 @@ public class Warp
             sender.sendMessage(ChatColor.RED + Messages.NOT_AN_OWNER.getMessage());
             return;
         }
-        this.wC.set("warps." + name + ".location.x", (Object)loc.getX());
-        this.wC.set("warps." + name + ".location.y", (Object)loc.getY());
-        this.wC.set("warps." + name + ".location.z", (Object)loc.getZ());
-        this.wC.set("warps." + name + ".location.world", (Object)Objects.requireNonNull(loc.getWorld()).getName());
-        this.wC.set("warps." + name + ".location.pitch", (Object)(double)loc.getPitch());
-        this.wC.set("warps." + name + ".location.yaw", (Object)(double)loc.getYaw());
-        this.wC.set("warps." + name + ".location.direction", (Object)loc.getDirection());
+        this.wC.set("warps." + name + ".location.x", loc.getX());
+        this.wC.set("warps." + name + ".location.y", loc.getY());
+        this.wC.set("warps." + name + ".location.z", loc.getZ());
+        this.wC.set("warps." + name + ".location.world", Objects.requireNonNull(loc.getWorld()).getName());
+        this.wC.set("warps." + name + ".location.pitch", (double)loc.getPitch());
+        this.wC.set("warps." + name + ".location.yaw", (double)loc.getYaw());
+        this.wC.set("warps." + name + ".location.direction", loc.getDirection());
         try {
             this.wC.save(new File(Warp.p.getDataFolder(), "warps.yml"));
         }
@@ -632,7 +632,7 @@ public class Warp
             return;
         }
         Bukkit.getLogger().info("Starting automatedRemoval task...");
-        taskId = Bukkit.getScheduler().scheduleSyncDelayedTask(Warp.p, (Runnable) () -> {
+        taskId = Bukkit.getScheduler().scheduleSyncDelayedTask(Warp.p, () -> {
             final Calendar currentDate = Calendar.getInstance();
             if (Warp.this.wC.getStringList("warpList").isEmpty()) {
                 Warp.this.automatedRemoval(Warp.p);
@@ -640,17 +640,17 @@ public class Warp
             }
             for (final String warp : Warp.this.wC.getStringList("warpList")) {
                 if (Warp.this.wC.getString("warps." + warp + ".date") == null) {
-                    Warp.this.wC.set("warps." + warp + ".date", (Object)((currentDate.get(2) + 1) * 30 + currentDate.get(5) + 1 + (currentDate.get(1) + 1) * 364));
+                    Warp.this.wC.set("warps." + warp + ".date", (currentDate.get(2) + 1) * 30 + currentDate.get(5) + 1 + (currentDate.get(1) + 1) * 364);
                 }
                 final int daysBetween = (currentDate.get(2) + 1) * 30 + currentDate.get(5) + 1 + (currentDate.get(1) + 1) * 364 - Warp.this.wC.getInt("warps." + warp + ".date");
                 if (Warp.p.getConfig().getInt("inactiveWarpDays") == 0) {
-                    Warp.p.getConfig().set("inactiveWarpDays", (Object)30);
+                    Warp.p.getConfig().set("inactiveWarpDays", 30);
                 }
                 if (daysBetween >= Warp.p.getConfig().getInt("inactiveWarpDays")) {
                     Warp.this.wC.set("warps." + warp, null);
                     final List<String> warps = Warp.this.wC.getStringList("warpList");
                     warps.remove(warp);
-                    Warp.this.wC.set("warpList", (Object)warps);
+                    Warp.this.wC.set("warpList", warps);
                     Warp.this.gui.delItem(warp);
                 }
             }
@@ -666,10 +666,10 @@ public class Warp
                 final long now = System.currentTimeMillis();
                 final long diffInDays = (now - warpOwner.getLastPlayed()) / 86400000L;
                 if (diffInDays > Warp.p.getConfig().getLong("inactiveWarpDays")) {
-                    Warp.this.wC.set("warps." + warp, (Object)null);
-                    final List<String> warps2 = (List<String>)Warp.this.wC.getStringList("warpList");
+                    Warp.this.wC.set("warps." + warp, null);
+                    final List<String> warps2 = Warp.this.wC.getStringList("warpList");
                     warps2.remove(warp);
-                    Warp.this.wC.set("warpList", (Object)warps2);
+                    Warp.this.wC.set("warpList", warps2);
                     Warp.this.gui.delItem(warp);
                 }
             }
@@ -680,7 +680,7 @@ public class Warp
                 e.printStackTrace();
             }
             automatedRemoval(Warp.p);
-        }, (long)(1200 * Warp.p.getConfig().getInt("automatedInactiveRemovalInMinutes")));
+        }, 1200 * Warp.p.getConfig().getInt("automatedInactiveRemovalInMinutes"));
     }
 
     public void removeOldWarps(final PWarpPlugin pl, final CommandSender sender) {
@@ -693,17 +693,17 @@ public class Warp
         }
         for (final String warp : this.wC.getStringList("warpList")) {
             if (this.wC.getString("warps." + warp + ".date") == null) {
-                this.wC.set("warps." + warp + ".date", (Object)((currentDate.get(2) + 1) * 30 + currentDate.get(5) + 1 + (currentDate.get(1) + 1) * 364));
+                this.wC.set("warps." + warp + ".date", (currentDate.get(2) + 1) * 30 + currentDate.get(5) + 1 + (currentDate.get(1) + 1) * 364);
             }
             final int daysBetween = (currentDate.get(2) + 1) * 30 + currentDate.get(5) + 1 + (currentDate.get(1) + 1) * 364 - this.wC.getInt("warps." + warp + ".date");
             if (Warp.p.getConfig().getInt("inactiveWarpDays") == 0) {
-                Warp.p.getConfig().set("inactiveWarpDays", (Object)30);
+                Warp.p.getConfig().set("inactiveWarpDays", 30);
             }
             if (daysBetween >= Warp.p.getConfig().getInt("inactiveWarpDays")) {
-                this.wC.set("warps." + warp, (Object)null);
-                final List<String> warps = (List<String>)this.wC.getStringList("warpList");
+                this.wC.set("warps." + warp, null);
+                final List<String> warps = this.wC.getStringList("warpList");
                 warps.remove(warp);
-                this.wC.set("warpList", (Object)warps);
+                this.wC.set("warpList", warps);
                 this.gui.delItem(warp);
             }
         }
@@ -719,10 +719,10 @@ public class Warp
             final long now = System.currentTimeMillis();
             final long diffInDays = (now - warpOwner.getLastPlayed()) / 86400000L;
             if (diffInDays > Warp.p.getConfig().getLong("inactiveWarpDays")) {
-                this.wC.set("warps." + warp, (Object)null);
-                final List<String> warps2 = (List<String>)this.wC.getStringList("warpList");
+                this.wC.set("warps." + warp, null);
+                final List<String> warps2 = this.wC.getStringList("warpList");
                 warps2.remove(warp);
-                this.wC.set("warpList", (Object)warps2);
+                this.wC.set("warpList", warps2);
                 this.gui.delItem(warp);
             }
         }
@@ -753,7 +753,7 @@ public class Warp
             sender.sendMessage(ChatColor.RED + Messages.PLAYER_NOT_TRUSTED.getMessage());
             return;
         }
-        trustedPlayers = (List<String>)this.wC.getStringList("warps." + name + ".trusted");
+        trustedPlayers = this.wC.getStringList("warps." + name + ".trusted");
         if (removeOrAdd) {
             if (trustedPlayers.contains(trustedPlayer.getUniqueId().toString())) {
                 sender.sendMessage(ChatColor.RED + Messages.PLAYER_ALREADY_TRUSTED.getMessage());
@@ -771,7 +771,7 @@ public class Warp
             trustedPlayers.remove(trustedPlayer.getUniqueId().toString());
             sender.sendMessage(ChatColor.GREEN + Messages.PLAYER_UNTRUSTED.getMessage().replaceAll("PPLAYERP", trustedPlayer.getName()));
         }
-        this.wC.set("warps." + name + ".trusted", (Object)trustedPlayers);
+        this.wC.set("warps." + name + ".trusted", trustedPlayers);
         try {
             this.wC.save(new File(Warp.p.getDataFolder(), "warps.yml"));
         }
@@ -782,8 +782,8 @@ public class Warp
 
     public void setWarpMoneyPrice(final PWarpPlugin pl, final CommandSender sender, final int amount) {
         Warp.p = pl;
-        Warp.p.getConfig().set("warpMoneyPrice.price", (Object)amount);
-        Warp.p.getConfig().set("warpMoneyPrice.enable", (Object)true);
+        Warp.p.getConfig().set("warpMoneyPrice.price", amount);
+        Warp.p.getConfig().set("warpMoneyPrice.enable", true);
         Warp.p.saveConfig();
         sender.sendMessage(ChatColor.GREEN + Messages.SET_PRICE.getMessage());
     }
@@ -802,13 +802,13 @@ public class Warp
             return;
         }
         final ItemStack handItem = player.getInventory().getItemInMainHand();
-        if (handItem.getType().equals((Object)Material.AIR)) {
+        if (handItem.getType().equals(Material.AIR)) {
             sender.sendMessage(ChatColor.RED + Messages.HOLD_ITEM.getMessage());
             return;
         }
         player.getInventory().setItemInMainHand(handItem);
         handItem.setAmount(1);
-        this.wC.set("warps." + name + ".item", (Object)handItem);
+        this.wC.set("warps." + name + ".item", handItem);
         try {
             this.wC.save(new File(Warp.p.getDataFolder(), "warps.yml"));
         }
@@ -832,7 +832,7 @@ public class Warp
             sender.sendMessage(ChatColor.RED + Messages.NOT_AN_OWNER.getMessage());
             return;
         }
-        this.wC.set("warps." + name + ".item", (Object)null);
+        this.wC.set("warps." + name + ".item", null);
         try {
             this.wC.save(new File(Warp.p.getDataFolder(), "warps.yml"));
         }
@@ -862,14 +862,14 @@ public class Warp
             return;
         }
         this.gui.delItem(name);
-        this.wC.set("warps." + newName, (Object)this.wC.getConfigurationSection("warps." + name).getValues(true));
+        this.wC.set("warps." + newName, this.wC.getConfigurationSection("warps." + name).getValues(true));
         final String ownerUUID = this.wC.getString("warps." + name + ".owner-UUID");
-        this.wC.set("warps." + newName + ".owner-UUID", (Object)ownerUUID);
-        this.wC.set("warps." + name, (Object)null);
-        final List<String> warps = (List<String>)this.wC.getStringList("warpList");
+        this.wC.set("warps." + newName + ".owner-UUID", ownerUUID);
+        this.wC.set("warps." + name, null);
+        final List<String> warps = this.wC.getStringList("warpList");
         warps.remove(name);
         warps.add(newName);
-        this.wC.set("warpList", (Object)warps);
+        this.wC.set("warpList", warps);
         try {
             this.wC.save(new File(Warp.p.getDataFolder(), "warps.yml"));
         }

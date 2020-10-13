@@ -8,14 +8,14 @@ public class WarpFile
 {
     private FileConfiguration warpFile;
     private File customConfigFile;
-    
+
     public void createWarpFile(final PWarpPlugin p) {
         this.customConfigFile = new File(p.getDataFolder(), "warps.yml");
         if (!this.customConfigFile.exists()) {
             this.customConfigFile.getParentFile().mkdirs();
             p.saveResource("warps.yml", false);
         }
-        this.warpFile = (FileConfiguration)new YamlConfiguration();
+        this.warpFile = new YamlConfiguration();
         try {
             this.warpFile.load(this.customConfigFile);
             this.warpFile.save(this.customConfigFile);
@@ -24,13 +24,13 @@ public class WarpFile
             e.printStackTrace();
         }
     }
-    
+
     public void transferWarps(final PWarpPlugin p) {
         if (p.getConfig().getStringList("warpList") != null && p.getConfig().isConfigurationSection("warps")) {
-            this.warpFile.set("warps", (Object)p.getConfig().getConfigurationSection("warps").getValues(true));
-            this.warpFile.set("warpList", (Object)p.getConfig().getStringList("warpList"));
-            p.getConfig().set("warps", (Object)null);
-            p.getConfig().set("warpList", (Object)null);
+            this.warpFile.set("warps", p.getConfig().getConfigurationSection("warps").getValues(true));
+            this.warpFile.set("warpList", p.getConfig().getStringList("warpList"));
+            p.getConfig().set("warps", null);
+            p.getConfig().set("warpList", null);
             p.saveConfig();
             this.customConfigFile = new File(p.getDataFolder(), "warps.yml");
             try {
@@ -41,13 +41,13 @@ public class WarpFile
             }
         }
     }
-    
+
     public FileConfiguration getWarpFile() {
         return this.warpFile;
     }
-    
+
     public void reloadWarps() {
-        this.customConfigFile = new File(((PWarpPlugin)JavaPlugin.getPlugin((Class)PWarpPlugin.class)).getDataFolder(), "warps.yml");
-        this.warpFile = (FileConfiguration)YamlConfiguration.loadConfiguration(this.customConfigFile);
+        this.customConfigFile = new File(JavaPlugin.getPlugin((Class)PWarpPlugin.class).getDataFolder(), "warps.yml");
+        this.warpFile = YamlConfiguration.loadConfiguration(this.customConfigFile);
     }
 }
