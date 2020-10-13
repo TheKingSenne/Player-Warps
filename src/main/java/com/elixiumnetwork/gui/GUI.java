@@ -1,11 +1,9 @@
 package com.elixiumnetwork.gui;
 
-import org.bukkit.plugin.*;
 import org.bukkit.plugin.java.*;
 import org.bukkit.*;
 import com.elixiumnetwork.messages.*;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import org.bukkit.inventory.meta.*;
 import org.bukkit.command.*;
@@ -41,23 +39,23 @@ public class GUI implements Listener
         if (GUI.wC.getStringList("warpList").isEmpty()) {
             return;
         }
-        final HashMap<Integer, List<String>> warpsWithVisitors = new HashMap<Integer, List<String>>();
+        final HashMap<Integer, List<String>> warpsWithVisitors = new HashMap<>();
         final List<String> warps = (List<String>)GUI.wC.getStringList("warpList");
-        final List<String> sortedWarps = new ArrayList<String>();
+        final List<String> sortedWarps = new ArrayList<>();
         for (final String warpName : warps) {
             if (GUI.wC.getString("warps." + warpName + ".isHidden") == null) {
                 GUI.wC.set("warps." + warpName + ".isHidden", (Object)false);
             }
             if (!GUI.wC.getBoolean("warps." + warpName + ".isHidden") && GUI.wC.getString("warps." + warpName + ".owner-UUID") != null) {
                 if (!warpsWithVisitors.containsKey(GUI.wC.getInt("warps." + warpName + ".visitorCount"))) {
-                    warpsWithVisitors.put(GUI.wC.getInt("warps." + warpName + ".visitorCount"), new ArrayList<String>());
+                    warpsWithVisitors.put(GUI.wC.getInt("warps." + warpName + ".visitorCount"), new ArrayList<>());
                 }
                 final List<String> addedWarps = warpsWithVisitors.get(GUI.wC.getInt("warps." + warpName + ".visitorCount"));
                 addedWarps.add(warpName);
                 warpsWithVisitors.put(GUI.wC.getInt("warps." + warpName + ".visitorCount"), addedWarps);
             }
         }
-        final List<Integer> visitors = new ArrayList<Integer>(warpsWithVisitors.keySet());
+        final List<Integer> visitors = new ArrayList<>(warpsWithVisitors.keySet());
         visitors.sort(Collections.reverseOrder());
         for (final int visitorAmount : visitors) {
             for (final String warp : warpsWithVisitors.get(visitorAmount)) {
@@ -79,7 +77,7 @@ public class GUI implements Listener
         for (int a = 0; a <= invAmount; ++a) {
             final Inventory inv = this.basicGui();
             for (int i = 0; i < 36 && i < warps.size(); ++i) {
-                final List<String> lore = new ArrayList<String>();
+                final List<String> lore = new ArrayList<>();
                 if (i + a * 36 < warps.size() && GUI.wC.getString("warps." + warps.get(i + a * 36) + ".owner-UUID") != null && GUI.wC.get("warps." + warps.get(i + a * 36) + ".location.world") != null) {
                     ItemStack warpIcon;
                     ItemMeta m;
@@ -161,7 +159,7 @@ public class GUI implements Listener
 
     public void addItem(String name, final PWarpPlugin p) {
         name = name.toLowerCase();
-        final List<String> lore = new ArrayList<String>();
+        final List<String> lore = new ArrayList<>();
         final ItemStack warpIcon = new ItemStack(Material.CONDUIT);
         final ItemMeta m = Bukkit.getItemFactory().getItemMeta(Material.CONDUIT);
         assert m != null;
@@ -209,7 +207,7 @@ public class GUI implements Listener
                     final ItemStack warpIcon = inv.getItem(i);
                     assert warpIcon != null;
                     final ItemMeta m = warpIcon.getItemMeta();
-                    final List<String> lore = new ArrayList<String>();
+                    final List<String> lore = new ArrayList<>();
                     lore.add(ChatColor.GRAY + "" + ChatColor.STRIKETHROUGH + "-------------------");
                     if (!GUI.wC.getStringList("warps." + name + ".lore").isEmpty()) {
                         final List<String> customLore = (List<String>)GUI.wC.getStringList("warps." + name + ".lore");
@@ -373,7 +371,7 @@ public class GUI implements Listener
         GUI.pane = new ItemStack(Material.GRAY_STAINED_GLASS_PANE, 1);
         backButton = new ItemStack(Material.STONE_BUTTON, 1);
         nextButton = new ItemStack(Material.STONE_BUTTON, 1);
-        GUI.warpsSorted = new ArrayList<String>();
+        GUI.warpsSorted = new ArrayList<>();
         GUI.wC = (FileConfiguration)new YamlConfiguration();
     }
 }

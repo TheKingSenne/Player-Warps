@@ -11,7 +11,6 @@ import me.ryanhamshire.GriefPrevention.*;
 import org.bukkit.permissions.*;
 import java.io.*;
 import net.milkbowl.vault.economy.*;
-import org.bukkit.plugin.*;
 import org.bukkit.*;
 import org.bukkit.block.data.type.*;
 import java.util.*;
@@ -62,7 +61,7 @@ public class Warp
                         ++warpAmount;
                     }
                     int newLimit = warpLimit;
-                    final List<Integer> limits = new ArrayList<Integer>();
+                    final List<Integer> limits = new ArrayList<>();
                     limits.add(warpLimit);
                     for (final PermissionAttachmentInfo perm : owner.getEffectivePermissions()) {
                         final int length = perm.getPermission().length();
@@ -533,7 +532,7 @@ public class Warp
             sender.sendMessage(ChatColor.RED + Messages.NOT_AN_OWNER.getMessage());
             return;
         }
-        List<String> configLore = new ArrayList<String>(3);
+        List<String> configLore = new ArrayList<>(3);
         final String loreString = String.join(" ", lore);
         if (this.wC.getStringList("warps." + name + ".lore").isEmpty()) {
             configLore.add("&1");
@@ -885,6 +884,6 @@ public class Warp
     }
 
     static {
-        teleportingPlayers = new ArrayList<String>();
+        teleportingPlayers = new ArrayList<>();
     }
 }

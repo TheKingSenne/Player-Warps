@@ -3,7 +3,6 @@ package com.elixiumnetwork.playerwarp;
 import org.bukkit.plugin.java.*;
 import com.elixiumnetwork.gui.*;
 import com.elixiumnetwork.vault.*;
-import org.bukkit.event.*;
 import org.bukkit.plugin.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
@@ -26,7 +25,7 @@ public class PWarpPlugin extends JavaPlugin implements askHelp
         this.gui = new GUI();
         this.messageFile = new MessageFile();
         this.v = new VaultPlugin();
-        this.hooks = new ArrayList<String>();
+        this.hooks = new ArrayList<>();
         this.wF = new WarpFile();
     }
 
@@ -223,7 +222,7 @@ public class PWarpPlugin extends JavaPlugin implements askHelp
                             sender.sendMessage(ChatColor.RED + Messages.CORRECT_USAGE.getMessage().replaceAll("PUSAGEP", "/pwarp setlore <warp> <1,2,3> <lore>"));
                             return true;
                         }
-                        final List<String> lore = new ArrayList<String>();
+                        final List<String> lore = new ArrayList<>();
                         lore.addAll(Arrays.asList(args).subList(3, args.length));
                         this.warp.setWarpLore(sender, this, lore, args[1], loreNum - 1);
                         return true;
@@ -414,7 +413,7 @@ public class PWarpPlugin extends JavaPlugin implements askHelp
                                         sender.sendMessage(ChatColor.RED + Messages.NO_PERMISSION.getMessage());
                                         return true;
                                     }
-                                    List<String> worlds = new ArrayList<String>();
+                                    List<String> worlds = new ArrayList<>();
                                     if (this.getConfig().getStringList("blacklist") == null) {
                                         worlds.add(args[2].toLowerCase());
                                     }
@@ -436,7 +435,7 @@ public class PWarpPlugin extends JavaPlugin implements askHelp
                                         sender.sendMessage(ChatColor.RED + Messages.NO_PERMISSION.getMessage());
                                         return true;
                                     }
-                                    List<String> worlds = new ArrayList<String>();
+                                    List<String> worlds = new ArrayList<>();
                                     if (this.getConfig().getStringList("blacklist") == null) {
                                         sender.sendMessage(ChatColor.RED + Messages.WORLD_NOT_BLACKLISTED.getMessage().replaceAll("PWORLDP", args[2].toLowerCase()));
                                         return true;
@@ -487,7 +486,7 @@ public class PWarpPlugin extends JavaPlugin implements askHelp
                                     sender.sendMessage(ChatColor.RED + Messages.NO_WARPS.getMessage());
                                     return true;
                                 }
-                                final List<String> ownedWarps = new ArrayList<String>();
+                                final List<String> ownedWarps = new ArrayList<>();
                                 final Player player = (Player)sender;
                                 for (int i = 0; i < this.wF.getWarpFile().getStringList("warpList").size(); ++i) {
                                     if (this.wF.getWarpFile().getString("warps." + this.wF.getWarpFile().getStringList("warpList").get(i) + ".owner-UUID").equals(player.getUniqueId().toString())) {
@@ -542,7 +541,7 @@ public class PWarpPlugin extends JavaPlugin implements askHelp
                                     sender.sendMessage(ChatColor.RED + Messages.NO_PERMISSION.getMessage());
                                     return true;
                                 }
-                                final List<String> ownedWarps = new ArrayList<String>();
+                                final List<String> ownedWarps = new ArrayList<>();
                                 OfflinePlayer player2 = null;
                                 try {
                                     player2 = Bukkit.getOfflinePlayer(args[1]);
@@ -775,7 +774,7 @@ public class PWarpPlugin extends JavaPlugin implements askHelp
                         sender.sendMessage(ChatColor.RED + Messages.CORRECT_USAGE.getMessage().replaceAll("PUSAGEP", "/pwarp listother <player>"));
                         return true;
                     }
-                    final List<String> ownedWarps2 = new ArrayList<String>();
+                    final List<String> ownedWarps2 = new ArrayList<>();
                     OfflinePlayer player3 = null;
                     try {
                         player3 = Bukkit.getOfflinePlayer(args[1]);
@@ -864,7 +863,7 @@ public class PWarpPlugin extends JavaPlugin implements askHelp
                         return true;
                     }
                     if (args[1].equalsIgnoreCase("add")) {
-                        List<String> worlds2 = new ArrayList<String>();
+                        List<String> worlds2 = new ArrayList<>();
                         if (this.getConfig().getStringList("blacklist") == null) {
                             worlds2.add(args[2].toLowerCase());
                         }
@@ -878,7 +877,7 @@ public class PWarpPlugin extends JavaPlugin implements askHelp
                         return true;
                     }
                     if (args[1].equalsIgnoreCase("remove")) {
-                        List<String> worlds2 = new ArrayList<String>();
+                        List<String> worlds2 = new ArrayList<>();
                         if (this.getConfig().getStringList("blacklist") == null) {
                             sender.sendMessage(ChatColor.RED + Messages.WORLD_NOT_BLACKLISTED.getMessage().replaceAll("PWORLDP", args[2].toLowerCase()));
                             return true;
