@@ -48,13 +48,6 @@ public class PWarpPlugin extends JavaPlugin implements askHelp
         else {
             this.hooks.add("GriefPrevention" + ChatColor.RED + " \u2718");
         }
-        if (Bukkit.getPluginManager().getPlugin("PWarpAddon") != null) {
-            Bukkit.getConsoleSender().sendMessage("[PWarp] Successfully hooked into PWarpAddon!");
-            this.hooks.add("PWarpAddon" + ChatColor.GREEN + " \u2714");
-        }
-        else {
-            this.hooks.add("PWarpAddon" + ChatColor.RED + " \u2718");
-        }
         this.saveResource("info.yml", true);
         this.wF.createWarpFile(this);
         this.wF.transferWarps(this);
