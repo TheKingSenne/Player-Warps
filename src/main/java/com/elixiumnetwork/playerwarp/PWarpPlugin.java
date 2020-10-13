@@ -1,18 +1,25 @@
 package com.elixiumnetwork.playerwarp;
 
-import org.bukkit.plugin.java.*;
-import com.elixiumnetwork.gui.*;
-import com.elixiumnetwork.vault.*;
-import org.bukkit.plugin.*;
-import org.bukkit.command.*;
-import org.bukkit.entity.*;
-import com.elixiumnetwork.messages.*;
-import java.util.*;
-import java.io.*;
-import org.bukkit.*;
+import com.elixiumnetwork.gui.GUI;
+import com.elixiumnetwork.messages.MessageFile;
+import com.elixiumnetwork.messages.Messages;
+import com.elixiumnetwork.vault.VaultPlugin;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 
-public class PWarpPlugin extends JavaPlugin implements askHelp
-{
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class PWarpPlugin extends JavaPlugin implements askHelp {
     private final Warp warp;
     private final GUI gui;
     public final MessageFile messageFile;
@@ -29,6 +36,7 @@ public class PWarpPlugin extends JavaPlugin implements askHelp
         this.wF = new WarpFile();
     }
 
+    @Override
     public void onEnable() {
         Bukkit.getConsoleSender().sendMessage("[PWarp] PWarp has been enabled!");
         if (Bukkit.getPluginManager().getPlugin("Vault") == null) {
@@ -55,17 +63,19 @@ public class PWarpPlugin extends JavaPlugin implements askHelp
         this.messageFile.checkConfig();
         Bukkit.getPluginManager().registerEvents(new GUI(), this);
         this.warp.automatedRemoval(this);
-        this.gui.setUpGui((PWarpPlugin)JavaPlugin.getPlugin((Class)PWarpPlugin.class));
+        this.gui.setUpGui(this);
         this.saveDefaultConfig();
         this.getConfig().options().copyDefaults(true);
         this.saveConfig();
     }
 
+    @Override
     public void onDisable() {
         Bukkit.getConsoleSender().sendMessage("[PWarp] PWarp has been disabled!");
         this.saveConfig();
     }
 
+    @Override
     public boolean onCommand(final CommandSender sender, final Command cmd, final String lbl, final String[] args) {
         if (cmd.getName().equalsIgnoreCase("pwarp")) {
             if (sender instanceof Player) {
@@ -428,7 +438,7 @@ public class PWarpPlugin extends JavaPlugin implements askHelp
                                         sender.sendMessage(ChatColor.RED + Messages.NO_PERMISSION.getMessage());
                                         return true;
                                     }
-                                    List<String> worlds = new ArrayList<>();
+                                    List<String> worlds;
                                     if (this.getConfig().getStringList("blacklist") == null) {
                                         sender.sendMessage(ChatColor.RED + Messages.WORLD_NOT_BLACKLISTED.getMessage().replaceAll("PWORLDP", args[2].toLowerCase()));
                                         return true;

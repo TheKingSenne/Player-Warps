@@ -1,12 +1,11 @@
 package com.elixiumnetwork.vault;
 
-import net.milkbowl.vault.permission.*;
-import net.milkbowl.vault.economy.*;
-import org.bukkit.*;
-import org.bukkit.plugin.*;
+import net.milkbowl.vault.economy.Economy;
+import net.milkbowl.vault.permission.Permission;
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.RegisteredServiceProvider;
 
-public class VaultPlugin
-{
+public class VaultPlugin {
     private static Permission permission;
     private static Economy economy;
 
@@ -16,7 +15,7 @@ public class VaultPlugin
     }
 
     public boolean setupPermissions() {
-        final RegisteredServiceProvider<Permission> permissionProvider = (RegisteredServiceProvider<Permission>)Bukkit.getServer().getServicesManager().getRegistration((Class)Permission.class);
+        final RegisteredServiceProvider<Permission> permissionProvider = (RegisteredServiceProvider<Permission>) Bukkit.getServer().getServicesManager().getRegistration((Class)Permission.class);
         if (permissionProvider != null) {
             VaultPlugin.permission = permissionProvider.getProvider();
         }

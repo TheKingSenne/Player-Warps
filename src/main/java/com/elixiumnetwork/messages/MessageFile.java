@@ -1,12 +1,12 @@
 package com.elixiumnetwork.messages;
 
-import java.io.*;
-import com.elixiumnetwork.playerwarp.*;
-import org.bukkit.configuration.file.*;
-import org.bukkit.configuration.*;
+import com.elixiumnetwork.playerwarp.PWarpPlugin;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 
-public class MessageFile
-{
+import java.io.File;
+
+public class MessageFile {
     private FileConfiguration messageFile;
     private File customConfigFile;
 

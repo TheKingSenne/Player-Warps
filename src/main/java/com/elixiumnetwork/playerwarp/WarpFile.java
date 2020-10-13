@@ -1,11 +1,13 @@
 package com.elixiumnetwork.playerwarp;
 
-import org.bukkit.configuration.file.*;
-import java.io.*;
-import org.bukkit.plugin.java.*;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.plugin.java.JavaPlugin;
 
-public class WarpFile
-{
+import java.io.File;
+import java.io.IOException;
+
+public class WarpFile {
     private FileConfiguration warpFile;
     private File customConfigFile;
 

@@ -1,21 +1,33 @@
 package com.elixiumnetwork.gui;
 
-import org.bukkit.plugin.java.*;
-import org.bukkit.*;
-import com.elixiumnetwork.messages.*;
-import java.util.*;
+import com.elixiumnetwork.messages.Messages;
+import com.elixiumnetwork.playerwarp.PWarpPlugin;
+import com.elixiumnetwork.playerwarp.Warp;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.HumanEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.java.JavaPlugin;
 
-import org.bukkit.inventory.meta.*;
-import org.bukkit.command.*;
-import org.bukkit.entity.*;
-import org.bukkit.inventory.*;
-import org.bukkit.event.inventory.*;
-import com.elixiumnetwork.playerwarp.*;
-import org.bukkit.event.*;
-import org.bukkit.configuration.file.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
 
-public class GUI implements Listener
-{
+public class GUI implements Listener {
     private static ItemStack pane;
     private static final ItemStack backButton;
     private static final ItemStack nextButton;
@@ -35,7 +47,6 @@ public class GUI implements Listener
     }
 
     private void sortWarps() {
-        final PWarpPlugin p = (PWarpPlugin)JavaPlugin.getPlugin((Class)PWarpPlugin.class);
         if (GUI.wC.getStringList("warpList").isEmpty()) {
             return;
         }
