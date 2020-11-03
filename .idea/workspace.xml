@@ -28,59 +28,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5f50d0bc-3af2-457f-9309-609cf64cdd65" name="Default Changelist" comment="Working on a recode, all new stuff is moved to me.tks.*">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/Pwarp.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/intellij-javadocs-4.0.1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_MilkBowl_VaultAPI_1_7.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_TechFortress_GriefPrevention_16_14_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_2_8_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_guava_21_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_lang_commons_lang_2_6.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_papermc_paperlib_1_0_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_md_5_bungeecord_chat_1_16_R0_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_spigotmc_spigot_api_1_16_3_R0_1_SNAPSHOT.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_yaml_snakeyaml_1_26.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PWarp.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/Commands.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/Events.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/Gui.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/GuiCatalog.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/PWarp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/PluginConfiguration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/Warp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/WarpList.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/tks/utils/PlayerUtils.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/resources/temp.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/elixiumnetwork/playerwarp/askHelp.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/elixiumnetwork/vault/VaultPlugin.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/config.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/info.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/me/tks/messages/MessageFile.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/me/tks/messages/MessagePathAndDefault.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/me/tks/messages/Messages.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/me/tks/playerwarp/Commands.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/me/tks/playerwarp/Events.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/me/tks/playerwarp/Gui.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/me/tks/playerwarp/GuiCatalog.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/me/tks/playerwarp/PWarp.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/me/tks/playerwarp/PluginConfiguration.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/me/tks/playerwarp/Warp.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/me/tks/playerwarp/WarpList.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/me/tks/utils/PlayerUtils.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/messages.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/plugin.yml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/target/classes/temp.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.travis.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/elixiumnetwork/playerwarp/askHelp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/elixiumnetwork/playerwarp/askHelp.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -177,7 +126,7 @@
       <workItem from="1604412168629" duration="2245000" />
       <workItem from="1604424893645" duration="5085000" />
       <workItem from="1604434126661" duration="18000" />
-      <workItem from="1604438072885" duration="2637000" />
+      <workItem from="1604438072885" duration="2951000" />
     </task>
     <task id="LOCAL-00001" summary="Working on a recode, all new stuff is moved to me.tks.*">
       <created>1604439250968</created>
@@ -186,7 +135,14 @@
       <option name="project" value="LOCAL" />
       <updated>1604439250968</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Working on a recode, all new stuff is moved to me.tks.*">
+      <created>1604440963022</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1604440963022</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
