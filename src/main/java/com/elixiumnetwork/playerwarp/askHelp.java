@@ -3,7 +3,6 @@ package com.elixiumnetwork.playerwarp;
 import me.tks.messages.Messages;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.plugin.java.JavaPlugin;
 
 interface askHelp {
     default void generalHelp(final CommandSender sender, final int page) {

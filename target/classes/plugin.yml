@@ -1,0 +1,11 @@
+main: me.tks.playerwarp.PWarp
+name: PWarp
+version: 1.0
+api-version: 1.16
+author: The_King_Senne
+commands:
+  pwarp:
+    description: Main command for playerwarps
+    aliases: pw
+    usage: "/pw help"
+
