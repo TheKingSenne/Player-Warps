@@ -1,4 +1,6 @@
-package com.elixiumnetwork.messages;
+package me.tks.messages;
+
+import org.bukkit.ChatColor;
 
 public enum MessagePathAndDefault {
     NO_PERMISSION("noPermission", "Error: You do not have permission."),
@@ -13,7 +15,7 @@ public enum MessagePathAndDefault {
     GUI_INVENTORY_NAME("guiName", "PlayerWarps"),
     BACK_BUTTON("backButton", "Back"),
     NEXT_BUTTON("nextButton", "Next"),
-    NO_WARPS("noWarps", "Error: There are no warps available."),
+    NO_WARPS("noWarps", ChatColor.RED + "Error: There are no warps available."),
     GUI_PAGE("guiPage", "Page:"),
     GUI_WARP_OWNER("guiOwner", "Owner:"),
     GUI_VISITORS("guiVisitors", "Visitors:"),
@@ -110,7 +112,7 @@ public enum MessagePathAndDefault {
     private final String msg;
     private final String path;
 
-    private MessagePathAndDefault(final String path, final String msg) {
+    MessagePathAndDefault(final String path, final String msg) {
         this.msg = msg;
         this.path = path;
     }

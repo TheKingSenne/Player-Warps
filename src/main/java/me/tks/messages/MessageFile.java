@@ -1,6 +1,6 @@
-package com.elixiumnetwork.messages;
+package me.tks.messages;
 
-import com.elixiumnetwork.playerwarp.PWarpPlugin;
+import me.tks.playerwarp.PWarp;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -10,7 +10,7 @@ public class MessageFile {
     private FileConfiguration messageFile;
     private File customConfigFile;
 
-    public void createMessageFile(final PWarpPlugin p) {
+    public void createMessageFile(final PWarp p) {
         this.customConfigFile = new File(p.getDataFolder(), "messages.yml");
         if (!this.customConfigFile.exists()) {
             this.customConfigFile.getParentFile().mkdirs();
@@ -34,7 +34,7 @@ public class MessageFile {
     }
 
     public void checkConfig() {
-        final PWarpPlugin p = (PWarpPlugin)PWarpPlugin.getPlugin((Class)PWarpPlugin.class);
+        final PWarp p = (PWarp) PWarp.getPlugin((Class)PWarp.class);
         this.customConfigFile = new File(p.getDataFolder(), "messages.yml");
         if (!this.customConfigFile.exists()) {
             return;

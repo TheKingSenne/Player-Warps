@@ -1,9 +1,8 @@
-main: com.elixiumnetwork.playerwarp.PWarpPlugin
+main: me.tks.playerwarp.PWarp
 name: PWarp
-version: ${project.version}
-api-version: 1.13
+version: 1.0
+api-version: 1.16
 author: The_King_Senne
-softdepend: [GriefPrevention, Vault]
 commands:
   pwarp:
     description: Main command for playerwarps
@@ -11,11 +10,8 @@ commands:
     usage: "/pw help"
   pwg:
     description: Opens the warp GUI
-    usage: "/pwg"
-  pwarps:
-    description: Opens the warp GUI
     aliases: pws
-    usage: "/pwarps"
+    usage: "/pwg"
   pwwarp:
     description: Warps to a warp
     aliases: pww
