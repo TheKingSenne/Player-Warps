@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="Pwarp">
-    <output-path>$USER_HOME$/Desktop/Server/plugins</output-path>
-    <root id="archive" name="Pwarp.jar">
-      <element id="module-output" name="PWarp" />
-    </root>
-  </artifact>
-</component>

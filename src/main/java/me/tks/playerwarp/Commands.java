@@ -11,12 +11,10 @@ import org.bukkit.entity.Player;
 
 public class Commands implements CommandExecutor {
 
-    private final PWarp p;
     private final WarpList wL;
     private final GuiCatalog gC;
 
-    public Commands(PWarp p, WarpList wL, GuiCatalog gC) {
-        this.p = p;
+    public Commands(WarpList wL, GuiCatalog gC) {
         this.wL = wL;
         this.gC = gC;
     }
@@ -146,7 +144,7 @@ public class Commands implements CommandExecutor {
                 }
 
                 // Makes a warp private
-                else if (args[0].equalsIgnoreCase("setrivate")) {
+                else if (args[0].equalsIgnoreCase("setprivate")) {
 
                     if (args.length != 2) {
                         player.sendMessage(ChatColor.RED + Messages.CORRECT_USAGE.getMessage().replaceAll("PUSAGEP", "/pwarp setprivate <warpName>"));
@@ -155,7 +153,7 @@ public class Commands implements CommandExecutor {
 
                     if (!wL.warpExistsWithMessage(player, args[1])) return true;
 
-                    wL.getWarp(args[1]).setPrivacyState(player, false);
+                    wL.getWarp(args[1]).setPrivacyState(player, true);
                     return true;
                 }
 
@@ -173,7 +171,7 @@ public class Commands implements CommandExecutor {
 
                     if (p == null) return true;
 
-                    wL.getWarp(args[1]).addTrustedPlayer(player, p);
+                    wL.getWarp(args[2]).addTrustedPlayer(player, p);
                     return true;
                 }
 
@@ -191,7 +189,7 @@ public class Commands implements CommandExecutor {
 
                     if (p == null) return true;
 
-                    wL.getWarp(args[1]).removeTrustedPlayer(player, p);
+                    wL.getWarp(args[2]).removeTrustedPlayer(player, p);
                     return true;
                 }
 
@@ -232,7 +230,108 @@ public class Commands implements CommandExecutor {
                     return true;
                 }
 
+                // Help command
+                else if (args[0].equalsIgnoreCase("help")) {
+                    if (args.length == 1) {
+                        help(sender, 1);
+                        return true;
+                    }
+                    else if (args.length != 2) {
+                        player.sendMessage(ChatColor.RED + Messages.CORRECT_USAGE.getMessage().replaceAll("PUSAGEP", "/pwarp help <page>"));
+                        return true;
+                    }
 
+                    try {
+                        help(sender, Integer.parseInt(args[1]));
+                    }
+                    catch (NumberFormatException e) {
+                        sender.sendMessage(ChatColor.RED + Messages.PLUGIN_NEEDS_NUMBER.getMessage());
+                    }
+                    return true;
+                }
+
+                // Set lore command
+                else if (args[0].equalsIgnoreCase("setLore")) {
+
+                    if (args.length < 4) {
+                        player.sendMessage(ChatColor.RED + Messages.CORRECT_USAGE.getMessage().replaceAll("PUSAGEP", "/pwarp setlore <warp> <1|2|3> <new lore>"));
+                        return true;
+                    }
+
+                    if (!wL.warpExistsWithMessage(player, args[1])) return true;
+
+                    int number;
+
+                    try {
+                        number = Integer.parseInt(args[2]);
+                    }
+                    catch (NumberFormatException e) {
+                        player.sendMessage(ChatColor.RED + Messages.PLUGIN_NEEDS_NUMBER.getMessage());
+                        player.sendMessage(ChatColor.RED + Messages.CORRECT_USAGE.getMessage().replaceAll("PUSAGEP", "/pwarp setlore <warp> <1|2|3> <new lore>"));
+                        return true;
+                    }
+
+                    wL.getWarp(args[1]).setLore(player, PlayerUtils.playerArrayInputToString(args, 2), number);
+
+                    return true;
+                }
+
+                // Rename a warp
+                else if (args[0].equalsIgnoreCase("rename")) {
+
+                    if (args.length != 3) {
+                        player.sendMessage(ChatColor.RED + Messages.CORRECT_USAGE.getMessage().replaceAll("PUSAGEP", "/pwarp rename <warp> <newName>"));
+                        return true;
+                    }
+
+                    if (!wL.warpExistsWithMessage(sender, args[1])) return true;
+
+                    wL.getWarp(args[1]).changeName(player, args[2]);
+
+                    return true;
+                }
+
+                // Set the top GUI item
+                else if (args[0].equalsIgnoreCase("guiItem")) {
+
+                    if (!PlayerUtils.hasPermissionWithMessage(player, "pwarp.guiitem")) return true;
+
+                    PWarp.pC.setGuiItem(player);
+
+                    return true;
+                }
+
+                // Set separator item
+                else if (args[0].equalsIgnoreCase("separator")) {
+
+                    if (!PlayerUtils.hasPermissionWithMessage(player, "pwarp.separator")) return true;
+
+                    PWarp.pC.setSeparatorItem(player);
+
+                    return true;
+                }
+
+                // Set delay
+                else if(args[0].equalsIgnoreCase("setDelay")) {
+
+                    if (args.length != 2) {
+                        player.sendMessage(ChatColor.RED + Messages.CORRECT_USAGE.getMessage().replaceAll("PUSAGEP", "/pwarp setdelay <delay>"));
+                        return true;
+                    }
+
+                    if (!PlayerUtils.hasPermissionWithMessage(player, "pwarp.setdelay")) return true;
+
+                    try {
+                        PWarp.pC.setTeleportDelay(Integer.parseInt(args[1]));
+                        player.sendMessage(ChatColor.GREEN + Messages.SET_DELAY.getMessage());
+                    }
+                    catch (NumberFormatException e) {
+                        player.sendMessage(ChatColor.RED + Messages.PLUGIN_NEEDS_NUMBER.getMessage());
+                        player.sendMessage(ChatColor.RED + Messages.CORRECT_USAGE.getMessage().replaceAll("PUSAGEP", "/pwarp setdelay <delay>"));
+                    }
+
+                    return true;
+                }
 
                 player.sendMessage(ChatColor.RED + Messages.NEED_HELP.getMessage());
                 return true;
@@ -260,6 +359,7 @@ public class Commands implements CommandExecutor {
                 return true;
             }
 
+
             sender.sendMessage(ChatColor.RED + Messages.NEED_HELP.getMessage());
             return true;
         }
@@ -269,6 +369,11 @@ public class Commands implements CommandExecutor {
     }
 
     public void help(CommandSender sender, int page) {
+
+        if (page > 2 || page < 1) {
+            sender.sendMessage(ChatColor.RED + Messages.PAGE_NOT_EXISTING.getMessage());
+            return;
+        }
 
         sender.sendMessage(ChatColor.GRAY + "" + ChatColor.STRIKETHROUGH + "--------------------" + ChatColor.RESET + ChatColor.YELLOW + "[PlayerWarps]" + ChatColor.RESET + ChatColor.GRAY + ChatColor.STRIKETHROUGH + "---------------------");
         //if (sender.isOp() || sender.hasPermission("pwarp.staffhelp")) {
@@ -300,16 +405,16 @@ public class Commands implements CommandExecutor {
                 //sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp blacklist add/remove <world>" + ChatColor.GRAY + " - " + Messages.HELP_BLACKLISTADDREMOVE.getMessage());
                 //sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp blacklist list" + ChatColor.GRAY + " - " + Messages.HELP_BLACKLISTLIST.getMessage());
             }
-            else if (page == 3) {
+            //else if (page == 3) {
                 //sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp listown" + ChatColor.GRAY + " - " + Messages.HELP_LISTOWN.getMessage());
                 //sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp hooks" + ChatColor.GRAY + " - " + Messages.HELP_HOOKS.getMessage());
                 //sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp w2w enable/disable" + ChatColor.GRAY + " - " + Messages.HELP_W2W.getMessage());
                 //sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp listother <player>" + ChatColor.GRAY + " - " + Messages.HELP_LISTOTHER.getMessage());
                 //sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp sethidden <warp> <true/false>" + ChatColor.GRAY + " - " + Messages.HELP_SETHIDDEN.getMessage());
                 //sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp info" + ChatColor.GRAY + " - " + Messages.HELP_INFO.getMessage());
-                //sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp rename <warp> <name>" + ChatColor.GRAY + " - " + Messages.HELP_RENAME.getMessage());
+                sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp rename <warp> <name>" + ChatColor.GRAY + " - " + Messages.HELP_RENAME.getMessage());
                 //sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp warpsafety <true/false>" + ChatColor.GRAY + " - " + Messages.HELP_WARPSAFETY.getMessage());
-            }
+            //}
         //}
         /*else if (page == 1) {
             sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp set <name>" + ChatColor.GRAY + " - " + Messages.HELP_SET.getMessage());

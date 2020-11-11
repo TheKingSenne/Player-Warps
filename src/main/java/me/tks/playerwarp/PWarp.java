@@ -1,6 +1,6 @@
 package me.tks.playerwarp;
 
-import com.elixiumnetwork.vault.VaultPlugin;
+import me.tks.dependencies.VaultPlugin;
 import me.tks.messages.MessageFile;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -10,11 +10,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 // TO-DO:
-// - Lore
 // - fix this JavaDoc lmao
-// - teleport delay
-// - help menu
-
+// - Info command
+// - Hooks command
+// - Blacklist
+// - W2W teleport
+// - Safe warps
+// - Virtual economy
+// - Item economy
+// - Automated remover for old warps?
+// - Listown/listother command
+// - GP support
+// - Fix code dupe for item from player getter
+// - Adding extra names for commands
+// - Exempt permission for teleport delay
 
 public class PWarp extends JavaPlugin {
 
@@ -24,6 +33,7 @@ public class PWarp extends JavaPlugin {
       public static MessageFile messageFile = null;
       public static PluginConfiguration pC = null;
       public List<String> hooks;
+      public static Events events;
 
     /**
      * Loads everything when plugin gets enabled
@@ -31,30 +41,29 @@ public class PWarp extends JavaPlugin {
     @Override
     public void onEnable() {
 
-        Bukkit.getPluginManager().registerEvents(new Events(), this);
+        // Register all events
+        events = new Events();
+        Bukkit.getPluginManager().registerEvents( events, this);
 
         // Set up custom message file
         messageFile = new MessageFile();
         messageFile.createMessageFile(this);
         messageFile.checkConfig();
 
-        // Sets up the Warp List and all GUI's
-        wL = WarpList.read();
-        gC = new GuiCatalog();
-        gC.createGuis(wL);
-
         // Load plugin configuration
         pC = PluginConfiguration.read();
 
-        // Start automated GUI refresh
+        // Sets up the Warp List and all GUI's
+        wL = WarpList.read();
+        gC = new GuiCatalog();
         gC.reloadGuis(this);
 
         // Load commands
-        Commands cmd = new Commands(this, wL, gC);
+        Commands cmd = new Commands(wL, gC);
 
         this.getCommand("pwarp").setExecutor(cmd);
         this.getCommand("pwg").setExecutor(cmd);
-        this.getCommand("pwarp").setExecutor(cmd);
+        this.getCommand("pwwarp").setExecutor(cmd);
 
         // Load all hooks
         hooks = new ArrayList<String>();
@@ -68,6 +77,7 @@ public class PWarp extends JavaPlugin {
         }
         // Set up the vault economy and permissions
         else {
+            v = new VaultPlugin();
             v.setupEconomy();
             v.setupPermissions();
 

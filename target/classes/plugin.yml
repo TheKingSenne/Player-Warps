@@ -8,4 +8,12 @@ commands:
     description: Main command for playerwarps
     aliases: pw
     usage: "/pw help"
+  pwg:
+    description: Opens the warp GUI
+    aliases: pws
+    usage: "/pwg"
+  pwwarp:
+    description: Warps to a warp
+    aliases: pww
+    usage: "/pwwarp <warp>"
 

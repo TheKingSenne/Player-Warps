@@ -73,8 +73,16 @@ public class GuiCatalog {
                 break;
             }
         }
+    }
 
+    public void updateItem(Warp warp, String oldName) {
+        if (guis.isEmpty()) return;
 
+        for (Gui gui : guis) {
+            if (gui.updateItem(warp, oldName)) {
+                break;
+            }
+        }
     }
 
     /**
@@ -119,7 +127,7 @@ public class GuiCatalog {
 
     public void openFirstGui(Player player) {
 
-        if (guis.size() == 0) {
+        if (guis.isEmpty() || PWarp.wL.getWarps().isEmpty()) {
             player.sendMessage(ChatColor.RED + Messages.NO_WARPS.getMessage());
             return;
         }
@@ -140,6 +148,10 @@ public class GuiCatalog {
 
     public void createGuis(WarpList wL) {
 
+        if (wL.getWarps().isEmpty()) {
+            return;
+        }
+
         Bukkit.getLogger().info("[PWarp] Refreshing GUI's.");
 
         wL.sortWarps();
@@ -147,7 +159,7 @@ public class GuiCatalog {
 
         ArrayList<Player> viewers = closeAllGuis();
 
-        guis.clear();
+        guis = new ArrayList<>();
 
         final int invAmount = (int) Math.ceil(warps.size() / 36.0);
 
@@ -197,4 +209,19 @@ public class GuiCatalog {
 
     }
 
+    public void updateGuiItem() {
+
+        for (Gui gui : guis) {
+            gui.updateGuiItem();
+        }
+
+    }
+
+    public void updateSeparatorItem() {
+
+        for (Gui gui : guis) {
+            gui.updateSeparatorItem();
+        }
+
+    }
 }

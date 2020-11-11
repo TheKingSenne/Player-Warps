@@ -2,17 +2,55 @@ package me.tks.playerwarp;
 
 import me.tks.messages.Messages;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Events implements Listener {
+
+    private final ArrayList<Player> teleportingPlayers;
+
+    public Events() {
+        teleportingPlayers = new ArrayList<>();
+    }
+
+    public void addPlayer(Player player) {
+        teleportingPlayers.add(player);
+    }
+
+    public void removePlayer(Player player) {
+        teleportingPlayers.remove(player);
+    }
+
+    public boolean isTeleporting(Player player) {
+        return teleportingPlayers.contains(player);
+    }
+
+    @EventHandler
+    public void onMove(PlayerMoveEvent e) {
+        Player player = e.getPlayer();
+
+        if (!isTeleporting(player)) return;
+
+        Location from = e.getFrom();
+        Location to = e.getTo();
+
+        if (from.getBlockX() == to.getBlockX() && from.getBlockY() == to.getBlockY() && from.getBlockZ() == to.getBlockZ()) return;
+
+        teleportingPlayers.remove(player);
+        player.sendMessage(ChatColor.RED + Messages.MOVED.getMessage());
+
+    }
+
 
     /**
      * This method handles the gui clicks
@@ -26,7 +64,7 @@ public class Events implements Listener {
 
         if (playerInv.equals(clickedInv)) return;
 
-        if (!PWarp.getPlugin(PWarp.class).gC.contains(clickedInv)) return;
+        if (!PWarp.gC.contains(clickedInv)) return;
 
         e.setCancelled(true);
 
@@ -52,25 +90,15 @@ public class Events implements Listener {
 
         }
 
-        // If is page item
-        if (type.equals(Material.PAPER)) {
-            return;
-        }
-
-        // If is pane
-        if (type.equals(Material.GRAY_STAINED_GLASS_PANE)) {
-            return;
-        }
-
-        // If top gui item
-        if (e.getSlot() == 4) {
+        // If is top/bottom slots
+        if (e.getSlot() < 9 || e.getSlot() > 44) {
             return;
         }
 
         // Is warp
-        String name = Objects.requireNonNull(clicked.getItemMeta()).getDisplayName()/*.substring(2) FIX colour:)*/;
+        String name = Objects.requireNonNull(clicked.getItemMeta()).getDisplayName().substring(2);
 
-        Warp warp = PWarp.getPlugin(PWarp.class).wL.getWarp(name);
+        Warp warp = PWarp.wL.getWarp(name);
 
         if (warp != null) {
             warp.goTo((Player) e.getWhoClicked());

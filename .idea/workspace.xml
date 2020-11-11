@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="Pwarp" />
+      <artifact name="PWarp" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
@@ -28,8 +28,43 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5f50d0bc-3af2-457f-9309-609cf64cdd65" name="Default Changelist" comment="Working on a recode, all new stuff is moved to me.tks.*">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/PWarp.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/temp.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/Pwarp.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/deploy_rsa.enc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/elixiumnetwork/gui/GUI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/elixiumnetwork/playerwarp/PWarpPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/elixiumnetwork/playerwarp/PWarpPlugin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/elixiumnetwork/playerwarp/Warp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/elixiumnetwork/playerwarp/Warp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/elixiumnetwork/playerwarp/askHelp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/tks/messages/MessagePathAndDefault.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/tks/messages/MessagePathAndDefault.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/tks/messages/Messages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/tks/messages/Messages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/Commands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/Commands.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/Events.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/Events.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/Gui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/Gui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/GuiCatalog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/GuiCatalog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/PWarp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/PWarp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/PluginConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/PluginConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/Warp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/Warp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/WarpList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/WarpList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/tks/utils/PlayerUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/tks/utils/PlayerUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/temp.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/elixiumnetwork/playerwarp/askHelp.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/me/tks/messages/MessagePathAndDefault.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/tks/messages/MessagePathAndDefault.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/me/tks/messages/Messages.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/tks/messages/Messages.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/me/tks/playerwarp/Commands.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/tks/playerwarp/Commands.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/me/tks/playerwarp/Events.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/tks/playerwarp/Events.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/me/tks/playerwarp/Gui.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/tks/playerwarp/Gui.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/me/tks/playerwarp/GuiCatalog.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/tks/playerwarp/GuiCatalog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/me/tks/playerwarp/PWarp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/tks/playerwarp/PWarp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/me/tks/playerwarp/PluginConfiguration.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/tks/playerwarp/PluginConfiguration.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/me/tks/playerwarp/Warp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/tks/playerwarp/Warp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/me/tks/playerwarp/WarpList.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/tks/playerwarp/WarpList.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/me/tks/utils/PlayerUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/tks/utils/PlayerUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/temp.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/temp.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,11 +103,12 @@
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/Server/plugins" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Problems" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.46896553" />
     <property name="run.code.analysis.last.selected.profile" value="aDefault" />
@@ -129,6 +165,10 @@
       <workItem from="1604438072885" duration="3326000" />
       <workItem from="1604476621631" duration="3000" />
       <workItem from="1604567227307" duration="283000" />
+      <workItem from="1604666253810" duration="11495000" />
+      <workItem from="1604919779039" duration="275000" />
+      <workItem from="1604941223821" duration="10294000" />
+      <workItem from="1604956858351" duration="98000" />
     </task>
     <task id="LOCAL-00001" summary="Working on a recode, all new stuff is moved to me.tks.*">
       <created>1604439250968</created>
@@ -174,10 +214,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="Working on a recode, all new stuff is moved to me.tks.*" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="249" y="0" key="#Project_Structure" timestamp="1604439709474">
+    <state x="249" y="0" key="#Project_Structure" timestamp="1604677376129">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="249" y="0" key="#Project_Structure/-1920.-363.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1604439709474" />
+    <state x="249" y="0" key="#Project_Structure/-1920.-363.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1604677376129" />
     <state x="249" y="0" key="#Project_Structure/0.0.1536.824@0.0.1536.824" timestamp="1604089466277" />
     <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1604094157950">
       <screen x="0" y="0" width="1536" height="824" />
@@ -196,13 +236,15 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="397" y="101" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog/-1920.-363.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1604440146758" />
-    <state x="596" y="141" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1603817564367">
+    <state x="596" y="141" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1604674106864">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="596" y="141" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/-1920.-363.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1604674106864" />
     <state x="596" y="141" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1536.824@0.0.1536.824" timestamp="1603817564367" />
-    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1604086206882">
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1604947661129">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="549" y="167" key="FileChooserDialogImpl/-1920.-363.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1604947661129" />
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1604086206882" />
     <state x="593" y="332" key="Github.CreateGistDialog" timestamp="1604439597867">
       <screen x="0" y="0" width="1536" height="824" />
@@ -225,6 +267,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="469" y="170" key="refactoring.ChangeSignatureDialog/0.0.1536.824@0.0.1536.824" timestamp="1603874916938" />
+    <state x="425" y="187" key="run.anything.popup" timestamp="1604956665059">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="425" y="187" key="run.anything.popup/-1920.-363.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1604956665059" />
     <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1604050569869">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

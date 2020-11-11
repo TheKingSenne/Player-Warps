@@ -1,4 +1,4 @@
-package com.elixiumnetwork.vault;
+package me.tks.dependencies;
 
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;

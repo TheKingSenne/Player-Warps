@@ -15,6 +15,7 @@ public class Gui {
 
     private final Inventory guiInv;
     private final int page;
+    //private final ArrayList<Warp> warps;
 
     /**
      * Constructor for a GUI inventory
@@ -23,11 +24,19 @@ public class Gui {
      * @param warps ArrayList containing all 36 warps in a sorted way
      */
     public Gui(int page, ArrayList<Warp> warps) {
+        this.page = page;
+        //this.warps = warps;
+
         // Create new inventory
         guiInv = Bukkit.createInventory(null, 54, ChatColor.YELLOW + Messages.GUI_INVENTORY_NAME.getMessage());
 
         // Create pane item
         ItemStack pane = new ItemStack(Material.GRAY_STAINED_GLASS_PANE, 1);
+
+        if (PWarp.pC.getSeparatorItem() != null) {
+            pane = PWarp.pC.getSeparatorItem();
+        }
+
         ItemMeta paneMeta = Bukkit.getItemFactory().getItemMeta(Material.GRAY_STAINED_GLASS_PANE);
         if (paneMeta != null) { paneMeta.setDisplayName(" "); }
         pane.setItemMeta(paneMeta);
@@ -44,11 +53,19 @@ public class Gui {
         nextButton.setItemMeta(nbim);
 
         // Create top gui item
-        ItemStack guiItem = new ItemStack(Material.SUNFLOWER);
-        ItemMeta guiItemMeta = Bukkit.getItemFactory().getItemMeta(Material.SUNFLOWER);
+        ItemStack guiItem = null;
 
-        if (guiItemMeta != null) { guiItemMeta.setDisplayName(ChatColor.YELLOW + "Created by The_King_Senne!"); }
-        guiItem.setItemMeta(guiItemMeta);
+        if (PWarp.pC.getGuiItem() != null) {
+            guiItem = PWarp.pC.getGuiItem();
+        }
+        else {
+            guiItem = new ItemStack(Material.SUNFLOWER);
+
+            ItemMeta guiItemMeta = Bukkit.getItemFactory().getItemMeta(Material.SUNFLOWER);
+
+            if (guiItemMeta != null) { guiItemMeta.setDisplayName(ChatColor.YELLOW + Messages.SERVER_NAME.getMessage()); }
+            guiItem.setItemMeta(guiItemMeta);
+        }
 
         // Create page item
         ItemStack pageItem = new ItemStack(Material.PAPER, 1);
@@ -72,8 +89,6 @@ public class Gui {
         for (Warp warp : warps) {
             guiInv.addItem(warp.getItemStack());
         }
-
-        this.page = page;
     }
 
     /**
@@ -101,8 +116,31 @@ public class Gui {
      * @return the boolean
      */
     public boolean updateItem(Warp warp) {
+
+//        if (!warps.contains(warp)) {
+//            Bukkit.broadcastMessage("this warp doesn't exist in this gui");
+//            return false;
+//        }
+
         for (int i = 0; i < guiInv.getSize(); i++) {
-            if (guiInv.getItem(i).getItemMeta().getDisplayName().toLowerCase().equals(warp.getName())) {
+            if (guiInv.getItem(i)!= null && guiInv.getItem(i).getItemMeta().getDisplayName().toLowerCase().equals(ChatColor.YELLOW + warp.getName())) {
+
+                guiInv.setItem(i, warp.getItemStack());
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean updateItem(Warp warp, String oldName) {
+
+//        if (!warps.contains(warp)) {
+//            Bukkit.broadcastMessage("this warp doesn't exist in this gui");
+//            return false;
+//        }
+
+        for (int i = 0; i < guiInv.getSize(); i++) {
+            if (guiInv.getItem(i)!= null && guiInv.getItem(i).getItemMeta().getDisplayName().toLowerCase().equals(ChatColor.YELLOW + oldName)) {
 
                 guiInv.setItem(i, warp.getItemStack());
                 return true;
@@ -154,4 +192,20 @@ public class Gui {
         return this.guiInv;
     }
 
+    public void updateSeparatorItem() {
+
+        // Place items in gui
+        for (int i = 0; i < 9; ++i) {
+
+            if (i != 4)
+            guiInv.setItem(i, PWarp.pC.getSeparatorItem());
+
+            if (i+45 != 48 && i+45 != 50 && i+45 != 49)
+            guiInv.setItem(i + 45, PWarp.pC.getSeparatorItem());
+        }
+    }
+
+    public void updateGuiItem() {
+        guiInv.setItem(4, PWarp.pC.getGuiItem());
+    }
 }

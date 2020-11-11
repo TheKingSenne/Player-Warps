@@ -1,24 +1,4 @@
-//package com.elixiumnetwork.playerwarp;
-//
-//import com.elixiumnetwork.gui.GUI;
-//import me.tks.messages.MessageFile;
-//import me.tks.messages.Messages;
-//import com.elixiumnetwork.vault.VaultPlugin;
-//import org.bukkit.Bukkit;
-//import org.bukkit.ChatColor;
-//import org.bukkit.Location;
-//import org.bukkit.OfflinePlayer;
-//import org.bukkit.command.Command;
-//import org.bukkit.command.CommandSender;
-//import org.bukkit.entity.Player;
-//import org.bukkit.plugin.java.JavaPlugin;
-//
-//import java.io.File;
-//import java.io.IOException;
-//import java.util.ArrayList;
-//import java.util.Arrays;
-//import java.util.List;
-//
+
 //public class PWarpPlugin extends JavaPlugin implements askHelp {
 //    private final Warp warp;
 //    private final GUI gui;
@@ -85,36 +65,7 @@
 //                    askHelp.generalHelp(sender, 1);
 //                    return true;
 //                }
-//                if (args[0].equalsIgnoreCase("help")) {
-//                    if (args.length == 2) {
-//                        int page = 1;
-//                        try {
-//                            page = Integer.parseInt(args[1]);
-//                        }
-//                        catch (Exception e3) {
-//                            sender.sendMessage(ChatColor.RED + Messages.PLUGIN_NEEDS_NUMBER.getMessage());
-//                            return true;
-//                        }
-//                        if (page > 3) {
-//                            sender.sendMessage(ChatColor.RED + Messages.PAGE_NOT_EXISTING.getMessage());
-//                            return true;
-//                        }
-//                        if (!sender.hasPermission("pwarp.staffhelp") && !sender.isOp() && page > 2) {
-//                            sender.sendMessage(ChatColor.RED + Messages.PAGE_NOT_EXISTING.getMessage());
-//                            return true;
-//                        }
-//                        askHelp.generalHelp(sender, page);
-//                        return true;
-//                    }
-//                    else {
-//                        if (args.length == 1) {
-//                            askHelp.generalHelp(sender, 1);
-//                            return true;
-//                        }
-//                        sender.sendMessage(ChatColor.RED + Messages.CORRECT_USAGE.getMessage().replaceAll("PUSAGEP", "/pwarp help <page>"));
-//                        return true;
-//                    }
-//                }
+
 //                else if (args[0].equalsIgnoreCase("set") || args[0].equalsIgnoreCase("place") || args[0].equalsIgnoreCase("create") || args[0].equalsIgnoreCase("setwarp") || args[0].equalsIgnoreCase("placewarp")) {
 //                    if (args.length != 2) {
 //                        sender.sendMessage(ChatColor.RED + Messages.CORRECT_USAGE.getMessage().replaceAll("PUSAGEP", "/pwarp set <name>"));
@@ -201,64 +152,6 @@
 //                        this.warp.setLimit(this, sender, args[1]);
 //                        return true;
 //                    }
-//                    else if (args[0].equalsIgnoreCase("gui")) {
-//                        if (args.length == 1) {
-//                            //this.gui.openInv(sender, 0);
-//                            return true;
-//                        }
-//                        sender.sendMessage(ChatColor.RED + Messages.CORRECT_USAGE.getMessage().replaceAll("PUSAGEP", "/pwarp gui or /pwg"));
-//                        return true;
-//                    }
-//                    else if (args[0].equalsIgnoreCase("setlore")) {
-//                        if (args.length < 4) {
-//                            sender.sendMessage(ChatColor.RED + Messages.CORRECT_USAGE.getMessage().replaceAll("PUSAGEP", "/pwarp setlore <warp> <1,2,3> <lore>"));
-//                            return true;
-//                        }
-//                        int loreNum = 0;
-//                        try {
-//                            loreNum = Integer.parseInt(args[2]);
-//                        }
-//                        catch (Exception e3) {
-//                            sender.sendMessage(ChatColor.RED + Messages.CORRECT_USAGE.getMessage().replaceAll("PUSAGEP", "/pwarp setlore <warp> <1,2,3> <lore>"));
-//                            return true;
-//                        }
-//                        final List<String> lore = new ArrayList<>();
-//                        lore.addAll(Arrays.asList(args).subList(3, args.length));
-//                        this.warp.setWarpLore(sender, this, lore, args[1], loreNum - 1);
-//                        return true;
-//                    }
-//                    else if (args[0].equalsIgnoreCase("resetlore")) {
-//                        if (args.length != 2) {
-//                            sender.sendMessage(ChatColor.RED + Messages.CORRECT_USAGE.getMessage().replaceAll("PUSAGEP", "/pwarp resetlore <warp>"));
-//                            return true;
-//                        }
-//                        this.warp.resetLore(args[1], sender, this);
-//                        return true;
-//                    }
-//                    else if (args[0].equalsIgnoreCase("guiitem")) {
-//                        if (args.length != 1) {
-//                            sender.sendMessage(ChatColor.RED + Messages.CORRECT_USAGE.getMessage().replaceAll("PUSAGEP", "/pwarp guiitem"));
-//                            return true;
-//                        }
-//                        if (!sender.isOp() && !sender.hasPermission("pwarp.guiitem")) {
-//                            sender.sendMessage(ChatColor.RED + Messages.NO_PERMISSION.getMessage());
-//                            return true;
-//                        }
-//                        this.gui.setGuiItem(this, sender);
-//                        return true;
-//                    }
-//                    else if (args[0].equalsIgnoreCase("movewarp")) {
-//                        if (!sender.hasPermission("pwarp.movewarp") && !sender.isOp()) {
-//                            sender.sendMessage(ChatColor.RED + Messages.NO_PERMISSION.getMessage());
-//                            return true;
-//                        }
-//                        if (args.length != 2) {
-//                            sender.sendMessage(ChatColor.RED + Messages.CORRECT_USAGE.getMessage().replaceAll("PUSAGEP", "/pwarp movewarp <warp>"));
-//                            return true;
-//                        }
-//                        this.warp.moveWarp(sender, this, args[1]);
-//                        return true;
-//                    }
 //                    else if (args[0].equalsIgnoreCase("clearoldwarps")) {
 //                        if (!sender.isOp() && !sender.hasPermission("pwarp.clearoldwarps")) {
 //                            sender.sendMessage(ChatColor.RED + Messages.NO_PERMISSION.getMessage());
@@ -267,32 +160,8 @@
 //                        this.warp.removeOldWarps(this, sender);
 //                        return true;
 //                    }
-//                    else if (args[0].equalsIgnoreCase("setprivate")) {
-//                        if (!sender.isOp() && !sender.hasPermission("pwarp.private")) {
-//                            sender.sendMessage(ChatColor.RED + Messages.NO_PERMISSION.getMessage());
-//                            return true;
-//                        }
 
-//                    }
-//                    else if (args[0].equalsIgnoreCase("setpublic")) {
-//                        if (!sender.isOp() && !sender.hasPermission("pwarp.private")) {
-//                            sender.sendMessage(ChatColor.RED + Messages.NO_PERMISSION.getMessage());
-//                            return true;
-//                        }
-//                    }
-//                    else if (args[0].equalsIgnoreCase("trust")) {
-//                        if (!sender.isOp() && !sender.hasPermission("pwarp.private")) {
-//                            sender.sendMessage(ChatColor.RED + Messages.NO_PERMISSION.getMessage());
-//                            return true;
-//                        }
 
-//                    }
-//                    else if (args[0].equalsIgnoreCase("untrust")) {
-//                        if (!sender.isOp() && !sender.hasPermission("pwarp.private")) {
-//                            sender.sendMessage(ChatColor.RED + Messages.NO_PERMISSION.getMessage());
-//                            return true;
-//                        }
-//                    }
 //                    else if (args[0].equalsIgnoreCase("setprice")) {
 //                        if (!sender.isOp() && !sender.hasPermission("pwarp.setprice")) {
 //                            sender.sendMessage(ChatColor.RED + Messages.NO_PERMISSION.getMessage());
@@ -389,18 +258,7 @@
 //                                    return true;
 //                                }
 //                            }
-//                            else if (args[0].equalsIgnoreCase("setseparator")) {
-//                                if (!sender.hasPermission("pwarp.setseparator")) {
-//                                    sender.sendMessage(ChatColor.RED + Messages.NO_PERMISSION.getMessage());
-//                                    return true;
-//                                }
-//                                if (args.length != 1) {
-//                                    sender.sendMessage(ChatColor.RED + Messages.CORRECT_USAGE.getMessage().replaceAll("PUSAGEP", "/pwarp setseparator"));
-//                                    return true;
-//                                }
-//                                this.gui.setSeparator(sender, this);
-//                                return true;
-//                            }
+
 //                            else if (args[0].equalsIgnoreCase("listown")) {
 //                                if (args.length != 1) {
 //                                    sender.sendMessage(ChatColor.RED + Messages.CORRECT_USAGE.getMessage().replaceAll("PUSAGEP", "/pwarp listown"));
@@ -525,18 +383,7 @@
 //                                }
 //                                return true;
 //                            }
-//                            else if (args[0].equalsIgnoreCase("rename")) {
-//                                if (!sender.hasPermission("pwarp.rename")) {
-//                                    sender.sendMessage(ChatColor.RED + Messages.NO_PERMISSION.getMessage());
-//                                    return true;
-//                                }
-//                                if (args.length != 3) {
-//                                    sender.sendMessage(ChatColor.RED + Messages.CORRECT_USAGE.getMessage().replaceAll("PUSAGEP", "/pwarp rename <warp> <name>"));
-//                                    return true;
-//                                }
-//                                this.warp.renameWarp(this, sender, args[1], args[2]);
-//                                return true;
-//                            }
+//
 //                            else if (args[0].equalsIgnoreCase("sethidden")) {
 //                                if (!sender.hasPermission("pwarp.sethidden")) {
 //                                    sender.sendMessage(ChatColor.RED + Messages.NO_PERMISSION.getMessage());
@@ -852,25 +699,3 @@
 //                return true;
 //            }
 //        }
-//        else if (cmd.getName().equalsIgnoreCase("pwg") || cmd.getName().equalsIgnoreCase("pwarps") || (cmd.getName().equalsIgnoreCase("pws") && sender instanceof Player)) {
-//            final Player executer = (Player)sender;
-//            if (Warp.teleportingPlayers != null && Warp.teleportingPlayers.contains(executer.getUniqueId().toString())) {
-//                sender.sendMessage(ChatColor.RED + Messages.NO_COMMANDS_ALLOWED.getMessage());
-//                return true;
-//            }
-//            this.gui.openInv(sender, 0);
-//            return true;
-//        }
-//        else {
-//            if (!cmd.getName().equalsIgnoreCase("pwwarp") || !(sender instanceof Player)) {
-//                return true;
-//            }
-//            if (args.length != 1) {
-//                sender.sendMessage(ChatColor.RED + Messages.CORRECT_USAGE.getMessage().replaceAll("PUSAGEP", "/pww <warp>"));
-//                return true;
-//            }
-//            this.warp.goToWarp(args[0].toLowerCase(), sender, this);
-//            return true;
-//        }
-//    }
-//}
