@@ -10,7 +10,11 @@ public class MessageFile {
     private FileConfiguration messageFile;
     private File customConfigFile;
 
-    public void createMessageFile(final PWarp p) {
+    /**
+     * Creates the message file if it doesn't exist.
+     * @param p reference to main
+     */
+    public void createMessageFile(PWarp p) {
         this.customConfigFile = new File(p.getDataFolder(), "messages.yml");
         if (!this.customConfigFile.exists()) {
             this.customConfigFile.getParentFile().mkdirs();
@@ -25,16 +29,19 @@ public class MessageFile {
         }
     }
 
+    /**
+     * Getter for the file configuration.
+     * @return
+     */
     FileConfiguration getMessageFile() {
         return this.messageFile;
     }
 
-    public void reloadMessages() {
-        this.messageFile = YamlConfiguration.loadConfiguration(this.customConfigFile);
-    }
-
+    /**
+     * Checks if the message file contains a message for all paths.
+     */
     public void checkConfig() {
-        final PWarp p = (PWarp) PWarp.getPlugin((Class)PWarp.class);
+        final PWarp p = PWarp.getPlugin(PWarp.class);
         this.customConfigFile = new File(p.getDataFolder(), "messages.yml");
         if (!this.customConfigFile.exists()) {
             return;

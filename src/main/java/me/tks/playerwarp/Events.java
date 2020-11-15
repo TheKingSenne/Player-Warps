@@ -17,24 +17,45 @@ import java.util.Objects;
 
 public class Events implements Listener {
 
+    // Arraylist containing all players that are currently teleporting
     private final ArrayList<Player> teleportingPlayers;
 
+    /**
+     * Constructor for EVents.
+     */
     public Events() {
         teleportingPlayers = new ArrayList<>();
     }
 
+    /**
+     * Adds a player to the teleporting players.
+     * @param player player to add
+     */
     public void addPlayer(Player player) {
         teleportingPlayers.add(player);
     }
 
+    /**
+     * Removes a player from the teleporting players.
+     * @param player player to remove
+     */
     public void removePlayer(Player player) {
         teleportingPlayers.remove(player);
     }
 
+    /**
+     * Checks if a player is teleporting.
+     * @param player player to check
+     * @return Boolean true if player is currently teleporting
+     */
     public boolean isTeleporting(Player player) {
         return teleportingPlayers.contains(player);
     }
 
+    /**
+     * Checks if a player moves to cancel teleportation.
+     * @param e PlayerMoveEvent
+     */
     @EventHandler
     public void onMove(PlayerMoveEvent e) {
         Player player = e.getPlayer();
@@ -53,7 +74,7 @@ public class Events implements Listener {
 
 
     /**
-     * This method handles the gui clicks
+     * This method handles the gui clicks.
      * @param e Click event
      */
     @EventHandler

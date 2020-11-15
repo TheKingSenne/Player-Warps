@@ -15,10 +15,9 @@ public class Gui {
 
     private final Inventory guiInv;
     private final int page;
-    //private final ArrayList<Warp> warps;
 
     /**
-     * Constructor for a GUI inventory
+     * Constructor for a GUI inventory.
      *
      * @param page  Page of the GUI list
      * @param warps ArrayList containing all 36 warps in a sorted way
@@ -92,16 +91,16 @@ public class Gui {
     }
 
     /**
-     * Gets the page
+     * Getter for the page number.
      *
-     * @return the page
+     * @return the page number
      */
     public int getPage() {
         return this.page;
     }
 
     /**
-     * Open gui.
+     * Opens the GUI for a player.
      *
      * @param player the player
      */
@@ -110,17 +109,12 @@ public class Gui {
     }
 
     /**
-     * Update item boolean.
+     * Updates the warp item in the gui.
      *
      * @param warp the warp
-     * @return the boolean
+     * @return Boolean true if the item has been updated
      */
     public boolean updateItem(Warp warp) {
-
-//        if (!warps.contains(warp)) {
-//            Bukkit.broadcastMessage("this warp doesn't exist in this gui");
-//            return false;
-//        }
 
         for (int i = 0; i < guiInv.getSize(); i++) {
             if (guiInv.getItem(i)!= null && guiInv.getItem(i).getItemMeta().getDisplayName().toLowerCase().equals(ChatColor.YELLOW + warp.getName())) {
@@ -132,12 +126,13 @@ public class Gui {
         return false;
     }
 
+    /**
+     * Updates the warp item in the GUI if the name has changed.
+     * @param warp the warp
+     * @param oldName old name of the warp
+     * @return Boolean true if the warp has been updated.
+     */
     public boolean updateItem(Warp warp, String oldName) {
-
-//        if (!warps.contains(warp)) {
-//            Bukkit.broadcastMessage("this warp doesn't exist in this gui");
-//            return false;
-//        }
 
         for (int i = 0; i < guiInv.getSize(); i++) {
             if (guiInv.getItem(i)!= null && guiInv.getItem(i).getItemMeta().getDisplayName().toLowerCase().equals(ChatColor.YELLOW + oldName)) {
@@ -150,9 +145,9 @@ public class Gui {
     }
 
     /**
-     * Has free slot boolean.
+     * Checks if this GUI has a free slot.
      *
-     * @return the boolean
+     * @return Boolean true if the warp has a free slot
      */
     public boolean hasFreeSlot() {
 
@@ -166,32 +161,35 @@ public class Gui {
     }
 
     /**
-     * Add item.
+     * Adds an item to the GUI.
      *
-     * @param item the item
+     * @param item item to add
      */
     public void addItem(ItemStack item) {
         this.guiInv.addItem(item);
     }
 
     /**
-     * Remove item.
+     * Removes an item from the GUI.
      *
-     * @param item the item
+     * @param item item to remove
      */
     public void removeItem(ItemStack item) {
         this.guiInv.removeItem(item);
     }
 
     /**
-     * Gets inventory.
+     * Getter for the GUI inventory.
      *
-     * @return the inventory
+     * @return the GUI inventory
      */
     public Inventory getInventory() {
         return this.guiInv;
     }
 
+    /**
+     * Updates the top and bottom row items of the GUI.
+     */
     public void updateSeparatorItem() {
 
         // Place items in gui
@@ -205,6 +203,9 @@ public class Gui {
         }
     }
 
+    /**
+     * Updates the top center item of the GUI.
+     */
     public void updateGuiItem() {
         guiInv.setItem(4, PWarp.pC.getGuiItem());
     }

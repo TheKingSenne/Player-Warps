@@ -1,8 +1,11 @@
 package me.tks.playerwarp;
 
 import com.google.gson.Gson;
+import me.tks.dependencies.VaultPlugin;
 import me.tks.messages.Messages;
+import me.tks.utils.PlayerUtils;
 import org.bukkit.*;
+import org.bukkit.block.data.type.Slab;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -12,6 +15,9 @@ import java.util.*;
 
 public class Warp implements Serializable {
 
+    /**
+     * Warp variables.
+     */
     private String name;
     private Location loc;
     private boolean isPrivate;
@@ -20,14 +26,9 @@ public class Warp implements Serializable {
     private final String owner;
     private final ArrayList<String> lore;
     private int visitors;
+    private boolean isHidden;
 
-    /**
-     * Creates a new warp object.
-     *
-     * @param name  The name of the warp
-     * @param loc   The location of the warp
-     * @param owner The owner
-     */
+
     public Warp(String name, Location loc, Player owner) {
 
         this.name = name;
@@ -38,6 +39,7 @@ public class Warp implements Serializable {
         this.lore = new ArrayList<>();
         this.visitors = 0;
         this.guiItem = new ItemStack(Material.CONDUIT, 1);
+        this.isHidden = false;
 
         name = name.substring(0, 1).toUpperCase() + name.substring(1);
 
@@ -60,7 +62,7 @@ public class Warp implements Serializable {
 
     }
 
-    public Warp(String name, Location loc, boolean isPrivate, List<String> trustedPlayers, ItemStack guiItem, String owner, ArrayList<String> lore, int visitors) {
+    public Warp(String name, Location loc, boolean isPrivate, List<String> trustedPlayers, ItemStack guiItem, String owner, ArrayList<String> lore, int visitors, boolean isHidden) {
         this.name = name;
         this.loc = loc;
         this.isPrivate = isPrivate;
@@ -69,6 +71,7 @@ public class Warp implements Serializable {
         this.owner = owner;
         this.lore = lore;
         this.visitors = visitors;
+        this.isHidden = isHidden;
 
         name = name.substring(0, 1).toUpperCase() + name.substring(1);
 
@@ -80,21 +83,71 @@ public class Warp implements Serializable {
     }
 
     /**
-     * Creates a new warp.
-     *
-     * @param player The owner
-     * @param name   The name of the warp
-     * @param wL     The current warp list
+     * Creates a new warp when a player requests to set a warp.
+     * @param player player that requested
+     * @param name name of the warp
+     * @param wL current WarpList
      */
     public static void setWarp(Player player, String name, WarpList wL) {
 
         // TO-DO:
         // - GriefPrevention
-        // - Blacklist
-        // - Item/warpPrice
+
+        double warpPrice = PWarp.pC.getWarpPrice();
+        ItemStack warpItemPrice = PWarp.pC.getWarpItemPrice();
+
+        boolean moneyPrice = warpPrice != 0;
+        boolean itemPrice = warpItemPrice != null;
+
+        // Economy managing
+        if (itemPrice || moneyPrice) {
+
+            if (itemPrice && !PWarp.pC.canAffordItemPrice(player)) {
+
+                if (!moneyPrice) {
+                    player.sendMessage(ChatColor.RED + Messages.CANT_AFFORD_ITEM.getMessage()
+                        .replaceAll("PITEMAMOUNTP", String.valueOf(warpItemPrice.getAmount()))
+                        .replaceAll("PITEMP", warpItemPrice.getType().name().toLowerCase().replaceAll("_", " ") + "(s)"));
+                }
+                else {
+                    player.sendMessage(ChatColor.RED + Messages.CANT_AFFORD_BOTH.getMessage()
+                        .replaceAll("PMONEYP", String.valueOf(warpPrice))
+                        .replaceAll("PITEMAMOUNTP", String.valueOf(warpItemPrice.getAmount()))
+                        .replaceAll("PITEMP", warpItemPrice.getType().name().toLowerCase().replaceAll("_", " ") + "(s)"));
+                }
+                return;
+            }
+
+            if (moneyPrice && !VaultPlugin.hasEnoughMoney(player, warpPrice)) {
+
+                if (!itemPrice) {
+                    player.sendMessage(ChatColor.RED + Messages.CANT_AFFORD_MONEY.getMessage().replaceAll("PMONEYAMOUNTP", String.valueOf(warpPrice)));
+                }
+                else {
+                    player.sendMessage(ChatColor.RED + Messages.CANT_AFFORD_BOTH.getMessage()
+                        .replaceAll("PMONEYP", String.valueOf(warpPrice))
+                        .replaceAll("PITEMAMOUNTP", String.valueOf(warpItemPrice.getAmount()))
+                        .replaceAll("PITEMP", warpItemPrice.getType().name().toLowerCase().replaceAll("_", " ") + "(s)"));
+                }
+                return;
+            }
+
+            if (itemPrice)
+            PWarp.pC.payItemPrice(player);
+
+            if (moneyPrice)
+            VaultPlugin.getEconomy().withdrawPlayer(player, warpPrice);
+        }
+
+        if (PWarp.pC.isBlacklisted(player.getLocation().getWorld())) {
+            player.sendMessage(ChatColor.RED + Messages.BLACKLISTED_WORLD.getMessage());
+            return;
+        }
+
+        if (PWarp.pC.getWarpSafety() && !PlayerUtils.isInSafeLocation(player)) return;
 
         if (wL.warpExists(name)) {
-            player.sendMessage(ChatColor.RED + Messages.NAME_IN_USE.getMessage().replaceAll("PWARPPNAME", name));
+            player.sendMessage(ChatColor.RED + Messages.NAME_IN_USE.getMessage().replaceAll("PWARPNAMEP", name));
             return;
         }
 
@@ -107,6 +160,34 @@ public class Warp implements Serializable {
 
         wL.addWarp(new Warp(name, player.getLocation(), player));
 
+        // Message manager
+        if (moneyPrice || itemPrice) {
+
+            // Only paid items
+            if (!moneyPrice) {
+                player.sendMessage(ChatColor.GREEN + Messages.CREATED_ITEM_PAID_WARP.getMessage()
+                    .replaceAll("PITEMAMOUNTP", String.valueOf(warpItemPrice.getAmount()))
+                    .replaceAll("PITEMP", warpItemPrice.getType().name().toLowerCase().replaceAll("_", " ") + "(s)"));
+                return;
+            }
+            // Only paid money
+            else if (!itemPrice) {
+                player.sendMessage(ChatColor.GREEN + Messages.CREATED_MONEY_PAID_WARP.getMessage()
+                    .replaceAll("PMONEYP", String.valueOf(warpPrice)));
+
+                return;
+            }
+            // Paid both
+            else {
+                player.sendMessage(ChatColor.GREEN + Messages.CREATED_BOTH_PAID_WARP.getMessage()
+                    .replaceAll("PMONEYP", String.valueOf(warpPrice))
+                    .replaceAll("PITEMAMOUNTP", String.valueOf(warpItemPrice.getAmount()))
+                    .replaceAll("PITEMP", warpItemPrice.getType().name().toLowerCase().replaceAll("_", " ") + "(s)"));
+                return;
+            }
+        }
+
+        // Didn't pay anything
         player.sendMessage(ChatColor.GREEN + Messages.CREATED_FREE_WARP.getMessage());
     }
 
@@ -120,9 +201,44 @@ public class Warp implements Serializable {
     }
 
     /**
-     * Change name.
+     * Checks if the warp is hidden.
+     * @return Boolean true if hidden
+     */
+    public boolean isHidden() {
+        return this.isHidden;
+    }
+
+    /**
+     * Sets the hidden state of a warp with message.
+     * @param player player that requested
+     * @param state Boolean true if hidden
+     */
+    public void setHidden(Player player, String state) {
+
+        if (!isOwnerWithMessage(player)) return;
+
+        boolean hiddenState;
+
+        try {
+            hiddenState = PlayerUtils.getBooleanFromUser(player, state);
+        }
+        catch (Exception e) {
+            return;
+        }
+
+        this.isHidden = hiddenState;
+
+        if (isHidden) {
+            PWarp.gC.removeItem(this);
+        }
+
+        player.sendMessage(ChatColor.GREEN + Messages.HIDDEN_UNHIDDEN.getMessage());
+    }
+
+    /**
+     * Changes the name of a warp.
      *
-     * @param name the name
+     * @param name the new name
      */
     public void changeName(Player player, String name) {
 
@@ -136,6 +252,41 @@ public class Warp implements Serializable {
         player.sendMessage(ChatColor.GREEN + Messages.RENAMED_WARP.getMessage());
     }
 
+    /**
+     * Checks if a warp is safe
+     * @param player player that requested
+     * @return Boolean true if warp is safe
+     */
+    public boolean isSafe(Player player) {
+
+        Location loc = this.loc.clone();
+
+        loc.setY(loc.getY() - 1);
+
+        Material material = loc.getBlock().getType();
+
+        if (material.equals(Material.AIR) || material.equals(Material.LAVA) || material.equals(Material.FIRE)) {
+            player.sendMessage(ChatColor.RED + Messages.IS_UNSAFE.getMessage());
+            return false;
+        }
+
+        for (int i = 1; i < 3; i++) {
+
+            loc.setY(loc.getY() + i);
+            material = loc.getBlock().getType();
+
+            if ((!material.equals(Material.AIR) && material.isSolid()) || material.equals(Material.FIRE) || material.equals(Material.COBWEB) || (material.equals(Material.LAVA) && !(loc.getBlock().getBlockData() instanceof Slab))) {
+                player.sendMessage(ChatColor.RED + Messages.IS_OBSTRUCTED.getMessage());
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Updates the ItemStack in the GUI.
+     */
     private void updateItemStack() {
 
         ItemMeta meta = this.guiItem.getItemMeta();
@@ -147,7 +298,7 @@ public class Warp implements Serializable {
     }
 
     /**
-     * Getter for visitors
+     * Getter for visitors.
      *
      * @return the current amount of visitors
      */
@@ -156,8 +307,8 @@ public class Warp implements Serializable {
     }
 
     /**
-     * Moves a warp to a new location
-     * @param player player executing the command
+     * Moves a warp to a new location.
+     * @param player player that requested
      */
     public void move(Player player) {
 
@@ -187,7 +338,7 @@ public class Warp implements Serializable {
     }
 
     /**
-     * Adds a trusted player
+     * Adds a trusted player.
      * @param owner Player who wants to trust
      * @param trusted Player to be trusted
      */
@@ -244,7 +395,7 @@ public class Warp implements Serializable {
     }
 
     /**
-     * Updates the warp's lore
+     * Updates the warp's lore.
      */
     public void updateLore() {
 
@@ -264,42 +415,48 @@ public class Warp implements Serializable {
      * @param player the player
      */
     public void goTo(Player player) {
-        if (isTrusted(player)) {
 
-            if (PWarp.pC.getTeleportDelay() != 0) {
-                PWarp.events.addPlayer(player);
-                player.sendMessage(ChatColor.GREEN + Messages.DONT_MOVE.getMessage().replaceAll("PSECONDSP", PWarp.pC.getTeleportDelay() + ""));
+        if (!PWarp.pC.isWorldToWorld()) {
+
+            if (!player.getLocation().getWorld().equals(this.getWorld())) {
+                player.sendMessage(ChatColor.RED + Messages.W2WTELEPORT.getMessage());
+                return;
             }
-
-            Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(PWarp.getProvidingPlugin(PWarp.class), (Runnable) () -> {
-
-                if (!PWarp.events.isTeleporting(player)) return;
-                player.teleport(this.loc);
-
-                // Only increase visitors if it's not the warp owner
-                if (!this.owner.equals(player.getUniqueId().toString())) {
-                    this.visitors++;
-                    updateLore();
-                    PWarp.gC.updateItem(this);
-                }
-                player.sendMessage(ChatColor.GREEN + Messages.TELEPORTED.getMessage());
-                PWarp.events.removePlayer(player);
-
-            }, 20 * PWarp.pC.getTeleportDelay());
-
-            //player.teleport(this.loc);
-            //player.sendMessage(ChatColor.GREEN + Messages.TELEPORTED.getMessage());
         }
-        else {
+
+        if (!isTrusted(player)) {
             player.sendMessage(ChatColor.RED + Messages.NOT_TRUSTED.getMessage());
+            return;
         }
+
+        if (PWarp.pC.getWarpSafety() && !this.isSafe(player)) return;
+
+        if (PWarp.pC.getTeleportDelay() != 0) {
+            PWarp.events.addPlayer(player);
+            player.sendMessage(ChatColor.GREEN + Messages.DONT_MOVE.getMessage().replaceAll("PSECONDSP", PWarp.pC.getTeleportDelay() + ""));
+        }
+
+        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(PWarp.getProvidingPlugin(PWarp.class), () -> {
+
+            if (!PWarp.events.isTeleporting(player)) return;
+            player.teleport(this.loc);
+
+            // Only increase visitors if it's not the warp owner
+            if (!this.owner.equals(player.getUniqueId().toString())) {
+                this.visitors++;
+                updateLore();
+                PWarp.gC.updateItem(this);
+            }
+            player.sendMessage(ChatColor.GREEN + Messages.TELEPORTED.getMessage());
+            PWarp.events.removePlayer(player);
+
+        }, 20 * PWarp.pC.getTeleportDelay());
     }
 
     /**
      * Check if a player is trusted to a warp.
-     *
      * @param player the player
-     * @return the boolean
+     * @return Boolean true if the player is trusted
      */
     public boolean isTrusted(Player player) {
         return this.trustedPlayers.contains(player.getUniqueId().toString()) || isOwner(player);
@@ -307,7 +464,6 @@ public class Warp implements Serializable {
 
     /**
      * Check if player is owner or has an override permission.
-     *
      * @param player the player
      * @return True if owner/permission, false if not
      */
@@ -367,6 +523,14 @@ public class Warp implements Serializable {
     }
 
     /**
+     * Getter for the world of the warp.
+     * @return the world
+     */
+    public World getWorld() {
+        return this.loc.getWorld();
+    }
+
+    /**
      * Converts the Warp object into json format to save.
      * @return A string containing the formatted object
      */
@@ -384,6 +548,7 @@ public class Warp implements Serializable {
         properties.put("owner", owner);
         properties.put("lore", lore);
         properties.put("visitors", visitors);
+        properties.put("isHidden", isHidden);
 
         return gson.toJson(properties);
     }
@@ -408,7 +573,13 @@ public class Warp implements Serializable {
         ArrayList<String> lore = (ArrayList<String>) map.get("lore");
         double visitors = (double) map.get("visitors");
 
-        return new Warp(name, loc, isPrivate, trustedPlayers, guiItem, owner, lore, (int) visitors);
+        boolean isHidden = false;
+
+        if (map.get("isHidden") != null) {
+            isHidden = (boolean) map.get("isHidden");
+        }
+
+        return new Warp(name, loc, isPrivate, trustedPlayers, guiItem, owner, lore, (int) visitors, isHidden);
     }
 
 }

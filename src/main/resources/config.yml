@@ -1,24 +1,4 @@
-##############################################|##############################################
-########################################|PlayerWarps|########################################
-##############################################|##############################################
-worldToWorldTeleport: true
 automatedInactiveRemovalInMinutes: 60
 automatedOldWarpRemoval: true
 defaultSetWarpAccess: true
-guiRefreshRateInMinutes: 30
 inactiveWarpDays: 30
-checkWarpSafety: true
-##############################################|##############################################
-warpPrice:
-  enable: false
-  item:
-    ==: org.bukkit.inventory.ItemStack
-    v: 1631
-    type: DIAMOND
-    amount: 5
-warpMoneyPrice:
-  enable: false
-  price: 20
-##############################################|##############################################
-blacklist:
-  - this_is_a_very_random_world

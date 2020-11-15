@@ -1,45 +1,96 @@
 package me.tks.dependencies;
 
+import me.tks.playerwarp.PWarp;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 
+import static org.bukkit.Bukkit.getServer;
+
 public class VaultPlugin {
-    private static Permission permission;
-    private static Economy economy;
 
-    public VaultPlugin() {
-        this.setupEconomy();
-        this.setupPermissions();
-    }
+    private static Permission permission = null;
+    private static Economy economy = null;
 
-    public boolean setupPermissions() {
-        final RegisteredServiceProvider<Permission> permissionProvider = (RegisteredServiceProvider<Permission>) Bukkit.getServer().getServicesManager().getRegistration((Class)Permission.class);
-        if (permissionProvider != null) {
-            VaultPlugin.permission = permissionProvider.getProvider();
+    /**
+     * Loads all vault properties.
+     */
+    public static void setUp() {
+        // Check if vault is installed
+        if (Bukkit.getPluginManager().getPlugin("Vault") == null) {
+
+            // Log that vault couldn't be found
+            Bukkit.getLogger().info(ChatColor.RED + "[PWarp] Error: this plugin requires Vault! Errors may occur.");
+            PWarp.hooks.add("Vault" + ChatColor.RED + " \u2718");
         }
-        return VaultPlugin.permission != null;
-    }
+        // Set up the vault economy and permissions
+        else {
+            VaultPlugin.setupPermissions();
+            if (!VaultPlugin.setupEconomy()) {
+                Bukkit.getLogger().info(ChatColor.RED + "[PWarp] Error: vault could not find any Vault dependencies.");
+                PWarp.hooks.add("Vault" + ChatColor.RED + " \u2718");
+            }
+            else {
+                // Log that vault has been enabled
+                Bukkit.getLogger().info("[PWarp] Successfully hooked into Vault!");
+                PWarp.hooks.add("Vault" + ChatColor.GREEN + " \u2714");
+            }
 
-    public boolean setupEconomy() {
-        final RegisteredServiceProvider<Economy> economyProvider = (RegisteredServiceProvider<Economy>)Bukkit.getServer().getServicesManager().getRegistration((Class)Economy.class);
-        if (economyProvider != null) {
-            VaultPlugin.economy = economyProvider.getProvider();
         }
-        return VaultPlugin.economy != null;
     }
 
-    public Permission getPermissions() {
-        return VaultPlugin.permission;
+    /**
+     * Sets up the permissions for vault.
+     * @return Boolean true if successful
+     */
+    public static boolean setupPermissions() {
+        RegisteredServiceProvider<Permission> rsp = getServer().getServicesManager().getRegistration(Permission.class);
+        permission = rsp.getProvider();
+        return permission != null;
     }
 
-    public Economy getEconomy() {
-        return VaultPlugin.economy;
+    /**
+     * Sets up the vault economy.
+     * @return Boolean true if successful
+     */
+    public static boolean setupEconomy() {
+        if (getServer().getPluginManager().getPlugin("Vault") == null) {
+            return false;
+        }
+        RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
+        if (rsp == null) {
+            return false;
+        }
+        economy = rsp.getProvider();
+        return economy != null;
     }
 
-    static {
-        VaultPlugin.permission = null;
-        VaultPlugin.economy = null;
+    /**
+     * Getter for the vault permissions.
+     * @return the permissions
+     */
+    public static Permission getPermissions() {
+        return permission;
+    }
+
+    /**
+     * Getter for the vault economy.
+     * @return current economy
+     */
+    public static Economy getEconomy() {
+        return economy;
+    }
+
+    /**
+     * Checks if a player can afford a certain price.
+     * @param player player that requested
+     * @param amount amount of money to check for
+     * @return Boolean true if player can afford
+     */
+    public static boolean hasEnoughMoney(Player player, double amount) {
+        return economy.getBalance(player) >= amount;
     }
 }

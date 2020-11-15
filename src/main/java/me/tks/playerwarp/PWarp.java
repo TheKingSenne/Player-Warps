@@ -3,40 +3,49 @@ package me.tks.playerwarp;
 import me.tks.dependencies.VaultPlugin;
 import me.tks.messages.MessageFile;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
 import java.util.List;
 
 // TO-DO:
-// - fix this JavaDoc lmao
-// - Info command
-// - Hooks command
-// - Blacklist
-// - W2W teleport
-// - Safe warps
-// - Virtual economy
-// - Item economy
-// - Automated remover for old warps?
-// - Listown/listother command
+// - Hide command - DONE
+// - check unused messages - DONE
+// - Permissions - DONE
+// - fix this JavaDoc lmao - DONE
+// - Edit help menu - DONE
+// - Info command - DONE
+// - Blacklist - DONE
+// - W2W teleport - DONE
+// - Safe warps - DONE
+// - Virtual economy - DONE
+// - Item economy - DONE
+// - Listown/listother command - DONE
+// - Adding extra names for commands - DONE
 // - GP support
-// - Fix code dupe for item from player getter
-// - Adding extra names for commands
-// - Exempt permission for teleport delay
+// - OP help menu
+// - Automated remover for old warps?
+// - Hooks command - when GP is implemented
+// - Fix code dupe for item from player getter -> method created, just needs to be implemented
+// - Exempt permission for teleport delay and all other crap
+// - Update info file²
 
+// Ideas:
+// - Add total amount of warps to info command
 public class PWarp extends JavaPlugin {
 
-      public static VaultPlugin v;
-      public static WarpList wL = null;
-      public static GuiCatalog gC = null;
-      public static MessageFile messageFile = null;
-      public static PluginConfiguration pC = null;
-      public List<String> hooks;
-      public static Events events;
+    /**
+     * Global plugin variables.
+     */
+    public static WarpList wL = null;
+    public static GuiCatalog gC = null;
+    public static MessageFile messageFile = null;
+    public static PluginConfiguration pC = null;
+    public static List<String> hooks;
+    public static Events events;
 
     /**
-     * Loads everything when plugin gets enabled
+     * Loads everything when plugin gets enabled.
      */
     @Override
     public void onEnable() {
@@ -66,37 +75,13 @@ public class PWarp extends JavaPlugin {
         this.getCommand("pwwarp").setExecutor(cmd);
 
         // Load all hooks
-        hooks = new ArrayList<String>();
+        hooks = new ArrayList<>();
 
-        // Check if vault is installed
-        if (Bukkit.getPluginManager().getPlugin("Vault") == null) {
-
-            // Log that vault couldn't be found
-            Bukkit.getLogger().info(ChatColor.RED + "[PWarp] Error: this plugin requires Vault! Errors may occur.");
-            this.hooks.add("Vault" + ChatColor.RED + " \u2718");
-        }
-        // Set up the vault economy and permissions
-        else {
-            v = new VaultPlugin();
-            v.setupEconomy();
-            v.setupPermissions();
-
-            // Log that vault has been enabled
-            Bukkit.getLogger().info("[PWarp] Successfully hooked into Vault!");
-            this.hooks.add("Vault" + ChatColor.GREEN + " \u2714");
-        }
-        // Hook for GriefPrevention, currently disabled
-//        if (Bukkit.getPluginManager().getPlugin("GriefPrevention") != null) {
-//            Bukkit.getConsoleSender().sendMessage("[PWarp] Successfully hooked into GriefPrevention!");
-//            this.hooks.add("GriefPrevention" + ChatColor.GREEN + " \u2714");
-//        }
-//        else {
-//            this.hooks.add("GriefPrevention" + ChatColor.RED + " \u2718");
-//        }
+        // Set up Vault
+        VaultPlugin.setUp();
 
         // Just a file to give general info about the plugin
         this.saveResource("info.yml", true);
-
 
         // Log that plugin has been enabled
         Bukkit.getLogger().info("[PWarp] PWarp has been enabled!");
@@ -108,7 +93,7 @@ public class PWarp extends JavaPlugin {
     }
 
     /**
-     * Saves everything when plugin closes
+     * Saves everything when plugin closes.
      */
     @Override
     public void onDisable() {

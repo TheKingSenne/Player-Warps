@@ -1,8 +1,9 @@
 main: me.tks.playerwarp.PWarp
 name: PWarp
-version: 1.0
+version: 2.0
 api-version: 1.16
 author: The_King_Senne
+softdepend: [GriefPrevention, Vault]
 commands:
   pwarp:
     description: Main command for playerwarps

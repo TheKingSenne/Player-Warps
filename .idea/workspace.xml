@@ -27,17 +27,13 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5f50d0bc-3af2-457f-9309-609cf64cdd65" name="Default Changelist" comment="Working on a recode, all new stuff is moved to me.tks.*">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/PWarp.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/temp.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/Pwarp.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="5f50d0bc-3af2-457f-9309-609cf64cdd65" name="Default Changelist" comment="New features have been added">
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/tks/dependencies/GriefPrevention.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/elixiumnetwork/gui/GUI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/deploy-release.sh" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/elixiumnetwork/playerwarp/PWarpPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/elixiumnetwork/playerwarp/PWarpPlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/elixiumnetwork/playerwarp/Warp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/elixiumnetwork/playerwarp/Warp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/elixiumnetwork/playerwarp/askHelp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/tks/dependencies/VaultPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/tks/dependencies/VaultPlugin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/tks/messages/MessageFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/tks/messages/MessageFile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/tks/messages/MessagePathAndDefault.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/tks/messages/MessagePathAndDefault.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/tks/messages/Messages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/tks/messages/Messages.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/Commands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/Commands.java" afterDir="false" />
@@ -50,8 +46,14 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/WarpList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/WarpList.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/tks/utils/PlayerUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/tks/utils/PlayerUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/temp.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/elixiumnetwork/playerwarp/askHelp.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/info.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/info.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/messages.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/messages.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/temp.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/elixiumnetwork/vault/VaultPlugin.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/info.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/info.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/me/tks/messages/MessageFile.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/tks/messages/MessageFile.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/me/tks/messages/MessagePathAndDefault.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/tks/messages/MessagePathAndDefault.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/me/tks/messages/Messages.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/tks/messages/Messages.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/me/tks/playerwarp/Commands.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/tks/playerwarp/Commands.class" afterDir="false" />
@@ -63,8 +65,9 @@
       <change beforePath="$PROJECT_DIR$/target/classes/me/tks/playerwarp/Warp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/tks/playerwarp/Warp.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/me/tks/playerwarp/WarpList.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/tks/playerwarp/WarpList.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/me/tks/utils/PlayerUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/tks/utils/PlayerUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/messages.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/messages.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/plugin.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/temp.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/temp.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/temp.yml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,13 +118,15 @@
     <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -169,6 +174,11 @@
       <workItem from="1604919779039" duration="275000" />
       <workItem from="1604941223821" duration="10294000" />
       <workItem from="1604956858351" duration="98000" />
+      <workItem from="1605126510941" duration="3445000" />
+      <workItem from="1605197025670" duration="30000" />
+      <workItem from="1605299202309" duration="1976000" />
+      <workItem from="1605376052030" duration="10631000" />
+      <workItem from="1605455356199" duration="16191000" />
     </task>
     <task id="LOCAL-00001" summary="Working on a recode, all new stuff is moved to me.tks.*">
       <created>1604439250968</created>
@@ -191,7 +201,14 @@
       <option name="project" value="LOCAL" />
       <updated>1604441043714</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="New features have been added">
+      <created>1605126793552</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1605126793552</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -211,7 +228,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Working on a recode, all new stuff is moved to me.tks.*" />
-    <option name="LAST_COMMIT_MESSAGE" value="Working on a recode, all new stuff is moved to me.tks.*" />
+    <MESSAGE value="New features have been added" />
+    <option name="LAST_COMMIT_MESSAGE" value="New features have been added" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="249" y="0" key="#Project_Structure" timestamp="1604677376129">
@@ -241,11 +260,11 @@
     </state>
     <state x="596" y="141" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/-1920.-363.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1604674106864" />
     <state x="596" y="141" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1536.824@0.0.1536.824" timestamp="1603817564367" />
-    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1604947661129">
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1605458359629">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="167" key="FileChooserDialogImpl/-1920.-363.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1604947661129" />
-    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1604086206882" />
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1605458359629" />
     <state x="593" y="332" key="Github.CreateGistDialog" timestamp="1604439597867">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -255,25 +274,31 @@
     </state>
     <state x="249" y="0" key="SettingsEditor/-1920.-363.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1604440656135" />
     <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1604236005342" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1604441051650">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1605126805045">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="361" y="145" key="Vcs.Push.Dialog.v2/-1920.-363.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1604441051650" />
-    <state x="209" y="33" key="new project wizard" timestamp="1604394242353">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1605126805045" />
+    <state x="478" y="145" width="579" height="534" key="find.popup" timestamp="1605470692034">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="209" y="33" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1604394242353" />
+    <state x="478" y="145" width="579" height="534" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1605470692034" />
+    <state x="209" y="33" key="new project wizard" timestamp="1605197054237">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="209" y="33" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1605197054237" />
     <state x="469" y="170" key="refactoring.ChangeSignatureDialog" timestamp="1603874916938">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="469" y="170" key="refactoring.ChangeSignatureDialog/0.0.1536.824@0.0.1536.824" timestamp="1603874916938" />
-    <state x="425" y="187" key="run.anything.popup" timestamp="1604956665059">
+    <state x="425" y="187" key="run.anything.popup" timestamp="1605458353315">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="425" y="187" key="run.anything.popup/-1920.-363.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1604956665059" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1604050569869">
+    <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1605458353315" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1605458357233">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1604050569869" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1605458357233" />
   </component>
 </project>

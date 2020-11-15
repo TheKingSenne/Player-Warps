@@ -1,14 +1,12 @@
 ##############################################|##############################################
 ########################################|PlayerWarps|########################################
 ##############################################|##############################################
-teleportDelayInSeconds: 0
 worldToWorldTeleport: true
 automatedInactiveRemovalInMinutes: 60
 automatedOldWarpRemoval: true
 defaultSetWarpAccess: true
 guiRefreshRateInMinutes: 30
 inactiveWarpDays: 30
-warpLimit: 0
 checkWarpSafety: true
 ##############################################|##############################################
 warpPrice:
@@ -21,19 +19,6 @@ warpPrice:
 warpMoneyPrice:
   enable: false
   price: 20
-##############################################|##############################################
-guiItem:
-  ==: org.bukkit.inventory.ItemStack
-  v: 1631
-  type: SUNFLOWER
-  meta:
-    ==: ItemMeta
-    meta-type: UNSPECIFIC
-    display-name: '&eCreated by The_King_Senne!'
-paneItem:
-  ==: org.bukkit.inventory.ItemStack
-  v: 1976
-  type: GRAY_STAINED_GLASS_PANE
 ##############################################|##############################################
 blacklist:
   - this_is_a_very_random_world

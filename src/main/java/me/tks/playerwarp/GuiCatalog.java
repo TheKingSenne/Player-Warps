@@ -14,12 +14,15 @@ public class GuiCatalog {
 
     private ArrayList<Gui> guis;
 
+    /**
+     * Constructor for the GuiCatalog.
+     */
     public GuiCatalog() {
         guis = new ArrayList<>();
     }
 
     /**
-     * Adds a new item to the gui
+     * Adds a new item to the first empty gui.
      * @param warp item to add to the gui
      */
     public void addItem(Warp warp) {
@@ -51,6 +54,10 @@ public class GuiCatalog {
 
     }
 
+    /**
+     * Removes an item from the GUI's.
+     * @param warp warp to remove
+     */
     public void removeItem(Warp warp) {
 
         if (guis.isEmpty()) {
@@ -65,6 +72,10 @@ public class GuiCatalog {
         }
     }
 
+    /**
+     * Updates an item in the GUI's.
+     * @param warp warp to update
+     */
     public void updateItem(Warp warp) {
         if (guis.isEmpty()) return;
 
@@ -75,6 +86,11 @@ public class GuiCatalog {
         }
     }
 
+    /**
+     * Updates an item in the GUI's taht has changed name.
+     * @param warp warp that has to be updated
+     * @param oldName old name of the warp
+     */
     public void updateItem(Warp warp, String oldName) {
         if (guis.isEmpty()) return;
 
@@ -108,6 +124,11 @@ public class GuiCatalog {
         }
     }
 
+    /**
+     * Open the previous GUI.
+     * @param inv current opened inventory
+     * @param player player to open it for
+     */
     public void openPreviousGui(Inventory inv, Player player) {
 
         int oldIndex = 0;
@@ -125,6 +146,10 @@ public class GuiCatalog {
         }
     }
 
+    /**
+     * Opens the first GUI for a player if it exists.
+     * @param player player to open the GUI for
+     */
     public void openFirstGui(Player player) {
 
         if (guis.isEmpty() || PWarp.wL.getWarps().isEmpty()) {
@@ -135,6 +160,11 @@ public class GuiCatalog {
         player.openInventory(guis.get(0).getInventory());
     }
 
+    /**
+     * Check if the catalog contains a specific inventory.
+     * @param inv inventory to check
+     * @return Boolean true if the catalog contains the inventory
+     */
     public boolean contains(Inventory inv) {
 
         for (Gui gui : guis) {
@@ -146,6 +176,10 @@ public class GuiCatalog {
         return false;
     }
 
+    /**
+     * Creates all the GUI's for a warp list.
+     * @param wL warp list
+     */
     public void createGuis(WarpList wL) {
 
         if (wL.getWarps().isEmpty()) {
@@ -155,7 +189,7 @@ public class GuiCatalog {
         Bukkit.getLogger().info("[PWarp] Refreshing GUI's.");
 
         wL.sortWarps();
-        ArrayList<Warp> warps = wL.getWarps();
+        ArrayList<Warp> warps = wL.getUnhiddenWarps();
 
         ArrayList<Player> viewers = closeAllGuis();
 
@@ -184,6 +218,10 @@ public class GuiCatalog {
         Bukkit.getLogger().info("[PWarp] GUI's have been refreshed.");
     }
 
+    /**
+     * Closes all GUI's that are currently opened.
+     * @return ArrayList of all players who had the GUI closed
+     */
     public ArrayList<Player> closeAllGuis() {
 
         ArrayList<Player> players = new ArrayList<>();
@@ -201,6 +239,10 @@ public class GuiCatalog {
         return players;
     }
 
+    /**
+     * Reloads the GUI's.
+     * @param p reference to main
+     */
     public void reloadGuis(PWarp p) {
 
         BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
@@ -209,6 +251,9 @@ public class GuiCatalog {
 
     }
 
+    /**
+     * Updates the center top item for all GUI's.
+     */
     public void updateGuiItem() {
 
         for (Gui gui : guis) {
@@ -217,6 +262,9 @@ public class GuiCatalog {
 
     }
 
+    /**
+     * UPdates the top and bottom row of items for all GUI's.
+     */
     public void updateSeparatorItem() {
 
         for (Gui gui : guis) {
