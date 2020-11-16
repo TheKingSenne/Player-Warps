@@ -25,6 +25,7 @@
 # pwarp.deleteall - delete all warps
 # pwarp.guiitem - change the top gui item
 # pwarp.hide - hide a warp from the gui
+# pwarp.hooks - see all the hooks of the plugin
 # pwarp.info - display general info about the plugin (settings)
 # pwarp.itemprice - set the item price of a warp
 # pwarp.listother - list warps owned by other players
@@ -32,12 +33,14 @@
 # pwarp.manage - have full access to other people's warps, with ability to change their properties or remove them
 # pwarp.moneyprice - set the virtual money price of a warp
 # pwarp.movewarp - move a warp to a new location
+# pwarp.otherlimit.x - have a personal limit x represents a positive integer
 # pwarp.refreshrate - change the refresh rate of the gui
 # pwarp.rename - rename a warp
 # pwarp.safety - enable/disable warp safety
 # pwarp.separator - change the top and bottom row of gui items
 # pwarp.setdelay - change the teleport delay
 # pwarp.setlimit - change the default warp limit
+# pwarp.staffhelp - see staff commands in the help menu
 # pwarp.w2w - enable/disable world to world teleport
 
 # --------------------------------------------------------------------------------------------------------------- #

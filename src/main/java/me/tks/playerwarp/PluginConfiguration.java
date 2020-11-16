@@ -5,7 +5,6 @@ import me.tks.messages.Messages;
 import me.tks.utils.PlayerUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -293,19 +292,15 @@ public class PluginConfiguration {
      */
     public void setGuiItem(Player player) {
 
-        ItemStack guiItem = player.getInventory().getItemInMainHand();
+        ItemStack guiItem = PlayerUtils.getNotNullInMainHand(player);
 
-        if (guiItem.getType().equals(Material.AIR)) {
-            player.sendMessage(ChatColor.RED + Messages.HOLD_ITEM.getMessage());
-            return;
-        }
-
-        player.getInventory().setItemInMainHand(guiItem);
+        if (guiItem == null) return;
 
         guiItem.setAmount(1);
 
         ItemMeta meta = guiItem.getItemMeta();
 
+        // Colour codes
         meta.setDisplayName(meta.getDisplayName().replaceAll("&", "§"));
         guiItem.setItemMeta(meta);
 
@@ -320,16 +315,13 @@ public class PluginConfiguration {
      */
     public void setSeparatorItem(Player player) {
 
-        ItemStack separatorItem = player.getInventory().getItemInMainHand();
+        ItemStack separatorItem = PlayerUtils.getNotNullInMainHand(player);
 
-        if(separatorItem.getType().equals(Material.AIR)) {
-            player.sendMessage(ChatColor.RED + Messages.HOLD_ITEM.getMessage());
-            return;
-        }
+        if (separatorItem == null) return;
 
-        player.getInventory().setItemInMainHand(separatorItem);
         separatorItem.setAmount(1);
 
+        // Make display name empty
         ItemMeta meta = separatorItem.getItemMeta();
         meta.setDisplayName(" ");
         separatorItem.setItemMeta(meta);
@@ -478,7 +470,7 @@ public class PluginConfiguration {
         }
 
         // Total amount of warps
-        player.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " Total warps" + ChatColor.GRAY + " - " + PWarp.wL.getWarps().size() + " Warps");
+        player.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " Total amount of warps" + ChatColor.GRAY + " - " + PWarp.wL.getWarps().size() + " Warps");
 
         // Plugin author :)
         player.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " Plugin author: " + ChatColor.GRAY + "The_King_Senne");

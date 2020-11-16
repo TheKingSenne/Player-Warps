@@ -1,5 +1,6 @@
 package me.tks.playerwarp;
 
+import me.tks.dependencies.GriefPreventionPlugin;
 import me.tks.dependencies.VaultPlugin;
 import me.tks.messages.MessageFile;
 import org.bukkit.Bukkit;
@@ -9,13 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 // TO-DO:
-// - GP support
-// - OP help menu
 // - Automated remover for old warps?
-// - Hooks command - when GP is implemented
-// - Fix code dupe for item from player getter -> method created, just needs to be implemented
 // - Exempt permission for teleport delay and all other crap
-// - Update info file²
 
 // Ideas:
 // - Add total amount of warps to info command
@@ -66,6 +62,9 @@ public class PWarp extends JavaPlugin {
 
         // Set up Vault
         VaultPlugin.setUp();
+
+        // Set up GriefPreventionPlugin
+        GriefPreventionPlugin.setUp();
 
         // Just a file to give general info about the plugin
         this.saveResource("info.yml", true);

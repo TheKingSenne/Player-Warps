@@ -59,7 +59,7 @@ public enum Messages {
     ADDED_BLACKLIST(PWarp.messageFile.getMessageFile().getString("addedBlacklist")),
     REMOVED_BLACKLIST(PWarp.messageFile.getMessageFile().getString("removedBlacklist")),
     CHANGED_SEPARATOR(PWarp.messageFile.getMessageFile().getString("changedSeparator")),
-    //NO_ACCESS_GP(PWarp.messageFile.getMessageFile().getString("noAccessGriefprevention")),
+    NO_ACCESS_GP(PWarp.messageFile.getMessageFile().getString("noAccessGriefprevention")),
     W2WTELEPORT(PWarp.messageFile.getMessageFile().getString("noWorldToWorldTeleport")),
     OWNED_WARPS(PWarp.messageFile.getMessageFile().getString("ownedWarps")),
     NO_OWNED_WARPS(PWarp.messageFile.getMessageFile().getString("noOwnedWarps")),

@@ -29,12 +29,12 @@
 //            Bukkit.getConsoleSender().sendMessage("[PWarp] Successfully hooked into Vault!");
 //            this.hooks.add("Vault" + ChatColor.GREEN + " \u2714");
 //        }
-//        if (Bukkit.getPluginManager().getPlugin("GriefPrevention") != null) {
-//            Bukkit.getConsoleSender().sendMessage("[PWarp] Successfully hooked into GriefPrevention!");
-//            this.hooks.add("GriefPrevention" + ChatColor.GREEN + " \u2714");
+//        if (Bukkit.getPluginManager().getPlugin("GriefPreventionPlugin") != null) {
+//            Bukkit.getConsoleSender().sendMessage("[PWarp] Successfully hooked into GriefPreventionPlugin!");
+//            this.hooks.add("GriefPreventionPlugin" + ChatColor.GREEN + " \u2714");
 //        }
 //        else {
-//            this.hooks.add("GriefPrevention" + ChatColor.RED + " \u2718");
+//            this.hooks.add("GriefPreventionPlugin" + ChatColor.RED + " \u2718");
 //        }
 //        this.saveResource("info.yml", true);
 //

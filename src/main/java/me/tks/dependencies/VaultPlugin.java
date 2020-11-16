@@ -10,7 +10,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 
 import static org.bukkit.Bukkit.getServer;
 
-public class VaultPlugin {
+public class VaultPlugin extends Hook{
 
     private static Permission permission = null;
     private static Economy economy = null;

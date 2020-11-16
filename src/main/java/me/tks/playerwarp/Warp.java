@@ -1,6 +1,7 @@
 package me.tks.playerwarp;
 
 import com.google.gson.Gson;
+import me.tks.dependencies.GriefPreventionPlugin;
 import me.tks.dependencies.VaultPlugin;
 import me.tks.messages.Messages;
 import me.tks.utils.PlayerUtils;
@@ -90,10 +91,12 @@ public class Warp implements Serializable {
      */
     public static void setWarp(Player player, String name, WarpList wL) {
 
-        // TO-DO:
-        // - GriefPrevention
-
+        // Check if player has access to claim
+        if (Bukkit.getPluginManager().getPlugin("GriefPreventionPlugin") != null) {
+            if (!GriefPreventionPlugin.hasAccess(player)) return;
+        }
         double warpPrice = PWarp.pC.getWarpPrice();
+
         ItemStack warpItemPrice = PWarp.pC.getWarpItemPrice();
 
         boolean moneyPrice = warpPrice != 0;
@@ -507,13 +510,9 @@ public class Warp implements Serializable {
         if (!isOwnerWithMessage(player)) return;
 
 
-        ItemStack newItem = player.getInventory().getItemInMainHand();
-        player.getInventory().setItemInMainHand(newItem);
+        ItemStack newItem = PlayerUtils.getNotNullInMainHand(player);
 
-        if (newItem.getType().equals(Material.AIR)) {
-            player.sendMessage(ChatColor.RED + Messages.HOLD_ITEM.getMessage());
-            return;
-        }
+        if (newItem == null) return;
 
         this.getItemStack().setType(newItem.getType());
 

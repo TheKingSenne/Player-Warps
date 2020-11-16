@@ -1,5 +1,6 @@
 package me.tks.playerwarp;
 
+import me.tks.dependencies.Hook;
 import me.tks.messages.Messages;
 import me.tks.utils.PlayerUtils;
 import org.bukkit.ChatColor;
@@ -458,6 +459,21 @@ public class Commands implements CommandExecutor {
                     return true;
                 }
 
+                // Check hooks
+                else if (args[0].equalsIgnoreCase("hooks")) {
+
+                    if (!PlayerUtils.hasPermissionWithMessage(player, "pwarp.hooks")) return true;
+
+                    if (args.length != 1) {
+                        player.sendMessage(ChatColor.RED + Messages.CORRECT_USAGE.getMessage().replaceAll("PUSAGEP", "/pwarp hooks"));
+                        return true;
+                    }
+
+                    Hook.displayHooks(player);
+
+                    return true;
+                }
+
                 // Hide warp
                 else if (args[0].equalsIgnoreCase("hide")) {
 
@@ -576,13 +592,14 @@ public class Commands implements CommandExecutor {
      */
     public void help(CommandSender sender, int page) {
 
-        if (page > 3 || page < 1) {
+        if (page < 1 || page > 4 || (page > 2 && !sender.hasPermission("pwarp.staffhelp"))) {
             sender.sendMessage(ChatColor.RED + Messages.PAGE_NOT_EXISTING.getMessage());
             return;
         }
 
         sender.sendMessage(ChatColor.GRAY + "" + ChatColor.STRIKETHROUGH + "--------------------" + ChatColor.RESET + ChatColor.YELLOW + "[PlayerWarps]" + ChatColor.RESET + ChatColor.GRAY + ChatColor.STRIKETHROUGH + "---------------------");
-        //if (sender.isOp() || sender.hasPermission("pwarp.staffhelp")) {
+        if (sender.hasPermission("pwarp.staffhelp")) {
+
             if (page == 1) {
                 sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp itemprice <amount>" + ChatColor.GRAY + " - " + Messages.HELP_SETITEMPRICE.getMessage());
                 sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp moneyprice <amount>" + ChatColor.GRAY + " - " + Messages.HELP_SETPRICE.getMessage());
@@ -591,58 +608,43 @@ public class Commands implements CommandExecutor {
                 sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp setdelay <seconds>" + ChatColor.GRAY + " - " + Messages.HELP_SETDELAY.getMessage());
                 sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp setlimit <limit>" + ChatColor.GRAY + " - " + Messages.HELP_SETLIMIT.getMessage());
                 //sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp clearoldwarps" + ChatColor.GRAY + " - " + Messages.HELP_CLEAROLDWARPS.getMessage().replaceAll("PINACTIVEDAYSP", (JavaPlugin.getPlugin(PWarpPlugin.class)).getConfig().getInt("inactiveWarpDays") + ""));
-                sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp set <name>" + ChatColor.GRAY + " - " + Messages.HELP_SET.getMessage());
-                sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp delete <name>" + ChatColor.GRAY + " - " + Messages.HELP_DELETE.getMessage());
-                sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp warp <warp>" + ChatColor.GRAY + " - " + Messages.HELP_WARP.getMessage());
                 sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp setseparator" + ChatColor.GRAY + " - " + Messages.HELP_SETSEPARATOR.getMessage());
+                return;
             }
             else if (page == 2) {
-                sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwg | /pws " + ChatColor.GRAY + " - " + Messages.HELP_PWG.getMessage());
-                sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp setlore <warp> <1,2,3> <lore>" + ChatColor.GRAY + " - " + Messages.HELP_SETLORE.getMessage());
-                sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp move <warp>" + ChatColor.GRAY + " - " + Messages.HELP_MOVEWARP.getMessage());
-                sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp setpublic <warp>" + ChatColor.GRAY + " - " + Messages.HELP_SETPUBLIC.getMessage());
-                sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp setprivate <warp>" + ChatColor.GRAY + " - " + Messages.HELP_SETPRIVATE.getMessage());
-                sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp trust <player> <warp>" + ChatColor.GRAY + " - " + Messages.HELP_TRUST.getMessage());
-                sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp untrust <player> <warp>" + ChatColor.GRAY + " - " + Messages.HELP_UNTRUST.getMessage());
-                sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp setitem <warp>" + ChatColor.GRAY + " - " + Messages.HELP_SETITEM.getMessage());
                 sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp blacklist add/remove <world>" + ChatColor.GRAY + " - " + Messages.HELP_BLACKLISTADDREMOVE.getMessage());
                 sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp blacklist list" + ChatColor.GRAY + " - " + Messages.HELP_BLACKLISTLIST.getMessage());
+                sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp hooks" + ChatColor.GRAY + " - " + Messages.HELP_HOOKS.getMessage());
+                sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp w2w enable/disable" + ChatColor.GRAY + " - " + Messages.HELP_W2W.getMessage());
+                sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp info" + ChatColor.GRAY + " - " + Messages.HELP_INFO.getMessage());
+                sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp safety <true/false>" + ChatColor.GRAY + " - " + Messages.HELP_WARPSAFETY.getMessage());
+                return;
             }
             else {
-                sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp listown" + ChatColor.GRAY + " - " + Messages.HELP_LISTOWN.getMessage());
-                //sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp hooks" + ChatColor.GRAY + " - " + Messages.HELP_HOOKS.getMessage());
-                sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp w2w enable/disable" + ChatColor.GRAY + " - " + Messages.HELP_W2W.getMessage());
-                sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp listother <player>" + ChatColor.GRAY + " - " + Messages.HELP_LISTOTHER.getMessage());
-                sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp hide <warp> <true/false>" + ChatColor.GRAY + " - " + Messages.HELP_SETHIDDEN.getMessage());
-                sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp info" + ChatColor.GRAY + " - " + Messages.HELP_INFO.getMessage());
-                sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp rename <warp> <name>" + ChatColor.GRAY + " - " + Messages.HELP_RENAME.getMessage());
-                sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp safety <true/false>" + ChatColor.GRAY + " - " + Messages.HELP_WARPSAFETY.getMessage());
+                if (page == 3) page = 1;
+                if (page == 4) page = 2;
             }
-        //}
-        /*else if (page == 1) {
+        }
+        if (page == 1) {
+
             sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp set <name>" + ChatColor.GRAY + " - " + Messages.HELP_SET.getMessage());
             sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp delete <name>" + ChatColor.GRAY + " - " + Messages.HELP_DELETE.getMessage());
             sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp warp <warp> | /pww <warp>" + ChatColor.GRAY + " - " + Messages.HELP_WARP.getMessage());
             sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwg | /pws | /pw gui" + ChatColor.GRAY + " - " + Messages.HELP_PWG.getMessage());
             sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp setlore <warp> <1,2,3> <lore>" + ChatColor.GRAY + " - " + Messages.HELP_SETLORE.getMessage());
-            sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp resetlore <warp>" + ChatColor.GRAY + " - " + Messages.HELP_RESETLORE.getMessage());
-            sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp movewarp <warp>" + ChatColor.GRAY + " - " + Messages.HELP_MOVEWARP.getMessage());
+            sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp move <warp>" + ChatColor.GRAY + " - " + Messages.HELP_MOVEWARP.getMessage());
             sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp setpublic <warp>" + ChatColor.GRAY + " - " + Messages.HELP_SETPUBLIC.getMessage());
             sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp setprivate <warp>" + ChatColor.GRAY + " - " + Messages.HELP_SETPRIVATE.getMessage());
-            sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp trust <warp> <player>" + ChatColor.GRAY + " - " + Messages.HELP_TRUST.getMessage());
-            sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp untrust <warp> <player>" + ChatColor.GRAY + " - " + Messages.HELP_UNTRUST.getMessage());
+            sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp trust <player> <warp>" + ChatColor.GRAY + " - " + Messages.HELP_TRUST.getMessage());
+            sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp untrust <player> <warp>" + ChatColor.GRAY + " - " + Messages.HELP_UNTRUST.getMessage());
             sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp setitem <warp>" + ChatColor.GRAY + " - " + Messages.HELP_SETITEM.getMessage());
         }
         else if (page == 2) {
-            sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp resetitem <warp>" + ChatColor.GRAY + " - " + Messages.HELP_RESETITEM.getMessage());
+
             sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp listown" + ChatColor.GRAY + " - " + Messages.HELP_LISTOWN.getMessage());
             sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp listother <player>" + ChatColor.GRAY + " - " + Messages.HELP_LISTOTHER.getMessage());
             sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp rename <warp> <name>" + ChatColor.GRAY + " - " + Messages.HELP_RENAME.getMessage());
-            sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp sethidden <warp> <true/false>" + ChatColor.GRAY + " - " + Messages.HELP_SETHIDDEN.getMessage());
+            sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp hide <warp> <true/false>" + ChatColor.GRAY + " - " + Messages.HELP_SETHIDDEN.getMessage());
         }
-*/
-
     }
-
-
 }

@@ -21,7 +21,7 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- GriefPrevention -->
+        <!-- GriefPreventionPlugin -->
         <dependency>
             <groupId>com.github.TechFortress</groupId>
             <artifactId>GriefPrevention</artifactId>
@@ -57,7 +57,7 @@
             <id>spigot-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
-        <repository> <!-- GriefPrevention, Vault API -->
+        <repository> <!-- GriefPreventionPlugin, Vault API -->
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
         </repository>
