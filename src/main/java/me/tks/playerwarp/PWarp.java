@@ -9,19 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 // TO-DO:
-// - Hide command - DONE
-// - check unused messages - DONE
-// - Permissions - DONE
-// - fix this JavaDoc lmao - DONE
-// - Edit help menu - DONE
-// - Info command - DONE
-// - Blacklist - DONE
-// - W2W teleport - DONE
-// - Safe warps - DONE
-// - Virtual economy - DONE
-// - Item economy - DONE
-// - Listown/listother command - DONE
-// - Adding extra names for commands - DONE
 // - GP support
 // - OP help menu
 // - Automated remover for old warps?

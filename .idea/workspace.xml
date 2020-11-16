@@ -27,47 +27,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5f50d0bc-3af2-457f-9309-609cf64cdd65" name="Default Changelist" comment="New features have been added">
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/tks/dependencies/GriefPrevention.java" afterDir="false" />
+    <list default="true" id="5f50d0bc-3af2-457f-9309-609cf64cdd65" name="Default Changelist" comment="Added all features except auto remover, OP help and GP support. Fixed some smalls bugs and got rid of some code duplication.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/deploy-release.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/elixiumnetwork/playerwarp/PWarpPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/elixiumnetwork/playerwarp/PWarpPlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/tks/dependencies/VaultPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/tks/dependencies/VaultPlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/tks/messages/MessageFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/tks/messages/MessageFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/tks/messages/MessagePathAndDefault.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/tks/messages/MessagePathAndDefault.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/tks/messages/Messages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/tks/messages/Messages.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/Commands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/Commands.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/Events.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/Events.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/Gui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/Gui.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/GuiCatalog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/GuiCatalog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/PWarp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/PWarp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/PluginConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/PluginConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/Warp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/Warp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/WarpList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/WarpList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/tks/utils/PlayerUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/tks/utils/PlayerUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/info.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/info.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/messages.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/messages.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/temp.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/elixiumnetwork/vault/VaultPlugin.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/info.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/info.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/tks/messages/MessageFile.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/tks/messages/MessageFile.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/tks/messages/MessagePathAndDefault.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/tks/messages/MessagePathAndDefault.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/tks/messages/Messages.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/tks/messages/Messages.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/tks/playerwarp/Commands.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/tks/playerwarp/Commands.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/tks/playerwarp/Events.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/tks/playerwarp/Events.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/tks/playerwarp/Gui.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/tks/playerwarp/Gui.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/tks/playerwarp/GuiCatalog.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/tks/playerwarp/GuiCatalog.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/tks/playerwarp/PWarp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/tks/playerwarp/PWarp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/tks/playerwarp/PluginConfiguration.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/tks/playerwarp/PluginConfiguration.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/tks/playerwarp/Warp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/tks/playerwarp/Warp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/tks/playerwarp/WarpList.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/tks/playerwarp/WarpList.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/tks/utils/PlayerUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/tks/utils/PlayerUtils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/messages.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/messages.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/plugin.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/temp.yml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,15 +80,13 @@
     <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -178,7 +138,7 @@
       <workItem from="1605197025670" duration="30000" />
       <workItem from="1605299202309" duration="1976000" />
       <workItem from="1605376052030" duration="10631000" />
-      <workItem from="1605455356199" duration="16191000" />
+      <workItem from="1605455356199" duration="17053000" />
     </task>
     <task id="LOCAL-00001" summary="Working on a recode, all new stuff is moved to me.tks.*">
       <created>1604439250968</created>
@@ -208,7 +168,14 @@
       <option name="project" value="LOCAL" />
       <updated>1605126793552</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Added all features except auto remover, OP help and GP support. Fixed some smalls bugs and got rid of some code duplication.">
+      <created>1605476291493</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1605476291493</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -229,7 +196,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Working on a recode, all new stuff is moved to me.tks.*" />
     <MESSAGE value="New features have been added" />
-    <option name="LAST_COMMIT_MESSAGE" value="New features have been added" />
+    <MESSAGE value="Added all features except auto remover, OP help and GP support. Fixed some smalls bugs and got rid of some code duplication." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added all features except auto remover, OP help and GP support. Fixed some smalls bugs and got rid of some code duplication." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -274,11 +242,11 @@
     </state>
     <state x="249" y="0" key="SettingsEditor/-1920.-363.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1604440656135" />
     <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1604236005342" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1605126805045">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1605476298578">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="361" y="145" key="Vcs.Push.Dialog.v2/-1920.-363.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1604441051650" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1605126805045" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1605476298578" />
     <state x="478" y="145" width="579" height="534" key="find.popup" timestamp="1605470692034">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
