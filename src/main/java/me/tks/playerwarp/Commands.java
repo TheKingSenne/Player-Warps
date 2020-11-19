@@ -25,12 +25,6 @@ public class Commands implements CommandExecutor {
         this.gC = gC;
     }
 
-// IDEAS:
-    // - Particle effects (might make an addon)
-    // - Gui managing per warp (might make an addon idk)
-    // - Different sorting for gui -> but based on what though; possible ideas so far: visitors, alphabetically, item
-    //
-
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String s, String[] args) {
 

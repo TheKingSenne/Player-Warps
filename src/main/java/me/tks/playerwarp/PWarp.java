@@ -11,10 +11,17 @@ import java.util.List;
 
 // TO-DO:
 // - Automated remover for old warps?
-// - Exempt permission for teleport delay and all other crap
+// - Fix lacking JavaDoc :)
+// - Reset item?
+// - Reset lore?
+// - Clear old warps
 
-// Ideas:
-// - Add total amount of warps to info command
+// IDEAS:
+// - Particle effects (might make an addon)
+// - Gui managing per warp (might make an addon idk)
+// - Different sorting for gui -> but based on what though; possible ideas so far: visitors, alphabetically, item
+//
+
 public class PWarp extends JavaPlugin {
 
     /**
