@@ -124,7 +124,7 @@ public class Warp implements Serializable {
             if (moneyPrice && !VaultPlugin.hasEnoughMoney(player, warpPrice)) {
 
                 if (!itemPrice) {
-                    player.sendMessage(ChatColor.RED + Messages.CANT_AFFORD_MONEY.getMessage().replaceAll("PMONEYAMOUNTP", String.valueOf(warpPrice)));
+                    player.sendMessage(ChatColor.RED + Messages.CANT_AFFORD_MONEY.getMessage().replaceAll("PMONEYP", String.valueOf(warpPrice)));
                 }
                 else {
                     player.sendMessage(ChatColor.RED + Messages.CANT_AFFORD_BOTH.getMessage()
@@ -434,26 +434,36 @@ public class Warp implements Serializable {
 
         if (PWarp.pC.getWarpSafety() && !this.isSafe(player)) return;
 
+        PWarp.events.addPlayer(player);
+
         if (PWarp.pC.getTeleportDelay() != 0) {
-            PWarp.events.addPlayer(player);
             player.sendMessage(ChatColor.GREEN + Messages.DONT_MOVE.getMessage().replaceAll("PSECONDSP", PWarp.pC.getTeleportDelay() + ""));
+
+            Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(PWarp.getProvidingPlugin(PWarp.class), () -> {
+                teleportTo(player, true);
+            }, 20 * PWarp.pC.getTeleportDelay());
+
         }
+        else {
+            teleportTo(player, false);
+        }
+    }
 
-        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(PWarp.getProvidingPlugin(PWarp.class), () -> {
+    public void teleportTo(Player player, boolean delay) {
 
-            if (!PWarp.events.isTeleporting(player)) return;
-            player.teleport(this.loc);
+        if (delay && !PWarp.events.isTeleporting(player)) return;
 
-            // Only increase visitors if it's not the warp owner
-            if (!this.owner.equals(player.getUniqueId().toString())) {
-                this.visitors++;
-                updateLore();
-                PWarp.gC.updateItem(this);
-            }
-            player.sendMessage(ChatColor.GREEN + Messages.TELEPORTED.getMessage());
-            PWarp.events.removePlayer(player);
+        player.teleport(this.loc);
 
-        }, 20 * PWarp.pC.getTeleportDelay());
+        // Only increase visitors if it's not the warp owner
+        if (!this.owner.equals(player.getUniqueId().toString())) {
+            this.visitors++;
+            updateLore();
+            PWarp.gC.updateItem(this);
+        }
+        player.sendMessage(ChatColor.GREEN + Messages.TELEPORTED.getMessage());
+        PWarp.events.removePlayer(player);
+
     }
 
     /**

@@ -364,7 +364,9 @@ public class WarpList implements Serializable {
 
         if (player.hasPermission("pwarp.nolimit")) return false;
 
-        return  getPersonalLimit(player) != 0 || ownsHowMany(player) >= getPersonalLimit(player);
+        if (PWarp.pC.getStandardLimit() == 0) return false;
+
+        return  (getPersonalLimit(player) != 0 && ownsHowMany(player) >= getPersonalLimit(player));
 
     }
 
