@@ -264,8 +264,7 @@
 //                        else {
 //                            sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " Warp safety" + ChatColor.GRAY + " - Disabled");
 //                        }
-//                    }
-//                }
+
 
 //                else if (args[0].equalsIgnoreCase("hooks")) {
 //                    if (!sender.hasPermission("pwarp.hooks")) {
