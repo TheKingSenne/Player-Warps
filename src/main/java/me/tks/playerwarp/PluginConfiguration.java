@@ -108,6 +108,12 @@ public class PluginConfiguration {
             return;
         }
 
+        if (amount == 0) {
+            this.warpItemPrice = null;
+            player.sendMessage(ChatColor.GREEN + Messages.SET_PRICE.getMessage());
+            return;
+        }
+
         ItemStack price = PlayerUtils.getNotNullInMainHand(player);
 
         if (price == null) return;
