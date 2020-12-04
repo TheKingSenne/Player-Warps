@@ -544,6 +544,20 @@ public class Commands implements CommandExecutor {
                     return true;
                 }
 
+                // Change default privacy
+                else if (args[0].equalsIgnoreCase("defaultPrivacy")) {
+                    if (!PlayerUtils.hasPermissionWithMessage(player, "pwarp.defaultprivacy")) return true;
+
+                    if (args.length != 2) {
+                        player.sendMessage(ChatColor.RED + Messages.CORRECT_USAGE.getMessage().replaceAll("PUSAGEP", "/pwarp defaultPrivacy <true|false>"));
+                        return true;
+                    }
+
+                    PWarp.pC.setDefaultPrivacy(sender, args[1]);
+
+                    return true;
+                }
+
                 player.sendMessage(ChatColor.RED + Messages.NEED_HELP.getMessage());
                 return true;
             }
@@ -612,6 +626,7 @@ public class Commands implements CommandExecutor {
                 sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp w2w enable/disable" + ChatColor.GRAY + " - " + Messages.HELP_W2W.getMessage());
                 sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp info" + ChatColor.GRAY + " - " + Messages.HELP_INFO.getMessage());
                 sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp safety <true/false>" + ChatColor.GRAY + " - " + Messages.HELP_WARPSAFETY.getMessage());
+                sender.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " /pwarp defaultprivacy <true/false>" + ChatColor.GRAY + " - " + Messages.HELP_UPDATE_PRIVACY.getMessage());
                 return;
             }
             else {

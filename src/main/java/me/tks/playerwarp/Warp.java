@@ -1,17 +1,21 @@
 package me.tks.playerwarp;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import me.tks.dependencies.GriefPreventionPlugin;
 import me.tks.dependencies.VaultPlugin;
 import me.tks.messages.Messages;
+import me.tks.utils.ItemUtils;
 import me.tks.utils.PlayerUtils;
 import org.bukkit.*;
 import org.bukkit.block.data.type.Slab;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
 
 import java.io.Serializable;
+import java.lang.reflect.Type;
 import java.util.*;
 
 public class Warp implements Serializable {
@@ -23,9 +27,9 @@ public class Warp implements Serializable {
     private Location loc;
     private boolean isPrivate;
     private final List<String> trustedPlayers;
-    private final ItemStack guiItem;
+    private ItemStack guiItem;
     private final String owner;
-    private final ArrayList<String> lore;
+    private ArrayList<String> lore;
     private int visitors;
     private boolean isHidden;
 
@@ -34,7 +38,7 @@ public class Warp implements Serializable {
 
         this.name = name;
         this.loc = loc;
-        this.isPrivate = false;
+        this.isPrivate = PWarp.pC.getDefaultPrivacy();
         this.trustedPlayers = new ArrayList<>();
         this.owner = owner.getUniqueId().toString();
         this.lore = new ArrayList<>();
@@ -78,7 +82,12 @@ public class Warp implements Serializable {
 
         ItemMeta meta = guiItem.getItemMeta();
         meta.setDisplayName(ChatColor.YELLOW + name);
-        meta.setLore(lore);
+        this.lore.set(0, ChatColor.GRAY + "" + ChatColor.STRIKETHROUGH + "-----------------");
+        this.lore.set(4, ChatColor.GRAY + "" + ChatColor.STRIKETHROUGH + "-----------------");
+        this.lore.set(5, ChatColor.AQUA + Messages.GUI_VISITORS.getMessage() + " " + visitors);
+        this.lore.set(6,ChatColor.AQUA + Messages.GUI_WARP_OWNER.getMessage() + " " + Bukkit.getOfflinePlayer(UUID.fromString(owner)).getName());
+        this.lore.set(7, ChatColor.GRAY + "" + ChatColor.STRIKETHROUGH + "-----------------");
+        meta.setLore(this.lore);
 
         this.guiItem.setItemMeta(meta);
     }
@@ -388,6 +397,7 @@ public class Warp implements Serializable {
 
         if (row > 4 || row <= 0) {
             player.sendMessage(ChatColor.RED + Messages.LORE_LIMIT.getMessage());
+            return;
         }
 
         this.lore.set(row, ChatColor.GOLD + line.replaceAll("&", "§"));
@@ -403,9 +413,11 @@ public class Warp implements Serializable {
     public void updateLore() {
 
         ItemMeta meta = this.guiItem.getItemMeta();
-
+        this.lore.set(0, ChatColor.GRAY + "" + ChatColor.STRIKETHROUGH + "-----------------");
+        this.lore.set(4, ChatColor.GRAY + "" + ChatColor.STRIKETHROUGH + "-----------------");
         this.lore.set(5, ChatColor.AQUA + Messages.GUI_VISITORS.getMessage() + " " + this.visitors);
         this.lore.set(6,ChatColor.AQUA + Messages.GUI_WARP_OWNER.getMessage() + " " + Bukkit.getOfflinePlayer(UUID.fromString(this.owner)).getName());
+        this.lore.set(7, ChatColor.GRAY + "" + ChatColor.STRIKETHROUGH + "-----------------");
 
         meta.setLore(lore);
         this.guiItem.setItemMeta(meta);
@@ -427,7 +439,7 @@ public class Warp implements Serializable {
             }
         }
 
-        if (!isTrusted(player)) {
+        if (isPrivate && !isTrusted(player)) {
             player.sendMessage(ChatColor.RED + Messages.NOT_TRUSTED.getMessage());
             return;
         }
@@ -449,6 +461,11 @@ public class Warp implements Serializable {
         }
     }
 
+    /**
+     * Teleports a play to a warp with a delay.
+     * @param player player to teleport
+     * @param delay delay
+     */
     public void teleportTo(Player player, boolean delay) {
 
         if (delay && !PWarp.events.isTeleporting(player)) return;
@@ -524,7 +541,12 @@ public class Warp implements Serializable {
 
         if (newItem == null) return;
 
-        this.getItemStack().setType(newItem.getType());
+//        this.getItemStack().setType(newItem.getType());
+        guiItem = newItem;
+        ItemMeta meta = guiItem.getItemMeta();
+        meta.setLore(lore);
+        meta.setDisplayName(ChatColor.YELLOW + name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase());
+        guiItem.setItemMeta(meta);
 
         PWarp.gC.updateItem(this);
 
@@ -544,20 +566,28 @@ public class Warp implements Serializable {
      * @return A string containing the formatted object
      */
     public String toJson() {
-
-        HashMap<String, Object> properties = new HashMap<>();
+        Type collectionType = new TypeToken<ArrayList<String>>(){}.getType();
+        Map<String, Object> properties = new HashMap<>();
 
         Gson gson = new Gson();
 
         properties.put("name", name);
-        properties.put("location", gson.toJson(loc.serialize()));
-        properties.put("isPrivate", isPrivate);
-        properties.put("trustedPlayers", trustedPlayers);
-        properties.put("guiItem", gson.toJson(guiItem.serialize()));
+        properties.put("location", "" + gson.toJson(loc.serialize()));
+        properties.put("isPrivate", "" + isPrivate);
+        properties.put("trustedPlayers", gson.toJson(trustedPlayers, collectionType));
+        properties.put("guiItem", gson.toJson(ItemUtils.serialize(guiItem)));
+
+        if (guiItem.getType().equals(Material.PLAYER_HEAD)) {
+            SkullMeta meta = (SkullMeta) guiItem.getItemMeta();
+            if (meta != null && meta.hasOwner()) {
+                properties.put("skullOwner", meta.getOwningPlayer().getUniqueId().toString());
+            }
+        }
+
         properties.put("owner", owner);
-        properties.put("lore", lore);
-        properties.put("visitors", visitors);
-        properties.put("isHidden", isHidden);
+        properties.put("lore", gson.toJson(lore, collectionType));
+        properties.put("visitors", "" + visitors);
+        properties.put("isHidden", "" + isHidden);
 
         return gson.toJson(properties);
     }
@@ -570,25 +600,76 @@ public class Warp implements Serializable {
     public static Warp fromJson(String properties) {
 
         Gson gson = new Gson();
+        try {
+            HashMap<String, Object> objectMap = gson.fromJson(properties, HashMap.class);
 
-        HashMap<String, Object> map = gson.fromJson(properties, HashMap.class);
+            String name = (String) objectMap.get("name");
+            Location loc = Location.deserialize(gson.fromJson((String) objectMap.get("location"), Map.class));
+            boolean isPrivate = (Boolean) objectMap.get("isPrivate");
+            List<String> trustedPlayers = (List<String>) objectMap.get("trustedPlayers");
+            ItemStack guiItem = ItemStack.deserialize(gson.fromJson((String) objectMap.get("guiItem"), Map.class));
+            String owner = (String) objectMap.get("owner");
+            ArrayList<String> lore = (ArrayList<String>) objectMap.get("lore");
+            double visitors = (double) objectMap.get("visitors");
 
-        String name = (String) map.get("name");
-        Location loc = Location.deserialize(gson.fromJson((String) map.get("location"), Map.class));
-        boolean isPrivate = (Boolean) map.get("isPrivate");
-        List<String> trustedPlayers = (List<String>) map.get("trustedPlayers");
-        ItemStack guiItem = ItemStack.deserialize(gson.fromJson((String) map.get("guiItem"), Map.class));
-        String owner = (String) map.get("owner");
-        ArrayList<String> lore = (ArrayList<String>) map.get("lore");
-        double visitors = (double) map.get("visitors");
+            boolean isHidden = false;
+
+            if (objectMap.get("isHidden") != null) {
+                isHidden = (boolean) objectMap.get("isHidden");
+            }
+            return new Warp(name, loc, isPrivate, trustedPlayers, guiItem, owner, lore, (int) visitors, isHidden);
+        }
+        catch (Exception e) {
+            // do nothing
+        }
+
+        Map<String, String> map = gson.fromJson(properties, Map.class);
+
+        String name = map.get("name");
+        Location loc = Location.deserialize(gson.fromJson(map.get("location"), Map.class));
+        boolean isPrivate = Boolean.parseBoolean(map.get("isPrivate"));
+
+        Type collectionType = new TypeToken<ArrayList<String>>(){}.getType();
+        ArrayList<String> trustedPlayers = gson.fromJson(map.get("trustedPlayers"), collectionType);
+
+        ItemStack guiItem;
+
+        if (map.get("guiItem") != null) {
+            try {
+                guiItem = ItemStack.deserialize(gson.fromJson(map.get("guiItem"), Map.class));
+            }
+            catch (Exception e) {
+                guiItem = ItemUtils.deserialize(gson.fromJson(map.get("guiItem"), String.class));
+            }
+        }
+        else {
+            guiItem = new ItemStack(Material.CONDUIT, 1);
+        }
+
+        // letsgo struggling with some skulls *insert sad noises here*
+//        if (guiItem.getType().equals(Material.PLAYER_HEAD)) {
+//
+//            if (map.get("skullOwner") != null) {
+//
+//                SkullMeta meta = (SkullMeta) guiItem.getItemMeta();
+//                meta.setOwningPlayer(Bukkit.getOfflinePlayer(map.get("skullOwner")));
+//                guiItem.setItemMeta(meta);
+//            }
+//
+//        }
+
+
+        String owner = map.get("owner");
+        ArrayList<String> lore = gson.fromJson(map.get("lore"), collectionType);
+        int visitors = Integer.parseInt(map.get("visitors"));
 
         boolean isHidden = false;
 
         if (map.get("isHidden") != null) {
-            isHidden = (boolean) map.get("isHidden");
+            isHidden = Boolean.parseBoolean(map.get("isHidden"));
         }
 
-        return new Warp(name, loc, isPrivate, trustedPlayers, guiItem, owner, lore, (int) visitors, isHidden);
+        return new Warp(name, loc, isPrivate, trustedPlayers, guiItem, owner, lore, visitors, isHidden);
     }
 
 }

@@ -93,7 +93,17 @@ public class WarpList implements Serializable {
 
             FileWriter fW = new FileWriter(new File(PWarp.getPlugin(PWarp.class).getDataFolder(), "warps.json"));
 
-            fW.write(this.toJson());
+            String json;
+
+            try {
+                json = this.toJson();
+            }
+            catch (Exception e) {
+                Bukkit.getLogger().info("Error: warps could not be saved.");
+                return;
+            }
+
+            fW.write(json);
 
             fW.close();
         }

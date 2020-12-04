@@ -101,7 +101,10 @@ public enum Messages {
     HELP_INFO(PWarp.messageFile.getMessageFile().getString("helpInfo")),
     HELP_RENAME(PWarp.messageFile.getMessageFile().getString("helpRename")),
     HELP_WARPSAFETY(PWarp.messageFile.getMessageFile().getString("helpWarpSafety")),
-    WARP_SAFETY_UPDATED(PWarp.messageFile.getMessageFile().getString("warpSafetyUpdated"));
+    WARP_SAFETY_UPDATED(PWarp.messageFile.getMessageFile().getString("warpSafetyUpdated")),
+    UPDATED_DEFAULT_PRIVACY(PWarp.messageFile.getMessageFile().getString("updatedDefaultPrivacy")),
+    HELP_UPDATE_PRIVACY(PWarp.messageFile.getMessageFile().getString("helpUpatePrivate"));
+
 
     private final String msg;
 

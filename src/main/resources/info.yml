@@ -42,6 +42,7 @@
 # pwarp.setlimit - change the default warp limit
 # pwarp.staffhelp - see staff commands in the help menu
 # pwarp.w2w - enable/disable world to world teleport
+# pwarp.defaultprivacy - change the default privacy
 
 # --------------------------------------------------------------------------------------------------------------- #
 #                                               Still need help?                                                  #

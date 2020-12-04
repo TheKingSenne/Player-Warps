@@ -3,6 +3,7 @@ package me.tks.utils;
 import me.tks.messages.Messages;
 import org.bukkit.*;
 import org.bukkit.block.data.type.Slab;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -143,7 +144,7 @@ public class PlayerUtils {
      * @return Boolean provided by player
      * @throws Exception when player didn't give a boolean
      */
-    public static boolean getBooleanFromUser(Player player, String safety) throws Exception {
+    public static boolean getBooleanFromUser(CommandSender player, String safety) throws Exception {
 
         boolean bool;
 

@@ -99,7 +99,9 @@ public enum MessagePathAndDefault {
     HELP_INFO("helpInfo", "Displays general info."),
     HELP_RENAME("helpRename", "Renames your warp."),
     HELP_WARPSAFETY("helpWarpSafety", "Enables/disables the global warp safety."),
-    WARP_SAFETY_UPDATED("warpSafetyUpdated", "The warp safety has been updated.");
+    WARP_SAFETY_UPDATED("warpSafetyUpdated", "The warp safety has been updated."),
+    UPDATED_DEFAULT_PRIVACY("updatedDefaultPrivacy", "You have successfully changed the default warp privacy."),
+    HELP_UPDATE_PRIVACY("helpUpatePrivate", "Changes the default warp privacy");
 
     private final String msg;
     private final String path;

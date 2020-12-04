@@ -33,6 +33,7 @@ public class PluginConfiguration {
     private final ArrayList<World> blacklistedWorlds;
     private boolean w2w; // Shown in info command
     private boolean warpSafety; // Shown in info command
+    private boolean defaultPrivacy;
 
     /**
      * Constructor for plugin configuration.
@@ -49,7 +50,7 @@ public class PluginConfiguration {
      */
     public PluginConfiguration(int standardLimit, int teleportDelay, int refreshRateInMinutes, double warpPrice,
                                ItemStack guiItem, ItemStack separatorItem, boolean warpSafety, boolean w2w, ArrayList<World> worlds,
-                               ItemStack warpItemPrice) {
+                               ItemStack warpItemPrice, boolean defaultPrivacy) {
 
         this.standardLimit = standardLimit;
         this.teleportDelay = teleportDelay;
@@ -61,6 +62,7 @@ public class PluginConfiguration {
         this.w2w = w2w;
         this.blacklistedWorlds = worlds;
         this.warpItemPrice = warpItemPrice;
+        this.defaultPrivacy = defaultPrivacy;;
     }
 
     /**
@@ -478,6 +480,15 @@ public class PluginConfiguration {
         // Total amount of warps
         player.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " Total amount of warps" + ChatColor.GRAY + " - " + PWarp.wL.getWarps().size() + " Warps");
 
+        // Default warp privacy
+        if (defaultPrivacy) {
+            player.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " Default warp privacy" + ChatColor.GRAY + " - Enabled");
+
+        }
+        else {
+            player.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " Default warp privacy" + ChatColor.GRAY + " - Disabled");
+        }
+
         // Plugin author :)
         player.sendMessage(ChatColor.GOLD + " »" + ChatColor.YELLOW + " Plugin author: " + ChatColor.GRAY + "The_King_Senne");
 
@@ -537,7 +548,7 @@ public class PluginConfiguration {
         }
 
         if (pC == null) {
-            pC = new PluginConfiguration(0, 0, 15, 0, null, null, true, true, new ArrayList<>(), null);
+            pC = new PluginConfiguration(0, 0, 15, 0, null, null, true, true, new ArrayList<>(), null, false);
         }
 
         return pC;
@@ -588,6 +599,7 @@ public class PluginConfiguration {
 
         properties.put("warpSafety", warpSafety);
         properties.put("worldToWorld", w2w);
+        properties.put("defaultPrivacy", defaultPrivacy);
 
         properties.put("worldSize", blacklistedWorlds.size());
 
@@ -657,6 +669,10 @@ public class PluginConfiguration {
 
         if (map.get("worldToWorld") != null) w2w = (boolean) map.get("worldToWorld");
 
+        boolean defaultPrivacy = false;
+
+        if (map.get("defaultPrivacy") != null) defaultPrivacy = (boolean) map.get("defaultPrivacy");
+
         int size = 0;
 
         if (map.get("worldSize") != null) {
@@ -676,8 +692,27 @@ public class PluginConfiguration {
             worlds.add(Bukkit.getWorld(name));
         }
 
-        return new PluginConfiguration(limit, delay, refreshRate, warpPrice,guiItem, separatorItem, warpSafety, w2w, worlds, warpItemPrice);
+        return new PluginConfiguration(limit, delay, refreshRate, warpPrice,guiItem, separatorItem, warpSafety, w2w, worlds, warpItemPrice, defaultPrivacy);
 
     }
 
+    public void setDefaultPrivacy(CommandSender sender, String boolStr) {
+
+        boolean privacy;
+
+        try {
+            privacy = PlayerUtils.getBooleanFromUser(sender, boolStr);
+        }
+        catch (Exception e) {
+            sender.sendMessage(ChatColor.RED + Messages.TRUE_OR_FALSE.getMessage());
+            return;
+        }
+
+        this.defaultPrivacy = privacy;
+        sender.sendMessage(ChatColor.GREEN + Messages.UPDATED_DEFAULT_PRIVACY.getMessage());
+    }
+
+    public boolean getDefaultPrivacy(){
+        return this.defaultPrivacy;
+    }
 }
