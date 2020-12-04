@@ -9,19 +9,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.ArrayList;
 import java.util.List;
 
-// TO-DO:
-// - Automated remover for old warps?
-// - Fix lacking JavaDoc :)
-// - Reset item?
-// - Reset lore?
-// - Clear old warps
-
-// IDEAS:
-// - Particle effects (might make an addon)
-// - Gui managing per warp (might make an addon idk)
-// - Different sorting for gui -> but based on what though; possible ideas so far: visitors, alphabetically, item
-//
-
 public class PWarp extends JavaPlugin {
 
     /**
