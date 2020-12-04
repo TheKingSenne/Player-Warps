@@ -427,10 +427,13 @@ public class Warp implements Serializable {
             }
         }
 
-        if (!isTrusted(player)) {
-            player.sendMessage(ChatColor.RED + Messages.NOT_TRUSTED.getMessage());
-            return;
+        if (isPrivate) {
+            if (!isTrusted(player)) {
+                player.sendMessage(ChatColor.RED + Messages.NOT_TRUSTED.getMessage());
+                return;
+            }
         }
+
 
         if (PWarp.pC.getWarpSafety() && !this.isSafe(player)) return;
 
