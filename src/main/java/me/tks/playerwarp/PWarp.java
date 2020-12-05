@@ -67,9 +67,6 @@ public class PWarp extends JavaPlugin {
         Bukkit.getLogger().info("[PWarp] PWarp has been enabled!");
 
 //        this.warp.automatedRemoval(this);
-//        this.saveDefaultConfig();
-//        this.getConfig().options().copyDefaults(true);
-//        this.saveConfig();
     }
 
     /**
@@ -77,10 +74,11 @@ public class PWarp extends JavaPlugin {
      */
     @Override
     public void onDisable() {
-        //this.saveConfig();
 
         // Write warps and configuration back
+        if (wL != null)
         wL.write();
+        if(pC != null)
         pC.write();
 
         // Log that plugin has been disabled

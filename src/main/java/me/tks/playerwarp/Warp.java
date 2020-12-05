@@ -374,7 +374,7 @@ public class Warp implements Serializable {
      */
     public void removeTrustedPlayer(Player owner, OfflinePlayer untrusted) {
 
-        if (isOwnerWithMessage(owner)) return;
+        if (!isOwnerWithMessage(owner)) return;
 
         if (!trustedPlayers.contains(untrusted.getUniqueId().toString())) {
             owner.sendMessage(ChatColor.RED + Messages.PLAYER_NOT_TRUSTED.getMessage());
@@ -646,7 +646,7 @@ public class Warp implements Serializable {
             guiItem = new ItemStack(Material.CONDUIT, 1);
         }
 
-        // letsgo struggling with some skulls *insert sad noises here*
+        // letsgo struggling with some skulls *insert sad noises here* :D
 //        if (guiItem.getType().equals(Material.PLAYER_HEAD)) {
 //
 //            if (map.get("skullOwner") != null) {

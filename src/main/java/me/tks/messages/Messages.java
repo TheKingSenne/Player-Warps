@@ -103,7 +103,7 @@ public enum Messages {
     HELP_WARPSAFETY(PWarp.messageFile.getMessageFile().getString("helpWarpSafety")),
     WARP_SAFETY_UPDATED(PWarp.messageFile.getMessageFile().getString("warpSafetyUpdated")),
     UPDATED_DEFAULT_PRIVACY(PWarp.messageFile.getMessageFile().getString("updatedDefaultPrivacy")),
-    HELP_UPDATE_PRIVACY(PWarp.messageFile.getMessageFile().getString("helpUpatePrivate"));
+    HELP_UPDATE_PRIVACY(PWarp.messageFile.getMessageFile().getString("helpUpatePrivate")),;
 
 
     private final String msg;

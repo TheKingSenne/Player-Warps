@@ -558,6 +558,7 @@ public class Commands implements CommandExecutor {
                     return true;
                 }
 
+
                 player.sendMessage(ChatColor.RED + Messages.NEED_HELP.getMessage());
                 return true;
             }

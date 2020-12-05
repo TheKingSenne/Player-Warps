@@ -13,6 +13,11 @@ import java.util.Map;
 
 public class ItemUtils {
 
+    /**
+     * Gets the enchantments from an item in a formatted String
+     * @param i ItemStack
+     * @return Formatted string
+     */
     private static String getEnchants(ItemStack i){
         List<String> e = new ArrayList<>();
         Map<Enchantment, Integer> en = i.getEnchantments();
