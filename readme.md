@@ -15,3 +15,4 @@
 
 ## Bugs:
 - Not compatible with world loading plugins (add post loading system)
+- Incompatibilty with other mc versions (check plugin.yml)
