@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="PWarp" />
+    </artifacts-to-build>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:pr" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:pwarp" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:master" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5f50d0bc-3af2-457f-9309-609cf64cdd65" name="Default Changelist" comment="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;src/main/java/me/tks/playerwarp/Warp.java">
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/tks/messages/MessagePathAndDefault.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/tks/messages/MessagePathAndDefault.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/tks/messages/Messages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/tks/messages/Messages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/Commands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/Commands.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/PluginConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/PluginConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/Warp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/Warp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/WarpList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/tks/playerwarp/WarpList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/tks/utils/ItemUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/tks/utils/PlayerUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/tks/utils/PlayerUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/info.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/info.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="hiddenUrls">
+      <set>
+        <option value="https://github.com/internetpolice-eu/PWarp" />
+      </set>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="C:\Program Files\JetBrains\IntelliJ IDEA 2020.2.1\plugins\maven\lib\maven3" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1iyYWGpUhK4krwsMsxdvmKBsBNF" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.46896553" />
+    <property name="run.code.analysis.last.selected.profile" value="aDefault" />
+    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5f50d0bc-3af2-457f-9309-609cf64cdd65" name="Default Changelist" comment="" />
+      <created>1602881329687</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1602881329687</updated>
+      <workItem from="1602881331128" duration="636000" />
+      <workItem from="1603120345213" duration="613000" />
+      <workItem from="1603203661573" duration="8000" />
+      <workItem from="1603222439344" duration="169000" />
+      <workItem from="1603371657356" duration="934000" />
+      <workItem from="1603817337356" duration="535000" />
+      <workItem from="1603820340733" duration="7045000" />
+      <workItem from="1603874647479" duration="4634000" />
+      <workItem from="1603880236470" duration="2296000" />
+      <workItem from="1603958724827" duration="1752000" />
+      <workItem from="1603961289631" duration="117000" />
+      <workItem from="1603968261839" duration="904000" />
+      <workItem from="1603989096192" duration="74000" />
+      <workItem from="1604050192437" duration="3404000" />
+      <workItem from="1604057741973" duration="126000" />
+      <workItem from="1604057920350" duration="6000" />
+      <workItem from="1604064840637" duration="12546000" />
+      <workItem from="1604155826054" duration="91000" />
+      <workItem from="1604178523068" duration="3754000" />
+      <workItem from="1604230103756" duration="15491000" />
+      <workItem from="1604329734538" duration="643000" />
+      <workItem from="1604345529948" duration="4851000" />
+      <workItem from="1604394204573" duration="41000" />
+      <workItem from="1604399355291" duration="1214000" />
+      <workItem from="1604412168629" duration="2245000" />
+      <workItem from="1604424893645" duration="5085000" />
+      <workItem from="1604434126661" duration="18000" />
+      <workItem from="1604438072885" duration="3326000" />
+      <workItem from="1604476621631" duration="3000" />
+      <workItem from="1604567227307" duration="283000" />
+      <workItem from="1604666253810" duration="11495000" />
+      <workItem from="1604919779039" duration="275000" />
+      <workItem from="1604941223821" duration="10294000" />
+      <workItem from="1604956858351" duration="98000" />
+      <workItem from="1605126510941" duration="3445000" />
+      <workItem from="1605197025670" duration="30000" />
+      <workItem from="1605299202309" duration="1976000" />
+      <workItem from="1605376052030" duration="10631000" />
+      <workItem from="1605455356199" duration="17053000" />
+      <workItem from="1605533187927" duration="1477000" />
+      <workItem from="1605719126074" duration="1997000" />
+      <workItem from="1605770493325" duration="1054000" />
+      <workItem from="1605773551675" duration="26000" />
+      <workItem from="1605779272977" duration="560000" />
+      <workItem from="1605857926460" duration="10000" />
+      <workItem from="1606159491442" duration="17000" />
+      <workItem from="1606325385680" duration="1425000" />
+      <workItem from="1606380461008" duration="85000" />
+      <workItem from="1606578793406" duration="3896000" />
+      <workItem from="1606587168276" duration="7460000" />
+      <workItem from="1606652286048" duration="1730000" />
+      <workItem from="1606677904857" duration="3238000" />
+      <workItem from="1606740357173" duration="5000" />
+      <workItem from="1606747403972" duration="3680000" />
+      <workItem from="1606902883078" duration="11081000" />
+      <workItem from="1606981064763" duration="779000" />
+      <workItem from="1607003295321" duration="190000" />
+      <workItem from="1607108952581" duration="7853000" />
+      <workItem from="1607119356053" duration="542000" />
+      <workItem from="1607119908119" duration="147000" />
+    </task>
+    <task id="LOCAL-00001" summary="Working on a recode, all new stuff is moved to me.tks.*">
+      <created>1604439250968</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1604439250968</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Working on a recode, all new stuff is moved to me.tks.*">
+      <created>1604440963022</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1604440963022</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Working on a recode, all new stuff is moved to me.tks.*">
+      <created>1604441043714</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1604441043714</updated>
+    </task>
+    <task id="LOCAL-00004" summary="New features have been added">
+      <created>1605126793552</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1605126793552</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Added all features except auto remover, OP help and GP support. Fixed some smalls bugs and got rid of some code duplication.">
+      <created>1605476291493</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1605476291493</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Added staff help, GP support and hooks command">
+      <created>1605534060763</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1605534060763</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Bug fixes">
+      <created>1605770943953</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1605770943953</updated>
+    </task>
+    <task id="LOCAL-00008" summary="This is a random commit to test my Discord WebHook">
+      <created>1605779320611</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1605779320611</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Removed package from before recode">
+      <created>1605779826655</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1605779826655</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Bug fix: itemprice can now be reset by setting amount to 0">
+      <created>1606579492249</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1606579492249</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Fixed bug where on rare occasions warps would not be saved (changed format), fixed that warps would always check if private, added a new command to change default privacy of a warp">
+      <created>1607118818085</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1607118818085</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Working on a recode, all new stuff is moved to me.tks.*" />
+    <MESSAGE value="New features have been added" />
+    <MESSAGE value="Added all features except auto remover, OP help and GP support. Fixed some smalls bugs and got rid of some code duplication." />
+    <MESSAGE value="Added staff help, GP support and hooks command" />
+    <MESSAGE value="Bug fixes" />
+    <MESSAGE value="This is a random commit to test my Discord WebHook" />
+    <MESSAGE value="Removed package from before recode" />
+    <MESSAGE value="Bug fix: itemprice can now be reset by setting amount to 0" />
+    <MESSAGE value="Fixed bug where on rare occasions warps would not be saved (changed format), fixed that warps would always check if private, added a new command to change default privacy of a warp" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed bug where on rare occasions warps would not be saved (changed format), fixed that warps would always check if private, added a new command to change default privacy of a warp" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="249" y="0" key="#Project_Structure" timestamp="1607112124163">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="249" y="0" key="#Project_Structure/-1920.-363.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1607112124163" />
+    <state x="249" y="0" key="#Project_Structure/0.0.1536.824@0.0.1536.824" timestamp="1604089466277" />
+    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1604094157950">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1604094157950" />
+    <state x="514" y="214" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1604440053545">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="514" y="214" key="#com.intellij.fileTypes.FileTypeChooser/-1920.-363.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1604440053545" />
+    <state x="514" y="214" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1604087054032" />
+    <state x="574" y="128" key="#com.intellij.ide.util.MemberChooser" timestamp="1604426555623">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="574" y="128" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1604426555623" />
+    <state x="397" y="101" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog" timestamp="1604440146758">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="397" y="101" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog/-1920.-363.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1604440146758" />
+    <state x="596" y="141" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1604674106864">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="596" y="141" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/-1920.-363.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1604674106864" />
+    <state x="596" y="141" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1536.824@0.0.1536.824" timestamp="1603817564367" />
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1605458359629">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="549" y="167" key="FileChooserDialogImpl/-1920.-363.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1604947661129" />
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1605458359629" />
+    <state x="593" y="332" key="Github.CreateGistDialog" timestamp="1604439597867">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="593" y="332" key="Github.CreateGistDialog/-1920.-363.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1604439597867" />
+    <state x="147" y="65" key="MergeDialog" timestamp="1607119747951">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="147" y="65" key="MergeDialog/-1920.-363.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1607119747951" />
+    <state x="407" y="174" key="MultipleFileMergeDialog" timestamp="1607118903452">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="407" y="174" key="MultipleFileMergeDialog/-1920.-363.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1607118903452" />
+    <state x="249" y="0" key="SettingsEditor" timestamp="1604440656135">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="249" y="0" key="SettingsEditor/-1920.-363.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1604440656135" />
+    <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1604236005342" />
+    <state x="437" y="296" key="VCS.ChangelistChooser" timestamp="1607119701158">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="437" y="296" key="VCS.ChangelistChooser/-1920.-363.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1607119701158" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1607118820540">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/-1920.-363.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1607118820540" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1606579496259" />
+    <state x="478" y="145" width="579" height="534" key="find.popup" timestamp="1605470692034">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="478" y="145" width="579" height="534" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1605470692034" />
+    <state x="209" y="33" key="new project wizard" timestamp="1606580834758">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="209" y="33" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1606580834758" />
+    <state x="469" y="170" key="refactoring.ChangeSignatureDialog" timestamp="1603874916938">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="469" y="170" key="refactoring.ChangeSignatureDialog/0.0.1536.824@0.0.1536.824" timestamp="1603874916938" />
+    <state x="425" y="187" key="run.anything.popup" timestamp="1605458353315">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="425" y="187" key="run.anything.popup/-1920.-363.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1604956665059" />
+    <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1605458353315" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1606904670035">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/-1920.-363.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1606904670035" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1605458357233" />
+  </component>
+</project>

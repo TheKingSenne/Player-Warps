@@ -27,6 +27,11 @@ public class ItemUtils {
         return StringUtils.join(e, ",");
     }
 
+    /**
+     * Converts an item to a text format
+     * @param i ItemStack to convert
+     * @return formatted string
+     */
     public static String serialize(ItemStack i){
         String[] parts = new String[6];
         parts[0] = i.getType().name();
@@ -34,10 +39,15 @@ public class ItemUtils {
         parts[2] = String.valueOf(i.getDurability());
         parts[3] = i.getItemMeta().getDisplayName();
         parts[4] = String.valueOf(i.getData().getData());
-        parts[5] = getEnchants(i);
+//        parts[5] = getEnchants(i);
         return StringUtils.join(parts, ";");
     }
 
+    /**
+     * Deserializes an item saved in the correct format (without enchants)
+     * @param p string to deserialize
+     * @return new ItemStack
+     */
     public static ItemStack deserialize(String p){
         String[] a = p.split(";");
         ItemStack i = new ItemStack(Material.getMaterial(a[0]), Integer.parseInt(a[1]));
@@ -48,23 +58,23 @@ public class ItemUtils {
         MaterialData data = i.getData();
         data.setData((byte) Integer.parseInt(a[4]));
         i.setData(data);
-        if (a.length > 5) {
-            String[] parts = a[5].split(",");
-            for (String s : parts) {
-                String label = s.split(":")[0];
-                String amplifier = s.split(":")[1];
-                Enchantment type = Enchantment.getByName(label);
-                if (type == null)
-                    continue;
-                int f;
-                try {
-                    f = Integer.parseInt(amplifier);
-                } catch(Exception ex) {
-                    continue;
-                }
-                i.addEnchantment(type, f);
-            }
-        }
+//        if (a.length > 5) {
+//            String[] parts = a[5].split(",");
+//            for (String s : parts) {
+//                String label = s.split(":")[0];
+//                String amplifier = s.split(":")[1];
+//                Enchantment type = Enchantment.getByName(label);
+//                if (type == null)
+//                    continue;
+//                int f;
+//                try {
+//                    f = Integer.parseInt(amplifier);
+//                } catch(Exception ex) {
+//                    continue;
+//                }
+//                i.addEnchantment(type, f);
+//            }
+//        }
         return i;
     }
 }

@@ -3,23 +3,23 @@ package me.tks.playerwarp;
 import com.google.gson.Gson;
 import me.tks.messages.Messages;
 import me.tks.utils.PlayerUtils;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.OfflinePlayer;
+import org.bukkit.*;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.InvalidConfigurationException;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
 public class WarpList implements Serializable {
 
+    // List of all warps
     private ArrayList<Warp> warps;
 
     /**
@@ -43,7 +43,18 @@ public class WarpList implements Serializable {
      */
     public static WarpList read() {
 
-        WarpList warpList = null;
+        WarpList warpList = new WarpList();
+
+        // Check for legacy version
+        File oldFile = new File(PWarp.getProvidingPlugin(PWarp.class).getDataFolder(), "warps.yml");
+
+        File warpFile = new File(PWarp.getPlugin(PWarp.class).getDataFolder(), "warps.json");
+
+        // Legacy file has been found and current warpfile is empty
+        if (oldFile.exists() && (!warpFile.exists() || warpFile.length() == 0)) {
+
+            return fromLegacy(oldFile);
+        }
 
         try {
             File file = new File(PWarp.getPlugin(PWarp.class).getDataFolder(), "warps.json");
@@ -379,5 +390,66 @@ public class WarpList implements Serializable {
         return  (getPersonalLimit(player) != 0 && ownsHowMany(player) >= getPersonalLimit(player));
 
     }
+
+    /**
+     * Converts a legacy warp file (before recode) to the current format
+     * @param file outdated file
+     * @return a new warp list
+     */
+    public static WarpList fromLegacy(File file) {
+        FileConfiguration fC = new YamlConfiguration();
+        try {
+            fC.load(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InvalidConfigurationException e) {
+            Bukkit.getLogger().info(ChatColor.RED + "[PWarp] An error occurred trying to convert from a legacy version.");
+            return new WarpList();
+        }
+
+        List<String> warps = fC.getStringList("warpList");
+        ArrayList<Warp> converted = new ArrayList<>();
+
+        for (String warpName : warps) {
+            double x = fC.getDouble("warps." + warpName + ".location.x");
+            double y = fC.getDouble("warps." + warpName + ".location.y");
+            double z = fC.getDouble("warps." + warpName + ".location.z");
+            String worldName = fC.getString("warps." + warpName + ".location.world");
+
+            // Something wrong in old config
+            if (worldName == null) continue;
+
+            World world = Bukkit.getWorld(worldName);
+
+            // World no longer exists
+            if (world == null) continue;
+
+            double pitch = fC.getDouble("warps." + warpName + ".location.pitch");
+            double yaw = fC.getDouble("warps." + warpName + ".location.yaw");
+            String uuid = fC.getString("warps." + warpName + ".owner-UUID");
+            int visitorCount = fC.getInt("warps." + warpName + ".visitorCount");
+            boolean isHidden = fC.getBoolean("warps." + warpName + ".isHidden");
+            boolean isPrivate = fC.getBoolean("warps." + warpName + ".isPrivate");
+            List<String> trusted = fC.getStringList("warps." + warpName + ".trusted");
+            ItemStack item = fC.getItemStack("warps." + warpName + ".item");
+
+            if (item == null) item = new ItemStack(Material.CONDUIT);
+
+            List<String> lore = null;
+
+            if (item.getItemMeta() != null)
+                lore = item.getItemMeta().getLore();
+
+            if (lore == null) lore = new ArrayList<>();
+
+            converted.add(new Warp(warpName, new Location(world,x,y,z, (float) yaw, (float) pitch), isPrivate, trusted, item, uuid, (ArrayList<String>) lore,visitorCount, isHidden));
+        }
+
+        // Remove old warpList
+        if (!file.delete()) Bukkit.getLogger().info("[PWarp] Legacy file has been removed");
+
+        return new WarpList(converted);
+    }
+
 
 }

@@ -8,6 +8,7 @@ import me.tks.messages.Messages;
 import me.tks.utils.ItemUtils;
 import me.tks.utils.PlayerUtils;
 import org.bukkit.*;
+import org.bukkit.block.Skull;
 import org.bukkit.block.data.type.Slab;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -68,6 +69,7 @@ public class Warp implements Serializable {
     }
 
     public Warp(String name, Location loc, boolean isPrivate, List<String> trustedPlayers, ItemStack guiItem, String owner, ArrayList<String> lore, int visitors, boolean isHidden) {
+
         this.name = name;
         this.loc = loc;
         this.isPrivate = isPrivate;
@@ -82,11 +84,28 @@ public class Warp implements Serializable {
 
         ItemMeta meta = guiItem.getItemMeta();
         meta.setDisplayName(ChatColor.YELLOW + name);
-        this.lore.set(0, ChatColor.GRAY + "" + ChatColor.STRIKETHROUGH + "-----------------");
-        this.lore.set(4, ChatColor.GRAY + "" + ChatColor.STRIKETHROUGH + "-----------------");
-        this.lore.set(5, ChatColor.AQUA + Messages.GUI_VISITORS.getMessage() + " " + visitors);
-        this.lore.set(6,ChatColor.AQUA + Messages.GUI_WARP_OWNER.getMessage() + " " + Bukkit.getOfflinePlayer(UUID.fromString(owner)).getName());
-        this.lore.set(7, ChatColor.GRAY + "" + ChatColor.STRIKETHROUGH + "-----------------");
+
+        // Added for legacy support
+        if (this.lore.size() < 8) {
+            lore = new ArrayList<>();
+            this.lore = lore;
+            lore.add(ChatColor.GRAY + "" + ChatColor.STRIKETHROUGH + "-----------------");
+            lore.add(ChatColor.GOLD + "");
+            lore.add(ChatColor.GOLD + "");
+            lore.add(ChatColor.GOLD + "");
+            lore.add(ChatColor.GRAY + "" + ChatColor.STRIKETHROUGH + "-----------------");
+            lore.add(ChatColor.AQUA + Messages.GUI_VISITORS.getMessage() + " " + this.visitors);
+            lore.add(ChatColor.AQUA + Messages.GUI_WARP_OWNER.getMessage() + " " + Bukkit.getOfflinePlayer(UUID.fromString(owner)).getName());
+            lore.add(ChatColor.GRAY + "" + ChatColor.STRIKETHROUGH + "-----------------");
+        }
+        else {
+            this.lore.set(0, ChatColor.GRAY + "" + ChatColor.STRIKETHROUGH + "-----------------");
+            this.lore.set(4, ChatColor.GRAY + "" + ChatColor.STRIKETHROUGH + "-----------------");
+            this.lore.set(5, ChatColor.AQUA + Messages.GUI_VISITORS.getMessage() + " " + visitors);
+            this.lore.set(6,ChatColor.AQUA + Messages.GUI_WARP_OWNER.getMessage() + " " + Bukkit.getOfflinePlayer(UUID.fromString(owner)).getName());
+            this.lore.set(7, ChatColor.GRAY + "" + ChatColor.STRIKETHROUGH + "-----------------");
+        }
+
         meta.setLore(this.lore);
 
         this.guiItem.setItemMeta(meta);
@@ -647,16 +666,15 @@ public class Warp implements Serializable {
         }
 
         // letsgo struggling with some skulls *insert sad noises here* :D
-//        if (guiItem.getType().equals(Material.PLAYER_HEAD)) {
-//
-//            if (map.get("skullOwner") != null) {
-//
-//                SkullMeta meta = (SkullMeta) guiItem.getItemMeta();
-//                meta.setOwningPlayer(Bukkit.getOfflinePlayer(map.get("skullOwner")));
-//                guiItem.setItemMeta(meta);
-//            }
-//
-//        }
+        if (guiItem.getType().equals(Material.PLAYER_HEAD)) {
+            if (map.get("skullOwner") != null) {
+
+                SkullMeta meta = (SkullMeta) guiItem.getItemMeta();
+                meta.setOwningPlayer(Bukkit.getOfflinePlayer(UUID.fromString(map.get("skullOwner"))));
+                guiItem.setItemMeta(meta);
+            }
+
+        }
 
 
         String owner = map.get("owner");

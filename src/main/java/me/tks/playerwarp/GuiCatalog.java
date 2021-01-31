@@ -233,6 +233,7 @@ public class GuiCatalog {
         }
 
         for (Player player : players) {
+
             player.closeInventory();
         }
 

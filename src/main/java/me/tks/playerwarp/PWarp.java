@@ -75,6 +75,9 @@ public class PWarp extends JavaPlugin {
     @Override
     public void onDisable() {
 
+        // Close all opened GUI's
+        gC.closeAllGuis();
+
         // Write warps and configuration back
         if (wL != null)
         wL.write();
