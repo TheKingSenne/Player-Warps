@@ -1,9 +1,7 @@
 #### Player-Warp
 ## To-do list:
 - Add option to change gui refresh rate
-- Add compatibilty for old version
 - Automated remover for old warps?
-- Fix lacking JavaDoc :)
 - Reset item?
 - Reset lore?
 - Clear old warps
@@ -15,5 +13,4 @@
 
 ## Bugs:
 - Not compatible with world loading plugins (add post loading system)
-- Incompatibilty with other mc versions (check plugin.yml)
 - Fix double teleprot
