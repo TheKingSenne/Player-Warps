@@ -122,6 +122,7 @@ public class Events implements Listener {
         Warp warp = PWarp.wL.getWarp(name);
 
         if (warp != null) {
+            e.getWhoClicked().closeInventory();
             warp.goTo((Player) e.getWhoClicked());
         }
 

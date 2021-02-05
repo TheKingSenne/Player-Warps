@@ -450,6 +450,11 @@ public class Warp implements Serializable {
      */
     public void goTo(Player player) {
 
+        if (PWarp.events.isTeleporting(player)) {
+            player.sendMessage(ChatColor.RED + Messages.NO_COMMANDS_ALLOWED.getMessage());
+            return;
+        }
+
         if (!PWarp.pC.isWorldToWorld()) {
 
             if (!player.getLocation().getWorld().equals(this.getWorld())) {
