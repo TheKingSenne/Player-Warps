@@ -4,7 +4,7 @@
 
     <groupId>com.elixiumnetwork</groupId>
     <artifactId>PWarp</artifactId>
-    <version>7.3.3-SNAPSHOT</version>
+    <version>2.7</version>
     <packaging>jar</packaging>
 
     <properties>

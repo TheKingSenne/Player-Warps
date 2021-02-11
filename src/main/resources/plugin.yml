@@ -1,6 +1,6 @@
 main: me.tks.playerwarp.PWarp
 name: PWarp
-version: 2.7
+version: ${project.version}
 api-version: 1.13
 author: The_King_Senne
 softdepend: [Multiverse-Core,GriefPreventionPlugin, Vault]
