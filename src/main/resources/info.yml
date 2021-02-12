@@ -43,6 +43,8 @@
 # pwarp.staffhelp - see staff commands in the help menu
 # pwarp.w2w - enable/disable world to world teleport
 # pwarp.defaultprivacy - change the default privacy
+# pwarp.setpublic - set a warp to public
+# pwarp.setprivate - set a warp to private
 
 # --------------------------------------------------------------------------------------------------------------- #
 #                                               Still need help?                                                  #
