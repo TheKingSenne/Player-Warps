@@ -12,4 +12,4 @@
 - Different sorting for gui -> but based on what though; possible ideas so far: visitors, alphabetically, item
 
 ## Bugs:
-- Not compatible with world loading plugins (add post loading system)
+- None
