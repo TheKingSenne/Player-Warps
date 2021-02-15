@@ -26,6 +26,7 @@ public class Warp implements Serializable {
      */
     private String name;
     private Location loc;
+    private Map mapLoc;
     private boolean isPrivate;
     private final List<String> trustedPlayers;
     private ItemStack guiItem;
@@ -33,7 +34,6 @@ public class Warp implements Serializable {
     private ArrayList<String> lore;
     private int visitors;
     private boolean isHidden;
-
 
     public Warp(String name, Location loc, Player owner) {
 
@@ -66,6 +66,50 @@ public class Warp implements Serializable {
 
 
 
+    }
+
+    public Warp(String name, Map loc, boolean isPrivate, List<String> trustedPlayers, ItemStack guiItem, String owner, ArrayList<String> lore, int visitors, boolean isHidden) {
+
+        this.name = name;
+        this.mapLoc = loc;
+        this.loc = null;
+        this.isPrivate = isPrivate;
+        this.trustedPlayers = trustedPlayers;
+        this.guiItem = guiItem;
+        this.owner = owner;
+        this.lore = lore;
+        this.visitors = visitors;
+        this.isHidden = isHidden;
+
+        name = name.substring(0, 1).toUpperCase() + name.substring(1);
+
+        ItemMeta meta = guiItem.getItemMeta();
+        meta.setDisplayName(ChatColor.YELLOW + name);
+
+        // Added for legacy support
+        if (this.lore.size() < 8) {
+            lore = new ArrayList<>();
+            this.lore = lore;
+            lore.add(ChatColor.GRAY + "" + ChatColor.STRIKETHROUGH + "-----------------");
+            lore.add(ChatColor.GOLD + "");
+            lore.add(ChatColor.GOLD + "");
+            lore.add(ChatColor.GOLD + "");
+            lore.add(ChatColor.GRAY + "" + ChatColor.STRIKETHROUGH + "-----------------");
+            lore.add(ChatColor.AQUA + Messages.GUI_VISITORS.getMessage() + " " + this.visitors);
+            lore.add(ChatColor.AQUA + Messages.GUI_WARP_OWNER.getMessage() + " " + Bukkit.getOfflinePlayer(UUID.fromString(owner)).getName());
+            lore.add(ChatColor.GRAY + "" + ChatColor.STRIKETHROUGH + "-----------------");
+        }
+        else {
+            this.lore.set(0, ChatColor.GRAY + "" + ChatColor.STRIKETHROUGH + "-----------------");
+            this.lore.set(4, ChatColor.GRAY + "" + ChatColor.STRIKETHROUGH + "-----------------");
+            this.lore.set(5, ChatColor.AQUA + Messages.GUI_VISITORS.getMessage() + " " + visitors);
+            this.lore.set(6,ChatColor.AQUA + Messages.GUI_WARP_OWNER.getMessage() + " " + Bukkit.getOfflinePlayer(UUID.fromString(owner)).getName());
+            this.lore.set(7, ChatColor.GRAY + "" + ChatColor.STRIKETHROUGH + "-----------------");
+        }
+
+        meta.setLore(this.lore);
+
+        this.guiItem.setItemMeta(meta);
     }
 
     public Warp(String name, Location loc, boolean isPrivate, List<String> trustedPlayers, ItemStack guiItem, String owner, ArrayList<String> lore, int visitors, boolean isHidden) {
@@ -110,6 +154,7 @@ public class Warp implements Serializable {
 
         this.guiItem.setItemMeta(meta);
     }
+
 
     /**
      * Creates a new warp when a player requests to set a warp.
@@ -455,6 +500,16 @@ public class Warp implements Serializable {
             return;
         }
 
+        if (loc == null) {
+            try {
+                loc = Location.deserialize(mapLoc);
+            }
+            catch (Exception e) {
+                player.sendMessage(ChatColor.RED + Messages.WARP_CONFIGURED_WRONG.getMessage());
+                return;
+            }
+        }
+
         if (!PWarp.pC.isWorldToWorld()) {
 
             if (!player.getLocation().getWorld().equals(this.getWorld())) {
@@ -596,7 +651,12 @@ public class Warp implements Serializable {
         Gson gson = new Gson();
 
         properties.put("name", name);
-        properties.put("location", "" + gson.toJson(loc.serialize()));
+        if (this.loc == null) {
+            properties.put("location", "" + gson.toJson(mapLoc));
+        }
+        else {
+            properties.put("location", "" + gson.toJson(loc.serialize()));
+        }
         properties.put("isPrivate", "" + isPrivate);
         properties.put("trustedPlayers", gson.toJson(trustedPlayers, collectionType));
         properties.put("guiItem", gson.toJson(ItemUtils.serialize(guiItem)));
@@ -628,7 +688,10 @@ public class Warp implements Serializable {
             HashMap<String, Object> objectMap = gson.fromJson(properties, HashMap.class);
 
             String name = (String) objectMap.get("name");
-            Location loc = Location.deserialize(gson.fromJson((String) objectMap.get("location"), Map.class));
+
+//            Location loc = Location.deserialize(gson.fromJson((String) objectMap.get("location"), Map.class));
+
+
             boolean isPrivate = (Boolean) objectMap.get("isPrivate");
             List<String> trustedPlayers = (List<String>) objectMap.get("trustedPlayers");
             ItemStack guiItem = ItemStack.deserialize(gson.fromJson((String) objectMap.get("guiItem"), Map.class));
@@ -641,7 +704,7 @@ public class Warp implements Serializable {
             if (objectMap.get("isHidden") != null) {
                 isHidden = (boolean) objectMap.get("isHidden");
             }
-            return new Warp(name, loc, isPrivate, trustedPlayers, guiItem, owner, lore, (int) visitors, isHidden);
+            return new Warp(name, gson.fromJson((String) objectMap.get("location"), Map.class), isPrivate, trustedPlayers, guiItem, owner, lore, (int) visitors, isHidden);
         }
         catch (Exception e) {
             // do nothing
@@ -650,7 +713,7 @@ public class Warp implements Serializable {
         Map<String, String> map = gson.fromJson(properties, Map.class);
 
         String name = map.get("name");
-        Location loc = Location.deserialize(gson.fromJson(map.get("location"), Map.class));
+//        Location loc = Location.deserialize(gson.fromJson(map.get("location"), Map.class));
         boolean isPrivate = Boolean.parseBoolean(map.get("isPrivate"));
 
         Type collectionType = new TypeToken<ArrayList<String>>(){}.getType();
@@ -692,7 +755,7 @@ public class Warp implements Serializable {
             isHidden = Boolean.parseBoolean(map.get("isHidden"));
         }
 
-        return new Warp(name, loc, isPrivate, trustedPlayers, guiItem, owner, lore, visitors, isHidden);
+        return new Warp(name, gson.fromJson(map.get("location"), Map.class), isPrivate, trustedPlayers, guiItem, owner, lore, visitors, isHidden);
     }
 
 }

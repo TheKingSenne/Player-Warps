@@ -1,6 +1,9 @@
 package me.tks.messages;
 
+import me.tks.playerwarp.PWarp;
+
 public enum MessagePathAndDefault {
+    WARP_CONFIGURED_WRONG("configuredWrong", "Error: This warp has been configured wrong. Does this world still exist?"),
     NO_PERMISSION("noPermission", "Error: You do not have permission."),
     NOT_AN_OWNER("notAnOwner", "Error: You do not own this warp."),
     WARP_NOT_EXISTING("warpNotExisting", "Error: This warp does not exist"),
