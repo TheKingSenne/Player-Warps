@@ -3,6 +3,7 @@ package me.tks.messages;
 import me.tks.playerwarp.PWarp;
 
 public enum Messages {
+    WARP_CONFIGURED_WRONG(PWarp.messageFile.getMessageFile().getString("configuredWrong")),
     NO_PERMISSION(PWarp.messageFile.getMessageFile().getString("noPermission")),
     NOT_AN_OWNER(PWarp.messageFile.getMessageFile().getString("notAnOwner")),
     WARP_NOT_EXISTING(PWarp.messageFile.getMessageFile().getString("warpNotExisting")),
