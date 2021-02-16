@@ -1,6 +1,5 @@
 #### Player-Warp
 ## To-do list:
-- Add option to change gui refresh rate
 - Automated remover for old warps?
 - Reset item?
 - Reset lore?
