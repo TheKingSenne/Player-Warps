@@ -168,6 +168,28 @@ public class Warp implements Serializable {
         if (Bukkit.getPluginManager().getPlugin("GriefPreventionPlugin") != null) {
             if (!GriefPreventionPlugin.hasAccess(player)) return;
         }
+
+        // Check if world is blacklisted
+        if (PWarp.pC.isBlacklisted(player.getLocation().getWorld())) {
+            player.sendMessage(ChatColor.RED + Messages.BLACKLISTED_WORLD.getMessage());
+            return;
+        }
+
+        // Check if player is in safe location
+        if (PWarp.pC.getWarpSafety() && !PlayerUtils.isInSafeLocation(player)) return;
+
+        // Check if warp name already in use
+        if (wL.warpExists(name)) {
+            player.sendMessage(ChatColor.RED + Messages.NAME_IN_USE.getMessage().replaceAll("PWARPNAMEP", name));
+            return;
+        }
+
+        // Check if player already owns too many warps
+        if (wL.ownsTooMany(player)) {
+            player.sendMessage(ChatColor.RED + Messages.LIMIT_REACHED.getMessage().replaceAll("PLIMITP", "" + WarpList.getPersonalLimit(player)));
+            return;
+        }
+
         double warpPrice = PWarp.pC.getWarpPrice();
 
         ItemStack warpItemPrice = PWarp.pC.getWarpItemPrice();
@@ -213,23 +235,6 @@ public class Warp implements Serializable {
 
             if (moneyPrice)
             VaultPlugin.getEconomy().withdrawPlayer(player, warpPrice);
-        }
-
-        if (PWarp.pC.isBlacklisted(player.getLocation().getWorld())) {
-            player.sendMessage(ChatColor.RED + Messages.BLACKLISTED_WORLD.getMessage());
-            return;
-        }
-
-        if (PWarp.pC.getWarpSafety() && !PlayerUtils.isInSafeLocation(player)) return;
-
-        if (wL.warpExists(name)) {
-            player.sendMessage(ChatColor.RED + Messages.NAME_IN_USE.getMessage().replaceAll("PWARPNAMEP", name));
-            return;
-        }
-
-        if (wL.ownsTooMany(player)) {
-            player.sendMessage(ChatColor.RED + Messages.LIMIT_REACHED.getMessage().replaceAll("PLIMITP", "" + WarpList.getPersonalLimit(player)));
-            return;
         }
 
         name = name.toLowerCase();
