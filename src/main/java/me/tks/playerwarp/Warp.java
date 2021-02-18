@@ -190,8 +190,8 @@ public class Warp implements Serializable {
             return;
         }
 
+        // Fetch prices from config
         double warpPrice = PWarp.pC.getWarpPrice();
-
         ItemStack warpItemPrice = PWarp.pC.getWarpItemPrice();
 
         boolean moneyPrice = warpPrice != 0;

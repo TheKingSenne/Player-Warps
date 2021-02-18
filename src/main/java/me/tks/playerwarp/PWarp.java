@@ -76,13 +76,14 @@ public class PWarp extends JavaPlugin {
     public void onDisable() {
 
         // Close all opened GUI's
-        gC.closeAllGuis();
+        if (gC != null)
+            gC.closeAllGuis();
 
         // Write warps and configuration back
-        if (wL != null)
-        wL.write();
+        if (wL != null && !wL.getWarps().isEmpty())
+            wL.write();
         if(pC != null)
-        pC.write();
+            pC.write();
 
         // Log that plugin has been disabled
         Bukkit.getLogger().info("[PWarp] PWarp has been disabled!");

@@ -39,6 +39,7 @@ public class ItemUtils {
         parts[2] = String.valueOf(i.getDurability());
         parts[3] = i.getItemMeta().getDisplayName();
         parts[4] = String.valueOf(i.getData().getData());
+
 //        parts[5] = getEnchants(i);
         return StringUtils.join(parts, ";");
     }
@@ -55,9 +56,15 @@ public class ItemUtils {
         ItemMeta meta = i.getItemMeta();
         meta.setDisplayName(a[3]);
         i.setItemMeta(meta);
+
         MaterialData data = i.getData();
-        data.setData((byte) Integer.parseInt(a[4]));
-        i.setData(data);
+        try {
+            data.setData((byte) Integer.parseInt(a[4]));
+            i.setData(data);
+        }
+        catch (Exception e) {
+            // Nothing happens here
+        }
 //        if (a.length > 5) {
 //            String[] parts = a[5].split(",");
 //            for (String s : parts) {
