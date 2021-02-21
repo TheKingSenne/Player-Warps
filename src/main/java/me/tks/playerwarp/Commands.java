@@ -73,6 +73,8 @@ public class Commands implements CommandExecutor {
                             || args[0].equalsIgnoreCase("placeWarp")
                             || args[0].equalsIgnoreCase("setWarp")) {
 
+                    if (!PlayerUtils.hasPermissionWithMessage(player, "pwarp.create")) return true;
+
                     // Check for correct arguments
                     if (args.length != 2) {
                         player.sendMessage(ChatColor.RED + Messages.CORRECT_USAGE.getMessage().replaceAll("PUSAGEP", "/pwarp setwarp <warpName>"));
@@ -88,6 +90,8 @@ public class Commands implements CommandExecutor {
                 else if (args[0].equalsIgnoreCase("delete") || args[0].equalsIgnoreCase("remove")
                     || args[0].equalsIgnoreCase("deleteWarp")
                     || args[0].equalsIgnoreCase("removeWarp")) {
+
+                    if (!PlayerUtils.hasPermissionWithMessage(player, "pwarp.delete")) return true;
 
                     if (args.length != 2) {
                         player.sendMessage(ChatColor.RED + Messages.CORRECT_USAGE.getMessage().replaceAll("PUSAGEP", "/pwarp delete <warpName>"));

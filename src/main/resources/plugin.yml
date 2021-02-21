@@ -18,3 +18,100 @@ commands:
     aliases: pww
     usage: "/pwwarp <warp>"
 
+#permissions:
+#  test.foo:
+#    description: Allows foo command
+#    default: op
+
+permissions:
+  pwarp.blacklist:
+    description: Manage the world blacklist
+    default: op
+
+  pwarp.deleteall:
+    description: Delete all warps
+    default: op
+
+  pwarp.guiitem:
+    description: Change the top gui item
+    default: op
+
+  pwarp.hide:
+    description: Hide a warp from the gui
+    default: true
+
+  pwarp.hooks:
+    description: See all the hooks of the plugin
+    default: op
+
+  pwarp.info:
+   description: Display general info about the plugin (settings)
+   default: op
+
+  pwarp.itemprice:
+    description: Set the item price of a warp
+    default: op
+
+  pwarp.listother:
+    description: List warps owned by other players
+    default: op
+
+  pwarp.listown:
+    description: List owned warps
+    default: true
+
+  pwarp.manage:
+    description: Have full access to other people's warps, with ability to change their properties or remove them
+    default: op
+
+  pwarp.moneyprice:
+    description: Set the virtual money price of a warp
+    default: op
+
+  pwarp.movewarp:
+    description: Move a warp to a new location
+    default: true
+
+  pwarp.refreshrate:
+    description: Change the refresh rate of the gui
+    default: op
+
+  pwarp.rename:
+    description: Rename a warp
+    default: op
+
+  pwarp.safety:
+    description: Enable/disable warp safety
+    default: op
+
+  pwarp.separator:
+    description: Change the top and bottom row of gui items
+    default: op
+
+  pwarp.setdelay:
+    description: Change the teleport delay
+    default: op
+
+  pwarp.setlimit:
+    description: Change the default warp limit
+    default: op
+
+  pwarp.staffhelp:
+    description: See staff commands in the help menu
+    default: op
+
+  pwarp.w2w:
+    description: Enable/disable world to world teleport
+    default: op
+
+  pwarp.defaultprivacy:
+    description: Change the default privacy
+    default: op
+
+  pwarp.setpublic:
+    descrption: Set a warp to public
+    default: true
+
+  pwarp.setprivate:
+    description: Set a warp to private
+    default: true
