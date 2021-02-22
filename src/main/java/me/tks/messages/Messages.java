@@ -1,6 +1,7 @@
 package me.tks.messages;
 
 import me.tks.playerwarp.PWarp;
+import net.md_5.bungee.api.ChatColor;
 
 public enum Messages {
     WARP_CONFIGURED_WRONG(PWarp.messageFile.getMessageFile().getString("configuredWrong")),
@@ -114,7 +115,7 @@ public enum Messages {
      * @param msg String containing the message.
      */
     Messages(String msg) {
-        this.msg = msg.replace('&', '§');
+        this.msg = ChatColor.translateAlternateColorCodes('&', msg);
     }
 
     /**
@@ -122,6 +123,6 @@ public enum Messages {
      * @return String containing the message.
      */
     public String getMessage() {
-        return this.msg.replace('&', '§');
+        return ChatColor.translateAlternateColorCodes('&', this.msg);
     }
 }
