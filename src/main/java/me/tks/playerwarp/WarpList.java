@@ -1,6 +1,7 @@
 package me.tks.playerwarp;
 
 import com.google.gson.Gson;
+import me.tks.events.PWarpAddedEvent;
 import me.tks.messages.Messages;
 import me.tks.utils.PlayerUtils;
 import org.bukkit.*;
@@ -130,8 +131,8 @@ public class WarpList implements Serializable {
      */
     public void addWarp(Warp warp) {
         this.warps.add(warp);
-
         PWarp.gC.addItem(warp);
+        Bukkit.getPluginManager().callEvent(new PWarpAddedEvent(warp));
     }
 
     /**
