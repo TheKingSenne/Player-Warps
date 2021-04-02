@@ -45,6 +45,8 @@
 # pwarp.defaultprivacy - change the default privacy
 # pwarp.setpublic - set a warp to public
 # pwarp.setprivate - set a warp to private
+# pwarp.delete - delete a warp (default true)
+# pwarp.create- create a warp (default true)
 
 # --------------------------------------------------------------------------------------------------------------- #
 #                                               Still need help?                                                  #
