@@ -159,7 +159,8 @@ public class WarpList implements Serializable {
         PWarp.gC.removeItem(warp);
 
         // Notify player
-        player.sendMessage(ChatColor.GREEN + Messages.REMOVED_WARP.getMessage());
+        player.sendMessage(ChatColor.GREEN + Messages.REMOVED_WARP.getMessage()
+        .replaceAll("PWARPNAMEP", warp.getName()));
 
     }
 
@@ -350,6 +351,7 @@ public class WarpList implements Serializable {
     public static int getPersonalLimit(Player player) {
         int limit = PWarp.pC.getStandardLimit();
         int newLimit = 0;
+        int tempLimit;
 
         if (limit == 0) return 0;
 
@@ -364,8 +366,9 @@ public class WarpList implements Serializable {
                     continue;
                 }
                 try {
-                    newLimit = Integer.parseInt(perm.getPermission().substring(17));
+                    tempLimit = Integer.parseInt(perm.getPermission().substring(17));
 
+                    if (tempLimit > newLimit) newLimit = tempLimit;
                 } catch (Exception e2) {
                     break;
                 }
