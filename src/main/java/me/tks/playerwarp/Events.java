@@ -82,8 +82,16 @@ public class Events implements Listener {
 
         Inventory playerInv = e.getWhoClicked().getInventory();
         Inventory clickedInv = e.getClickedInventory();
+        Player player = (Player) e.getWhoClicked();
 
-        if (playerInv.equals(clickedInv)) return;
+        if (playerInv.equals(clickedInv) && PWarp.gC.contains(player.getOpenInventory().getTopInventory())) {
+            e.setCancelled(true);
+            return;
+        }
+
+        if (playerInv.equals(clickedInv)) {
+            return;
+        }
 
         if (!PWarp.gC.contains(clickedInv)) return;
 

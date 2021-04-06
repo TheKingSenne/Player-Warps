@@ -18,12 +18,15 @@ commands:
     aliases: pww
     usage: "/pwwarp <warp>"
 
-#permissions:
-#  test.foo:
-#    description: Allows foo command
-#    default: op
-
 permissions:
+  pwarp.create:
+    description: Create a warp
+    default: true
+
+  pwarp.delete:
+    description: Delete a warp
+    default: true
+
   pwarp.blacklist:
     description: Manage the world blacklist
     default: op
