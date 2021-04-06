@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import me.tks.dependencies.GriefPreventionPlugin;
 import me.tks.dependencies.VaultPlugin;
+import me.tks.events.PWarpCreateEvent;
 import me.tks.messages.Messages;
 import me.tks.utils.ItemUtils;
 import me.tks.utils.PlayerUtils;
@@ -239,7 +240,13 @@ public class Warp implements Serializable {
 
         name = name.toLowerCase();
 
-        wL.addWarp(new Warp(name, player.getLocation(), player));
+        PWarpCreateEvent warpCreateEvent = new PWarpCreateEvent(name, player, player.getLocation());
+        Bukkit.getPluginManager().callEvent(warpCreateEvent);
+        if (warpCreateEvent.isCancelled()) {
+            return;
+        }
+        
+        wL.addWarp(new Warp(warpCreateEvent.getWarpName(), warpCreateEvent.getLocation(), warpCreateEvent.getPlayer()));
 
         // Message manager
         if (moneyPrice || itemPrice) {
