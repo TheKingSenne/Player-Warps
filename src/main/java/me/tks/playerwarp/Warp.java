@@ -245,7 +245,7 @@ public class Warp implements Serializable {
         if (warpCreateEvent.isCancelled()) {
             return;
         }
-        
+
         wL.addWarp(new Warp(warpCreateEvent.getWarpName(), warpCreateEvent.getLocation(), warpCreateEvent.getPlayer()));
 
         // Message manager
@@ -255,14 +255,15 @@ public class Warp implements Serializable {
             if (!moneyPrice) {
                 player.sendMessage(ChatColor.GREEN + Messages.CREATED_ITEM_PAID_WARP.getMessage()
                     .replaceAll("PITEMAMOUNTP", String.valueOf(warpItemPrice.getAmount()))
-                    .replaceAll("PITEMP", warpItemPrice.getType().name().toLowerCase().replaceAll("_", " ") + "(s)"));
+                    .replaceAll("PITEMP", warpItemPrice.getType().name().toLowerCase().replaceAll("_", " ") + "(s)")
+                    .replaceAll("PWARPNAMEP", name));
                 return;
             }
             // Only paid money
             else if (!itemPrice) {
                 player.sendMessage(ChatColor.GREEN + Messages.CREATED_MONEY_PAID_WARP.getMessage()
-                    .replaceAll("PMONEYP", String.valueOf(warpPrice)));
-
+                    .replaceAll("PMONEYP", String.valueOf(warpPrice))
+                    .replaceAll("PWARPNAMEP", name));
                 return;
             }
             // Paid both
@@ -270,7 +271,8 @@ public class Warp implements Serializable {
                 player.sendMessage(ChatColor.GREEN + Messages.CREATED_BOTH_PAID_WARP.getMessage()
                     .replaceAll("PMONEYP", String.valueOf(warpPrice))
                     .replaceAll("PITEMAMOUNTP", String.valueOf(warpItemPrice.getAmount()))
-                    .replaceAll("PITEMP", warpItemPrice.getType().name().toLowerCase().replaceAll("_", " ") + "(s)"));
+                    .replaceAll("PITEMP", warpItemPrice.getType().name().toLowerCase().replaceAll("_", " ") + "(s)")
+                    .replaceAll("PWARPNAMEP", name));
                 return;
             }
         }
