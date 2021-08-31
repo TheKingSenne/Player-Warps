@@ -295,7 +295,7 @@ public class Warp implements Serializable {
      *
      * @return Warp location
      */
-    public Location getWarpLocation() { return this.loc; }
+    public Location getWarpLocation() { return this.loc.clone(); }
 
     /**
      * Getter for the warp private status
