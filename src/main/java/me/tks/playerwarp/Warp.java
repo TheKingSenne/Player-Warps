@@ -291,6 +291,20 @@ public class Warp implements Serializable {
     }
 
     /**
+     * Getter for the warp location
+     *
+     * @return Warp location
+     */
+    public Location getWarpLocation() { return this.loc.clone(); }
+
+    /**
+     * Getter for the warp private status
+     *
+     * @return Warp isPrivate
+     */
+    public boolean getIsPrivate() { return this.isPrivate; }
+
+    /**
      * Checks if the warp is hidden.
      * @return Boolean true if hidden
      */
