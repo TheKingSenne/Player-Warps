@@ -16,6 +16,7 @@ public class EssentialsPlugin extends Hook {
      */
     public static void setUp() {
         if (Bukkit.getPluginManager().getPlugin("Essentials") != null) {
+            essentials = (Essentials) Bukkit.getPluginManager().getPlugin("Essentials");
             Bukkit.getConsoleSender().sendMessage("[PWarp] Successfully hooked into Essentials!");
             PWarp.hooks.add("Essentials" + ChatColor.GREEN + " \u2714");
         }
