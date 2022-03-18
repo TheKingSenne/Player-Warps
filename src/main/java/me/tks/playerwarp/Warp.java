@@ -2,6 +2,7 @@ package me.tks.playerwarp;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import me.tks.dependencies.EssentialsPlugin;
 import me.tks.dependencies.GriefPreventionPlugin;
 import me.tks.dependencies.VaultPlugin;
 import me.tks.events.PWarpCreateEvent;
@@ -562,6 +563,11 @@ public class Warp implements Serializable {
     public void teleportTo(Player player, boolean delay) {
 
         if (delay && !PWarp.events.isTeleporting(player)) return;
+
+        // Sets the player's /back location in Essentials.
+        if (Bukkit.getPluginManager().getPlugin("Essentials") != null) {
+            EssentialsPlugin.registerPlayerLocation(player);
+        }
 
         player.teleport(this.loc);
 
