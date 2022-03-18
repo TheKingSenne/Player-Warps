@@ -3,7 +3,7 @@ name: PWarp
 version: ${project.version}
 api-version: 1.13
 author: The_King_Senne
-softdepend: [Multiverse-Core, GriefPrevention, Vault]
+softdepend: [Multiverse-Core, GriefPrevention, Vault, Essentials]
 commands:
   pwarp:
     description: Main command for playerwarps
