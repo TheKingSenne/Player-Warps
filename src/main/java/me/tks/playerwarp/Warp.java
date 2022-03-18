@@ -555,7 +555,7 @@ public class Warp implements Serializable {
     }
 
     /**
-     * Teleports a play to a warp with a delay.
+     * Teleports a player to a warp with a delay.
      * @param player player to teleport
      * @param delay delay
      */
