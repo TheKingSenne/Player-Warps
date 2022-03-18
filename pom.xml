@@ -50,6 +50,20 @@
             <version>1.0.4</version>
             <scope>compile</scope>
         </dependency>
+
+        <!-- EssentialsX -->
+        <dependency>
+            <groupId>net.essentialsx</groupId>
+            <artifactId>EssentialsX</artifactId>
+            <version>2.19.0</version>
+            <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.bstats</groupId>
+                    <artifactId>bstats-bukkit</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
     </dependencies>
 
     <repositories>
@@ -64,6 +78,10 @@
         <repository>
             <id>papermc-repo</id>
             <url>https://papermc.io/repo/repository/maven-public/</url>
+        </repository>
+        <repository> <!-- EssentialsX -->
+            <id>essentials-releases</id>
+            <url>https://repo.essentialsx.net/releases/</url>
         </repository>
     </repositories>
 
