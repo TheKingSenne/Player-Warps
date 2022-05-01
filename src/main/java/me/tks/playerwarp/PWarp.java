@@ -1,5 +1,6 @@
 package me.tks.playerwarp;
 
+import me.tks.dependencies.EssentialsPlugin;
 import me.tks.dependencies.GriefPreventionPlugin;
 import me.tks.dependencies.VaultPlugin;
 import me.tks.messages.MessageFile;
@@ -59,6 +60,9 @@ public class PWarp extends JavaPlugin {
 
         // Set up GriefPreventionPlugin
         GriefPreventionPlugin.setUp();
+
+        // Set up EssentialsPlugin
+        EssentialsPlugin.setUp();
 
         // Just a file to give general info about the plugin
         this.saveResource("info.yml", true);
