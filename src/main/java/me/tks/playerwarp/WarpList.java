@@ -320,6 +320,10 @@ public class WarpList implements Serializable {
         listOwnedWarps(player, (Player) requested);
     }
 
+    /**
+     * Shows a player a list of their warps.
+     * @param player player that requested
+     */
     public void listOwnedWarps(Player player) {
         listOwnedWarps(player, player);
     }
