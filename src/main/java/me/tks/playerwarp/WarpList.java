@@ -317,17 +317,22 @@ public class WarpList implements Serializable {
         OfflinePlayer requested = PlayerUtils.getOfflinePlayerFromName(player, arg);
 
         if (requested == null) return;
-        listOwnedWarps((Player) requested);
+        listOwnedWarps(player, (Player) requested);
+    }
+
+    public void listOwnedWarps(Player player) {
+        listOwnedWarps(player, player);
     }
 
     /**
      * List all warps owned by a player.
      * @param player player that requested
+     * @param target player to list warps from
      */
-    public void listOwnedWarps(Player player) {
+    public void listOwnedWarps(Player player, Player target) {
 
         ArrayList<String> owned = (ArrayList<String>) this.warps.stream()
-            .filter(x -> x.isOwner(player))
+            .filter(x -> x.isOwner(target))
             .map(Warp::getName)
             .collect(Collectors.toList());
 
