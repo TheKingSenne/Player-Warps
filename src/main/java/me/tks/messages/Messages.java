@@ -1,128 +1,155 @@
 package me.tks.messages;
 
 import me.tks.playerwarp.PWarp;
-import net.md_5.bungee.api.ChatColor;
+import org.bukkit.ChatColor;
+
+import java.util.Objects;
 
 public enum Messages {
-    WARP_CONFIGURED_WRONG(PWarp.messageFile.getMessageFile().getString("configuredWrong")),
-    NO_PERMISSION(PWarp.messageFile.getMessageFile().getString("noPermission")),
-    NOT_AN_OWNER(PWarp.messageFile.getMessageFile().getString("notAnOwner")),
-    WARP_NOT_EXISTING(PWarp.messageFile.getMessageFile().getString("warpNotExisting")),
-    PLUGIN_NEEDS_NUMBER(PWarp.messageFile.getMessageFile().getString("needsNumber")),
-    CORRECT_USAGE(PWarp.messageFile.getMessageFile().getString("correctUsage")),
-    MADE_PUBLIC(PWarp.messageFile.getMessageFile().getString("madePublic")),
-    MADE_PRIVATE(PWarp.messageFile.getMessageFile().getString("madePrivate")),
-    PLAYER_NOT_EXISTING(PWarp.messageFile.getMessageFile().getString("noPlayer")),
-    NEED_HELP(PWarp.messageFile.getMessageFile().getString("needHelp")),
-    GUI_INVENTORY_NAME(PWarp.messageFile.getMessageFile().getString("guiName")),
-    BACK_BUTTON(PWarp.messageFile.getMessageFile().getString("backButton")),
-    NEXT_BUTTON(PWarp.messageFile.getMessageFile().getString("nextButton")),
-    NO_WARPS(PWarp.messageFile.getMessageFile().getString("noWarps")),
-    GUI_PAGE(PWarp.messageFile.getMessageFile().getString("guiPage")),
-    GUI_WARP_OWNER(PWarp.messageFile.getMessageFile().getString("guiOwner")),
-    GUI_VISITORS(PWarp.messageFile.getMessageFile().getString("guiVisitors")),
-    GUI_ITEM_CHANGED(PWarp.messageFile.getMessageFile().getString("guiItemChanged")),
-    LIMIT_REACHED(PWarp.messageFile.getMessageFile().getString("limitReached")),
-    NAME_IN_USE(PWarp.messageFile.getMessageFile().getString("nameAlreadyUsed")),
-    CANT_AFFORD_MONEY(PWarp.messageFile.getMessageFile().getString("cantAffordMoney")),
-    CREATED_ITEM_PAID_WARP(PWarp.messageFile.getMessageFile().getString("createdItemPaidWarp")),
-    CREATED_MONEY_PAID_WARP(PWarp.messageFile.getMessageFile().getString("createdMoneyPaidWarp")),
-    CREATED_BOTH_PAID_WARP(PWarp.messageFile.getMessageFile().getString("createdBothPaidWarp")),
-    CREATED_FREE_WARP(PWarp.messageFile.getMessageFile().getString("createdFreeWarp")),
-    REMOVED_WARP(PWarp.messageFile.getMessageFile().getString("removedWarp")),
-    NOT_TRUSTED(PWarp.messageFile.getMessageFile().getString("notTrusted")),
-    TELEPORTED(PWarp.messageFile.getMessageFile().getString("onTeleport")),
-    PAGE_NOT_EXISTING(PWarp.messageFile.getMessageFile().getString("pageLimit")),
-    HOLD_ITEM(PWarp.messageFile.getMessageFile().getString("holdItem")),
-    SET_PRICE(PWarp.messageFile.getMessageFile().getString("setPrice")),
-    REMOVED_ALL(PWarp.messageFile.getMessageFile().getString("allWarpsRemoved")),
-    LIMIT_ABOVE_0(PWarp.messageFile.getMessageFile().getString("limitAbove0")),
-    LIMIT_CHANGED(PWarp.messageFile.getMessageFile().getString("changedLimit")),
-    SET_UNSAFE(PWarp.messageFile.getMessageFile().getString("setUnsafe")),
-    IS_UNSAFE(PWarp.messageFile.getMessageFile().getString("isUnsafe")),
-    IS_OBSTRUCTED(PWarp.messageFile.getMessageFile().getString("isObstructed")),
-    LORE_LIMIT(PWarp.messageFile.getMessageFile().getString("loreLimit")),
-    UPDATED_LORE(PWarp.messageFile.getMessageFile().getString("updatedLore")),
-    MOVED_WARP(PWarp.messageFile.getMessageFile().getString("movedWarp")),
-//    REMOVED_INACTIVE(PWarp.messageFile.getMessageFile().getString("removedInactive")),
-    PLAYER_NOT_TRUSTED(PWarp.messageFile.getMessageFile().getString("playerNotTrusted")),
-    PLAYER_ALREADY_TRUSTED(PWarp.messageFile.getMessageFile().getString("playerAlreadyTrusted")),
-    PLAYER_TRUSTED(PWarp.messageFile.getMessageFile().getString("playerTrusted")),
-    PLAYER_UNTRUSTED(PWarp.messageFile.getMessageFile().getString("playerUntrusted")),
-    CANT_AFFORD_BOTH(PWarp.messageFile.getMessageFile().getString("cantAffordBoth")),
-    CHANGED_WARP_ICON(PWarp.messageFile.getMessageFile().getString("changedIcon")),
-    CANT_AFFORD_ITEM(PWarp.messageFile.getMessageFile().getString("cantAffordItem")),
-    SERVER_NAME(PWarp.messageFile.getMessageFile().getString("serverName")),
-    MOVED(PWarp.messageFile.getMessageFile().getString("moved")),
-    DONT_MOVE(PWarp.messageFile.getMessageFile().getString("dontMove")),
-    SET_DELAY(PWarp.messageFile.getMessageFile().getString("setDelay")),
-    BLACKLISTED_WORLD(PWarp.messageFile.getMessageFile().getString("blacklistedWorld")),
-    WORLD_NOT_BLACKLISTED(PWarp.messageFile.getMessageFile().getString("worldNotBlacklisted")),
-    ADDED_BLACKLIST(PWarp.messageFile.getMessageFile().getString("addedBlacklist")),
-    REMOVED_BLACKLIST(PWarp.messageFile.getMessageFile().getString("removedBlacklist")),
-    CHANGED_SEPARATOR(PWarp.messageFile.getMessageFile().getString("changedSeparator")),
-    NO_ACCESS_GP(PWarp.messageFile.getMessageFile().getString("noAccessGriefprevention")),
-    W2WTELEPORT(PWarp.messageFile.getMessageFile().getString("noWorldToWorldTeleport")),
-    OWNED_WARPS(PWarp.messageFile.getMessageFile().getString("ownedWarps")),
-    NO_OWNED_WARPS(PWarp.messageFile.getMessageFile().getString("noOwnedWarps")),
-    NO_WORLDS_BLACKLISTED(PWarp.messageFile.getMessageFile().getString("noWorldsBlacklisted")),
-    ENABLED_W2W(PWarp.messageFile.getMessageFile().getString("enabledWorldToWorldTeleport")),
-    DISABLED_W2W(PWarp.messageFile.getMessageFile().getString("disabledWorldToWorldTeleport")),
-    NO_COMMANDS_ALLOWED(PWarp.messageFile.getMessageFile().getString("noCommandsAllowed")),
-    ALREADY_BLACKLISTED(PWarp.messageFile.getMessageFile().getString("alreadyBlacklisted")),
-    WORLD_NOT_EXISTING(PWarp.messageFile.getMessageFile().getString("worldNotExisting")),
-    TRUE_OR_FALSE(PWarp.messageFile.getMessageFile().getString("trueOrFalse")),
-    HIDDEN_UNHIDDEN(PWarp.messageFile.getMessageFile().getString("hiddenUnhidden")),
-    RENAMED_WARP(PWarp.messageFile.getMessageFile().getString("renamedWarp")),
-    HELP_SETITEMPRICE(PWarp.messageFile.getMessageFile().getString("helpSetItemPrice")),
-    HELP_SETPRICE(PWarp.messageFile.getMessageFile().getString("helpSetPrice")),
-    HELP_GUIITEM(PWarp.messageFile.getMessageFile().getString("helpGuiItem")),
-    HELP_DELETEALL(PWarp.messageFile.getMessageFile().getString("helpDeleteAll")),
-    HELP_SETDELAY(PWarp.messageFile.getMessageFile().getString("helpSetDelay")),
-    HELP_SETLIMIT(PWarp.messageFile.getMessageFile().getString("helpSetLimit")),
-//    HELP_CLEAROLDWARPS(PWarp.messageFile.getMessageFile().getString("helpClearOldWarps")),
-    HELP_SET(PWarp.messageFile.getMessageFile().getString("helpSet")),
-    HELP_DELETE(PWarp.messageFile.getMessageFile().getString("helpDelete")),
-    HELP_WARP(PWarp.messageFile.getMessageFile().getString("helpWarp")),
-    HELP_SETSEPARATOR(PWarp.messageFile.getMessageFile().getString("helpSetSeparator")),
-    HELP_PWG(PWarp.messageFile.getMessageFile().getString("helpPwg")),
-    HELP_SETLORE(PWarp.messageFile.getMessageFile().getString("helpSetLore")),
-    HELP_MOVEWARP(PWarp.messageFile.getMessageFile().getString("helpMoveWarp")),
-    HELP_SETPUBLIC(PWarp.messageFile.getMessageFile().getString("helpSetPublic")),
-    HELP_SETPRIVATE(PWarp.messageFile.getMessageFile().getString("helpSetPrivate")),
-    HELP_TRUST(PWarp.messageFile.getMessageFile().getString("helpTrust")),
-    HELP_UNTRUST(PWarp.messageFile.getMessageFile().getString("helpUntrust")),
-    HELP_SETITEM(PWarp.messageFile.getMessageFile().getString("helpSetItem")),
-    HELP_BLACKLISTADDREMOVE(PWarp.messageFile.getMessageFile().getString("helpBlacklistAddRemove")),
-    HELP_BLACKLISTLIST(PWarp.messageFile.getMessageFile().getString("helpBlacklistList")),
-    HELP_LISTOWN(PWarp.messageFile.getMessageFile().getString("helpListOwn")),
-    HELP_HOOKS(PWarp.messageFile.getMessageFile().getString("helpHooks")),
-    HELP_W2W(PWarp.messageFile.getMessageFile().getString("helpW2w")),
-    HELP_LISTOTHER(PWarp.messageFile.getMessageFile().getString("helpListOther")),
-    HELP_SETHIDDEN(PWarp.messageFile.getMessageFile().getString("helpSetHidden")),
-    HELP_INFO(PWarp.messageFile.getMessageFile().getString("helpInfo")),
-    HELP_RENAME(PWarp.messageFile.getMessageFile().getString("helpRename")),
-    HELP_WARPSAFETY(PWarp.messageFile.getMessageFile().getString("helpWarpSafety")),
-    WARP_SAFETY_UPDATED(PWarp.messageFile.getMessageFile().getString("warpSafetyUpdated")),
-    UPDATED_DEFAULT_PRIVACY(PWarp.messageFile.getMessageFile().getString("updatedDefaultPrivacy")),
-    HELP_UPDATE_PRIVACY(PWarp.messageFile.getMessageFile().getString("helpUpatePrivate")),;
+    WARP_CONFIGURED_WRONG("configuredWrong", "Error: This warp has been configured wrong. Does this world still exist?"),
+    NO_PERMISSION("noPermission", "Error: You do not have permission."),
+    NOT_AN_OWNER("notAnOwner", "Error: You do not own this warp."),
+    WARP_NOT_EXISTING("warpNotExisting", "Error: This warp does not exist"),
+    PLUGIN_NEEDS_NUMBER("needsNumber", "Error: Please specify a number."),
+    CORRECT_USAGE("correctUsage", "Error: Correct usage is PUSAGEP"),
+    MADE_PUBLIC("madePublic", "Your warp has been made public."),
+    MADE_PRIVATE("madePrivate", "Your warp has been made private."),
+    PLAYER_NOT_EXISTING("noPlayer", "Error: This player does not exist."),
+    NEED_HELP("needHelp", "For help, please use /pwarp help"),
+    GUI_INVENTORY_NAME("guiName", "PlayerWarps"),
+    BACK_BUTTON("backButton", "Back"),
+    NEXT_BUTTON("nextButton", "Next"),
+    NO_WARPS("noWarps", "Error: There are no warps available."),
+    GUI_PAGE("guiPage", "Page:"),
+    GUI_WARP_OWNER("guiOwner", "Owner:"),
+    GUI_VISITORS("guiVisitors", "Visitors:"),
+    GUI_ITEM_CHANGED("guiItemChanged", "The GUI-item has been changed."),
+    LIMIT_REACHED("limitReached", "Error: You cannot have more than PLIMITP warps."),
+    NAME_IN_USE("nameAlreadyUsed", "Error: PWARPNAMEP is already in use."),
+    CANT_AFFORD_MONEY("cantAffordMoney", "Error: You can't afford a new warp. A new warp costs PMONEYP."),
+    CREATED_ITEM_PAID_WARP("createdItemPaidWarp", "You have created a new warp and have paid PITEMAMOUNTP PITEMP."),
+    CREATED_MONEY_PAID_WARP("createdMoneyPaidWarp", "You have created a new warp and have paid PMONEYP."),
+    CREATED_BOTH_PAID_WARP("createdBothPaidWarp", "You have created a new warp and have paid PMONEYP and PITEMAMOUNTP PITEMP."),
+    CREATED_FREE_WARP("createdFreeWarp", "You have created a new warp."),
+    REMOVED_WARP("removedWarp", "Your warp has been successfully removed."),
+    NOT_TRUSTED("notTrusted", "Error: You aren't trusted to this warp"),
+    TELEPORTED("onTeleport", "You have been teleported."),
+    PAGE_NOT_EXISTING("pageLimit", "Error: This page does not exist."),
+    HOLD_ITEM("holdItem", "Error: Please hold an item"),
+    SET_PRICE("setPrice", "You have changed the warp price."),
+    REMOVED_ALL("allWarpsRemoved", "You have removed all warps."),
+    LIMIT_ABOVE_0("limitAbove0", "Error: Please specify a number above 0."),
+    LIMIT_CHANGED("changedLimit", "You have changed the warp limit."),
+    SET_UNSAFE("setUnsafe", "Error: You can't set warps or warp in lava or air."),
+    IS_UNSAFE("isUnsafe", "Error: This warp is unsafe."),
+    IS_OBSTRUCTED("isObstructed", "Error: This warp is obstructed."),
+    LORE_LIMIT("loreLimit", "Error: You can only set 3 lores."),
+    UPDATED_LORE("updatedLore", "You have changed your warp lore."),
+    MOVED_WARP("movedWarp", "Your warp has been moved."),
+    //    REMOVED_INACTIVE("removedInactive", "All warps that have not been visited or where players haven't logged on in PINACTIVEP days have been removed."),
+    PLAYER_NOT_TRUSTED("playerNotTrusted", "Error: This player is not trusted to your warp."),
+    PLAYER_ALREADY_TRUSTED("playerAlreadyTrusted", "Error: This player has already been trusted to your warp."),
+    PLAYER_TRUSTED("playerTrusted", "You have trusted PPLAYERP to your warp."),
+    PLAYER_UNTRUSTED("playerUntrusted", "You have untrusted PPLAYERP from your warp."),
+    CANT_AFFORD_BOTH("cantAffordBoth", "Error: You can't afford a new warp. A new warp costs PMONEYP and PITEMAMOUNTP PITEMP."),
+    CHANGED_WARP_ICON("changedIcon", "Your warp icon has been changed."),
+    CANT_AFFORD_ITEM("cantAffordItem", "Error: You can't afford a new warp. A new warp costs PITEMAMOUNTP PITEMP."),
+    SERVER_NAME("serverName", "PlayerWarps"),
+    MOVED("moved", "Error: You moved."),
+    DONT_MOVE("dontMove", "You will be teleported in PSECONDSP seconds. Please do not move."),
+    SET_DELAY("setDelay", "You have changed the delay."),
+    BLACKLISTED_WORLD("blacklistedWorld", "Error: you can't set a warp in this world."),
+    WORLD_NOT_BLACKLISTED("worldNotBlacklisted", "Error: PWORLDP is not blacklisted."),
+    ADDED_BLACKLIST("addedBlacklist", "Added PWORLDP to the blacklist."),
+    REMOVED_BLACKLIST("removedBlacklist", "Removed PWORLDP from the blacklist."),
+    CHANGED_SEPARATOR("changedSeparator", "You have successfully changed the separator item."),
+    NO_ACCESS_GP("noAccessGriefprevention", "Error: you don't have access to this claim."),
+    W2WTELEPORT("noWorldToWorldTeleport", "Error: you can't teleport to another world."),
+    OWNED_WARPS("ownedWarps", "[PPLAYERP's warps]"),
+    NO_OWNED_WARPS("noOwnedWarps", "Error: you don't own any warps."),
+    NO_WORLDS_BLACKLISTED("noWorldsBlacklisted", "Error: there are no worlds blacklisted."),
+    ENABLED_W2W("enabledWorldToWorldTeleport", "You successfully enabled world to world teleport."),
+    DISABLED_W2W("disabledWorldToWorldTeleport", "You successfully disabled world to world teleport."),
+    NO_COMMANDS_ALLOWED("noCommandsAllowed", "Error: you can't use any PWarp commands whilst teleporting."),
+    ALREADY_BLACKLISTED("alreadyBlacklisted", "Error: this world is already blacklisted."),
+    WORLD_NOT_EXISTING("worldNotExisting", "Error: this world doesn't exist."),
+    TRUE_OR_FALSE("trueOrFalse", "Error: please use true or false."),
+    HIDDEN_UNHIDDEN("hiddenUnhidden", "You have successfully hidden/unhidden your warp."),
+    RENAMED_WARP("renamedWarp", "Your warp has been renamed."),
+    HELP_SETITEMPRICE("helpSetItemPrice", "Sets the item cost of a warp."),
+    HELP_SETPRICE("helpSetPrice", "Sets the money cost for a warp."),
+    HELP_GUIITEM("helpGuiItem", "Sets the top item in the GUI."),
+    HELP_DELETEALL("helpDeleteAll", "Deletes all existing warps."),
+    HELP_SETDELAY("helpSetDelay", "Sets the teleport delay."),
+    HELP_SETLIMIT("helpSetLimit", "Sets the default warp limit."),
+    //    HELP_CLEAROLDWARPS("helpClearOldWarps", "Removes all warps which haven't been visited for over PINACTIVEDAYSP days."),
+    HELP_SET("helpSet", "Creates a new warp."),
+    HELP_DELETE("helpDelete", "Deletes your warp."),
+    HELP_WARP("helpWarp", "Teleports you to a warp."),
+    HELP_SETSEPARATOR("helpSetSeparator", "Changes the top and bottom items in the GUI."),
+    HELP_PWG("helpPwg", "Opens the GUI."),
+    HELP_SETLORE("helpSetLore", "Sets your warp lore."),
+    HELP_MOVEWARP("helpMoveWarp", "Moves your warp to your current position."),
+    HELP_SETPUBLIC("helpSetPublic", "Makes your warp public."),
+    HELP_SETPRIVATE("helpSetPrivate", "Makes your warp private."),
+    HELP_TRUST("helpTrust", "Trusts a player to your warp."),
+    HELP_UNTRUST("helpUntrust", "Untrusts a player from your warp."),
+    HELP_SETITEM("helpSetItem", "Changes your warpicon in the GUI."),
+    HELP_BLACKLISTADDREMOVE("helpBlacklistAddRemove", "Blacklists a world."),
+    HELP_BLACKLISTLIST("helpBlacklistList", "Lists blacklisted worlds."),
+    HELP_LISTOWN("helpListOwn", "Lists your warps."),
+    HELP_HOOKS("helpHooks", "Lists hooked plugins."),
+    HELP_W2W("helpW2w", "Enables/disables world to world teleporting."),
+    HELP_LISTOTHER("helpListOther", "Lists another player's owned warps."),
+    HELP_SETHIDDEN("helpSetHidden", "Hides your warp in the GUI."),
+    HELP_INFO("helpInfo", "Displays general info."),
+    HELP_RENAME("helpRename", "Renames your warp."),
+    HELP_WARPSAFETY("helpWarpSafety", "Enables/disables the global warp safety."),
+    WARP_SAFETY_UPDATED("warpSafetyUpdated", "The warp safety has been updated."),
+    UPDATED_DEFAULT_PRIVACY("updatedDefaultPrivacy", "You have successfully changed the default warp privacy."),
+    HELP_UPDATE_PRIVACY("helpUpatePrivate", "Changes the default warp privacy"),
+    RELOADING("reloading", "&eReloading configuration files..."),
+    RELOADED("reloaded", "&aReload complete.");
 
-
-    private final String msg;
+    private final String path;
+    private final String defaultMessage;
 
     /**
-     * Constructor for message enum.
-     * @param msg String containing the message.
+     * Constructor for the message enum.
+     *
+     * @param path           String containing path
+     * @param defaultMessage String containing the default message
      */
-    Messages(String msg) {
-        this.msg = ChatColor.translateAlternateColorCodes('&', msg);
+    Messages(String path, String defaultMessage) {
+        this.path = path;
+        this.defaultMessage = defaultMessage;
+    }
+
+    /**
+     * Getter for the message path.
+     *
+     * @return String containing path
+     */
+    public String getPath() {
+        return this.path;
+    }
+
+    /**
+     * Getter for the default message.
+     *
+     * @return String containing default message
+     */
+    public String getDefaultMessage() {
+        return this.defaultMessage;
     }
 
     /**
      * Getter for a message.
+     *
      * @return String containing the message.
      */
     public String getMessage() {
-        return ChatColor.translateAlternateColorCodes('&', this.msg);
+        return ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(PWarp.getInstance().getMessageFile().getMessageFile().getString(getPath(), getDefaultMessage())));
     }
+
 }
