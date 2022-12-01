@@ -47,3 +47,5 @@ cantAffordBoth: 'Error: You cannot afford a new warp. A new warp costs PMONEYP a
 changedIcon: 'Your warp icon has been changed.'
 resetIcon: 'Your warp icon has been reset.'
 cantAffordItem: 'Error: You cannot afford a new warp. A new warp costs PITEMAMOUNTP PITEMP.'
+reloading: "&eReloading configuration files..."
+reloaded: "&aReload complete."

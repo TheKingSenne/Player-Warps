@@ -46,7 +46,7 @@ public class MessageFile {
         if (!this.customConfigFile.exists()) {
             return;
         }
-        for (final MessagePathAndDefault msg : MessagePathAndDefault.values()) {
+        for (final Messages msg : Messages.values()) {
             if (this.messageFile.get(msg.getPath()) == null) {
                 FileConfiguration.createPath(this.messageFile, msg.getPath());
                 this.messageFile.set(msg.getPath(), msg.getDefaultMessage());

@@ -17,20 +17,23 @@ public class PWarp extends JavaPlugin {
      */
     public static WarpList wL = null;
     public static GuiCatalog gC = null;
-    public static MessageFile messageFile = null;
     public static PluginConfiguration pC = null;
     public static List<String> hooks;
     public static Events events;
+
+    private MessageFile messageFile = null;
+    private static PWarp instance;
 
     /**
      * Loads everything when plugin gets enabled.
      */
     @Override
     public void onEnable() {
+        PWarp.instance = this;
 
         // Register all events
         events = new Events();
-        Bukkit.getPluginManager().registerEvents( events, this);
+        Bukkit.getPluginManager().registerEvents(events, this);
 
         // Set up custom message file
         messageFile = new MessageFile();
@@ -86,14 +89,27 @@ public class PWarp extends JavaPlugin {
         // Write warps and configuration back
         if (wL != null && !wL.getWarps().isEmpty())
             wL.write();
-        if(pC != null)
+        if (pC != null)
             pC.write();
 
         // Log that plugin has been disabled
         Bukkit.getLogger().info("[PWarp] PWarp has been disabled!");
     }
 
+    public void reload() {
+        getLogger().info("Reloading...");
+        reloadConfig();
+        messageFile.createMessageFile(this);
+        messageFile.checkConfig();
+        getLogger().info("Configuration reloaded!");
+    }
 
+    public MessageFile getMessageFile() {
+        return messageFile;
+    }
 
+    public static PWarp getInstance() {
+        return instance;
+    }
 
 }
