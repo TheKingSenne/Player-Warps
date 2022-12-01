@@ -562,6 +562,16 @@ public class Commands implements CommandExecutor {
                     return true;
                 }
 
+                else if (args[0].equalsIgnoreCase("reload")) {
+                    if (!PlayerUtils.hasPermissionWithMessage(player, "pwarp.reload")) return true;
+
+                    player.sendMessage(Messages.RELOADING.getMessage());
+                    PWarp.getInstance().reload();
+                    player.sendMessage(Messages.RELOADED.getMessage());
+
+                    return true;
+                }
+
 
                 player.sendMessage(ChatColor.RED + Messages.NEED_HELP.getMessage());
                 return true;
