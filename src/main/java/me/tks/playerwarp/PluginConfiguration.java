@@ -187,7 +187,7 @@ public class PluginConfiguration {
         try {
             isOn = PlayerUtils.getBooleanFromUser(player, safety);
         }
-        catch (Exception e) {
+        catch (IllegalArgumentException e) {
             return;
         }
 
@@ -215,7 +215,7 @@ public class PluginConfiguration {
         try {
             state = PlayerUtils.getBooleanFromUser(player, bool);
         }
-        catch (Exception e) {
+        catch (IllegalArgumentException e) {
             return;
         }
 
@@ -703,7 +703,7 @@ public class PluginConfiguration {
         try {
             privacy = PlayerUtils.getBooleanFromUser(sender, boolStr);
         }
-        catch (Exception e) {
+        catch (IllegalArgumentException e) {
             sender.sendMessage(ChatColor.RED + Messages.TRUE_OR_FALSE.getMessage());
             return;
         }
