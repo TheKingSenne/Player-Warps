@@ -140,23 +140,19 @@ public class PlayerUtils {
     /**
      * Converts user input into a boolean with message.
      * @param player player that requested
-     * @param safety string provided by player
+     * @param bool string provided by player
      * @return Boolean provided by player
-     * @throws Exception when player didn't give a boolean
+     * @throws IllegalArgumentException when player didn't give a boolean
      */
-    public static boolean getBooleanFromUser(CommandSender player, String safety) throws Exception {
-
-        boolean bool;
-
-        try {
-            bool = Boolean.parseBoolean(safety);
+    public static boolean getBooleanFromUser(CommandSender player, String bool) throws IllegalArgumentException {
+        if (bool.equalsIgnoreCase("true")) {
+            return true;
         }
-        catch (Exception e) {
-            player.sendMessage(ChatColor.RED + Messages.TRUE_OR_FALSE.getMessage());
-            throw new Exception();
+        if (bool.equalsIgnoreCase("false")) {
+            return false;
         }
-
-        return bool;
+        player.sendMessage(ChatColor.RED + Messages.TRUE_OR_FALSE.getMessage());
+        throw new IllegalArgumentException();
     }
 
     public static double getDoubleFromUser(Player player, String arg) {

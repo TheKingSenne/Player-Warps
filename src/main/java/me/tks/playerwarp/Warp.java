@@ -327,7 +327,7 @@ public class Warp implements Serializable {
         try {
             hiddenState = PlayerUtils.getBooleanFromUser(player, state);
         }
-        catch (Exception e) {
+        catch (IllegalArgumentException e) {
             return;
         }
 
