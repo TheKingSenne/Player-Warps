@@ -610,7 +610,7 @@ public class Warp implements Serializable {
      * @param player the player
      * @return True if owner, false if not
      */
-    public boolean isOwner(Player player) {
+    public boolean isOwner(OfflinePlayer player) {
         return owner.equals(player.getUniqueId().toString());
     }
 
