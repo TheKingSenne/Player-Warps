@@ -320,7 +320,7 @@ public class Warp implements Serializable {
      */
     public void setHidden(Player player, String state) {
 
-        if (!isOwnerWithMessage(player)) return;
+        if (!canManageWithMessage(player)) return;
 
         boolean hiddenState;
 
@@ -347,7 +347,7 @@ public class Warp implements Serializable {
      */
     public void changeName(Player player, String name) {
 
-        if (!isOwnerWithMessage(player)) return;
+        if (!canManageWithMessage(player)) return;
 
         String oldName = this.name;
 
@@ -417,7 +417,7 @@ public class Warp implements Serializable {
      */
     public void move(Player player) {
 
-        if (!isOwnerWithMessage(player)) return;
+        if (!canManageWithMessage(player)) return;
 
         this.loc = player.getLocation();
         player.sendMessage(ChatColor.GREEN + Messages.MOVED_WARP.getMessage());
@@ -430,7 +430,7 @@ public class Warp implements Serializable {
      */
     public void setPrivacyState(Player owner, boolean isPrivate) {
 
-        if (!isOwnerWithMessage(owner)) return;
+        if (!canManageWithMessage(owner)) return;
 
         this.isPrivate = isPrivate;
 
@@ -449,7 +449,7 @@ public class Warp implements Serializable {
      */
     public void addTrustedPlayer(Player owner, OfflinePlayer trusted) {
 
-        if (!isOwnerWithMessage(owner)) return;
+        if (!canManageWithMessage(owner)) return;
 
         if (trustedPlayers.contains(trusted.getUniqueId().toString())) {
             owner.sendMessage(ChatColor.RED + Messages.PLAYER_ALREADY_TRUSTED.getMessage());
@@ -467,7 +467,7 @@ public class Warp implements Serializable {
      */
     public void removeTrustedPlayer(Player owner, OfflinePlayer untrusted) {
 
-        if (!isOwnerWithMessage(owner)) return;
+        if (!canManageWithMessage(owner)) return;
 
         if (!trustedPlayers.contains(untrusted.getUniqueId().toString())) {
             owner.sendMessage(ChatColor.RED + Messages.PLAYER_NOT_TRUSTED.getMessage());
@@ -486,7 +486,7 @@ public class Warp implements Serializable {
      */
     public void setLore(Player player, String line, int row) {
 
-        if (!isOwnerWithMessage(player)) return;
+        if (!canManageWithMessage(player)) return;
 
         if (row > 4 || row <= 0) {
             player.sendMessage(ChatColor.RED + Messages.LORE_LIMIT.getMessage());
@@ -602,17 +602,25 @@ public class Warp implements Serializable {
      * @return Boolean true if the player is trusted
      */
     public boolean isTrusted(Player player) {
-        return this.trustedPlayers.contains(player.getUniqueId().toString()) || isOwner(player);
+        return this.trustedPlayers.contains(player.getUniqueId().toString()) || canManage(player);
     }
 
     /**
-     * Check if player is owner or has an override permission.
+     * Check if player is owner of this warp.
      * @param player the player
-     * @return True if owner/permission, false if not
+     * @return True if owner, false if not
      */
     public boolean isOwner(Player player) {
-        // Player is owner or has an override permission
-        return this.owner.equals(player.getUniqueId().toString()) || player.hasPermission("pwarp.manage");
+        return owner.equals(player.getUniqueId().toString());
+    }
+
+    /**
+     * Checks if the player can manage/update this warp.
+     * @param player the player
+     * @return true if can manage, false if not
+     */
+    public boolean canManage(Player player) {
+        return isOwner(player) || player.hasPermission("pwarp.manage");
     }
 
     /**
@@ -621,9 +629,9 @@ public class Warp implements Serializable {
      * @param player the player
      * @return True if owner/permission, false if not
      */
-    public boolean isOwnerWithMessage(Player player) {
+    public boolean canManageWithMessage(Player player) {
         // Player is owner or has override permission
-        if (this.owner.equals(player.getUniqueId().toString()) || player.hasPermission("pwarp.manage")) {
+        if (canManage(player)) {
             return true;
         }
 
@@ -647,7 +655,7 @@ public class Warp implements Serializable {
      */
     public void setItemStack(Player player) {
 
-        if (!isOwnerWithMessage(player)) return;
+        if (!canManageWithMessage(player)) return;
 
 
         ItemStack newItem = PlayerUtils.getNotNullInMainHand(player);
