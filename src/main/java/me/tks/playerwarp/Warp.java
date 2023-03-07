@@ -335,6 +335,8 @@ public class Warp implements Serializable {
 
         if (isHidden) {
             PWarp.gC.removeItem(this);
+        } else {
+            PWarp.gC.addItem(this);
         }
 
         player.sendMessage(ChatColor.GREEN + Messages.HIDDEN_UNHIDDEN.getMessage());
