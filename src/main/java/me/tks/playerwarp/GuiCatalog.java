@@ -206,8 +206,6 @@ public class GuiCatalog {
             return;
         }
 
-        Bukkit.getLogger().info("[PWarp] Refreshing GUI's.");
-
         wL.sortWarps();
         ArrayList<Warp> warps = wL.getUnhiddenWarps();
 
@@ -234,8 +232,6 @@ public class GuiCatalog {
         for (Player player : viewers) {
             openFirstGui(player);
         }
-
-        Bukkit.getLogger().info("[PWarp] GUI's have been refreshed.");
     }
 
     /**
@@ -268,7 +264,7 @@ public class GuiCatalog {
 
         BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
 
-        scheduler.scheduleSyncRepeatingTask(p, () -> PWarp.gC.createGuis(PWarp.wL), 0L, 1200 * PWarp.pC.getRefreshRateInMinutes());
+        scheduler.scheduleSyncRepeatingTask(p, () -> PWarp.gC.createGuis(PWarp.wL), 0L, 1200L * PWarp.pC.getRefreshRateInMinutes());
 
     }
 
