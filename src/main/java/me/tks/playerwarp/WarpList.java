@@ -20,8 +20,6 @@ import java.util.stream.Collectors;
 
 public class WarpList implements Serializable {
 
-    private static final String FALLBACK_USERNAME = "Unknown";
-
     // List of all warps
     private ArrayList<Warp> warps;
 
@@ -347,9 +345,7 @@ public class WarpList implements Serializable {
             return;
         }
 
-        String username = target.getName() == null ? FALLBACK_USERNAME : target.getName();
-
-        player.sendMessage(ChatColor.GRAY + "" + ChatColor.STRIKETHROUGH + "-----" + ChatColor.RESET + ChatColor.YELLOW + Messages.OWNED_WARPS.getMessage().replaceAll("PPLAYERP", username)
+        player.sendMessage(ChatColor.GRAY + "" + ChatColor.STRIKETHROUGH + "-----" + ChatColor.RESET + ChatColor.YELLOW + Messages.OWNED_WARPS.getMessage().replaceAll("PPLAYERP", target.getName())
             + ChatColor.GRAY + ChatColor.STRIKETHROUGH + "-----");
 
         player.sendMessage(ChatColor.GOLD + "» " + ChatColor.YELLOW + String.join(ChatColor.GOLD + "\n» " + ChatColor.YELLOW, owned));
