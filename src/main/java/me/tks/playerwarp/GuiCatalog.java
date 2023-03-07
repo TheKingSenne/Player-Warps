@@ -33,15 +33,18 @@ public class GuiCatalog {
             ArrayList<Warp> warps = new ArrayList<>();
             warps.add(warp);
             guis.add(new Gui(1, warps));
-            added = true;
+            return;
         }
-        else {
-            for (Gui gui : guis) {
-                if (gui.hasFreeSlot()) {
-                    gui.addItem(warp.getItemStack());
-                    added = true;
-                    break;
-                }
+
+        if (hasItem(warp)) {
+            return;
+        }
+
+        for (Gui gui : guis) {
+            if (gui.hasFreeSlot()) {
+                gui.addItem(warp.getItemStack());
+                added = true;
+                break;
             }
         }
 
@@ -52,6 +55,23 @@ public class GuiCatalog {
             guis.add(gui);
         }
 
+    }
+
+    /**
+     * Checks if warp exists in GUI's
+     * @param warp the warp to check on
+     * @return boolean, true if it already exists
+     */
+    private boolean hasItem(Warp warp) {
+        boolean result = false;
+        for (Gui gui : guis) {
+            Inventory inventory = gui.getInventory();
+            if (inventory.contains(warp.getItemStack())) {
+                result = true;
+                break;
+            }
+        }
+        return result;
     }
 
     /**
