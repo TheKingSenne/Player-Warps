@@ -150,7 +150,7 @@ public class WarpList implements Serializable {
         // Get Warp object from name
         Warp warp = this.getWarp(name);
 
-        if (!warp.isOwnerWithMessage(player)) {
+        if (!warp.canManageWithMessage(player)) {
             return;
         }
 
