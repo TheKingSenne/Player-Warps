@@ -317,7 +317,7 @@ public class WarpList implements Serializable {
         OfflinePlayer requested = PlayerUtils.getOfflinePlayerFromName(player, arg);
 
         if (requested == null) return;
-        listOwnedWarps(player, (Player) requested);
+        listOwnedWarps(player, requested);
     }
 
     /**
@@ -333,7 +333,7 @@ public class WarpList implements Serializable {
      * @param player player that requested
      * @param target player to list warps from
      */
-    public void listOwnedWarps(Player player, Player target) {
+    public void listOwnedWarps(Player player, OfflinePlayer target) {
 
         ArrayList<String> owned = (ArrayList<String>) this.warps.stream()
             .filter(x -> x.isOwner(target))
@@ -345,10 +345,10 @@ public class WarpList implements Serializable {
             return;
         }
 
-        player.sendMessage(ChatColor.GRAY + "" + ChatColor.STRIKETHROUGH + "-----" + ChatColor.RESET + ChatColor.YELLOW + Messages.OWNED_WARPS.getMessage().replaceAll("PPLAYERP", player.getName())
+        player.sendMessage(ChatColor.GRAY + "" + ChatColor.STRIKETHROUGH + "-----" + ChatColor.RESET + ChatColor.YELLOW + Messages.OWNED_WARPS.getMessage().replaceAll("PPLAYERP", target.getName())
             + ChatColor.GRAY + ChatColor.STRIKETHROUGH + "-----");
 
-        player.sendMessage(ChatColor.GOLD + "» " + ChatColor.YELLOW + String.join(ChatColor.GOLD + "\n » " + ChatColor.YELLOW, owned));
+        player.sendMessage(ChatColor.GOLD + "» " + ChatColor.YELLOW + String.join(ChatColor.GOLD + "\n» " + ChatColor.YELLOW, owned));
 
     }
 
