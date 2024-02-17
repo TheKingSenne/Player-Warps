@@ -778,12 +778,24 @@ public class Warp implements Serializable {
         }
 
         // letsgo struggling with some skulls *insert sad noises here* :D
-        if (guiItem.getType().equals(Material.PLAYER_HEAD)) {
-            if (map.get("skullOwner") != null) {
+        ItemMeta meta = guiItem.getItemMeta();
+        if (meta instanceof SkullMeta) {
+            SkullMeta skullMeta = (SkullMeta) meta;
 
-                SkullMeta meta = (SkullMeta) guiItem.getItemMeta();
-                meta.setOwningPlayer(Bukkit.getOfflinePlayer(UUID.fromString(map.get("skullOwner"))));
-                guiItem.setItemMeta(meta);
+            String uuidString = map.get("skullOwner");
+
+            if (uuidString != null) {
+
+                UUID uuid = UUID.fromString(uuidString);
+                OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(uuid);
+
+                if (offlinePlayer.getName() == null) {
+                    // name of game profile can not be null in newer minecraft versions
+                    offlinePlayer = new DummyPlayer(uuid, "");
+                }
+
+                skullMeta.setOwningPlayer(offlinePlayer);
+                guiItem.setItemMeta(skullMeta);
             }
 
         }
